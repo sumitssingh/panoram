@@ -1,0 +1,12 @@
+
+{
+	"accessKeyId":"AKIAIJFLEDGLMSTIEPOQ",
+	"secretAccessKey":"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",
+	"tokenExpiry":180000,
+	"JWT_SECRET": "Astringwhichtoguess",
+	"admin":{
+		"username":"admin@gmail.com",
+		"password":"panorama"
+	}
+
+}
