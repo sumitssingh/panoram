@@ -40,9 +40,9 @@ router.get('/myProfile', function(req, res, next) {
       if (err) {
           res.send(err)
       } else {
-          res.contentType(doctor.doctorDp.contentType);
-          // res.send(doctor);
-          res.send(doctor.doctorDp.data);
+          // res.contentType(doctor.doctorDp.contentType);
+          res.send(doctor);
+          // res.send(doctor.doctorDp.data);
       }
   })
 });
