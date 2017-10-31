@@ -237,11 +237,10 @@ router.route('/follow/doctor')
             doc.follow.push(req.body.id);
 
             doc.save(function (err, doctor) {
-                if (err)
+                if (err) {
                     res.send({status:false, info:err})
+		} else {
                 // res.send({status: true, info:"Success"})
-            })
-        })
         Doctor.findById(req.body.id, function (err, doctor) {
             if (err) {
                 res.send({status: false, info: err})
@@ -257,6 +256,9 @@ router.route('/follow/doctor')
                 })
             }
         })
+}
+})
+})
     })
 
 module.exports = router;
