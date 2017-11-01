@@ -1,6 +1,6 @@
 angular.module('myApp')
-    .controller('DashboardController', ['$rootScope','$scope', '$timeout', '$state', '$http','ngDialog','$controller','UtilityService',
-        function($rootScope, $scope, $timeout, $state, $http, ngDialog, $controller, UtilityService) {
+    .controller('DashboardController', ['$rootScope','$scope', '$timeout', '$state','SERVER_BASE_URL', '$http','ngDialog','$controller','UtilityService',
+        function($rootScope, $scope, $timeout, $state,SERVER_BASE_URL, $http, ngDialog, $controller, UtilityService) {
 $scope.selectedItem = {};
 $rootScope.users=[];
                             
@@ -37,7 +37,7 @@ $rootScope.users=[];
             $scope.events = [];
             $http({
                 method: "GET",
-                url:  'http://107.170.218.205:3001/admin/doctor/getAppointmentByDoctor/'+doc.id,
+                url:  SERVER_BASE_URL+'admin/doctor/getAppointmentByDoctor/'+doc.id,
                 headers: {
                     'content-type': 'Application/json',
                     'Authorization':"Bearer " + localStorage.getItem('ngStorage-token')

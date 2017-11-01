@@ -1,12 +1,14 @@
 
 
 angular.module('myApp')
-.controller('OnCallCtrl',['$scope','$rootScope', '$sce', '$q','$http','SweetAlert','NgTableParams','SERVER_BASE_URL',
-  function ($scope,$rootScope, $sce,  $q,  $http, SweetAlert, NgTableParams, SERVER_BASE_URL){
+.controller('OnCallCtrl',['$scope','$rootScope', '$sce', '$q','$http','SweetAlert','NgTableParams','SERVER_BASE_URL','UtilityService',
+  function ($scope,$rootScope, $sce,  $q,  $http, SweetAlert, NgTableParams, SERVER_BASE_URL, UtilityService){
   var simpleList = [{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"}];
 
 $scope.row = {};
 $scope.OnCall  = [];
+var states = [];
+$scope.locationUrl= 'admin/doctor/fetch/All/location';
                         $http({
                             method: "GET",
                             url: SERVER_BASE_URL+'admin/doctor/getAllDoctors/name',
@@ -22,9 +24,15 @@ $scope.OnCall  = [];
                             })
                             console.log(doctor);
                           // var simpleList = [{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"}];
-                          var states = simpleList.map(function(doc){
-                              return doc.location;
+                          // var states = simpleList.map(function(doc){
+                              // return doc.location;
+                            // })
+                           UtilityService.apiGet($scope.locationUrl,{}).then(function(response){
+                            console.log(response);
+                            states = response.data.map(function(doc){
+                              return doc;
                             })
+                          });
                               function suggest_state(term) {
                                 console.log(term);
                             var q = term.toLowerCase().trim();

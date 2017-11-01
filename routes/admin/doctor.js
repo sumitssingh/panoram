@@ -23,6 +23,23 @@ router.get('/getAllDoctors', function (req, res) {
         res.send({status: false, info: "Sorry You are not admin"})
     }
 })
+router.get('/fetch/All/location', function (req, res) {
+    Doctor.find({}, function (err, doc) {
+    if (err) {
+        res.send({status: false, info: "Something is not right"})
+    } else{
+var docLocation =[];
+       for (var i = doc.length - 1; i >= 0; i--) {
+           var location = doc[i].Appointment.map(function(loc){
+            docLocation.push(loc.location);
+            return docLocation;
+           })
+           
+       }
+        res.send(docLocation);
+    }
+    })
+})
 router.get('/getAllDoctors/name', function (req, res) {
     console.log(req.isAdmin);
     if (req.isAdmin) {
