@@ -1,0 +1,258 @@
+<div class="row">
+    <div class="col-md-2" style="padding-right: 0px;">
+        <!--left-fixed -navigation-->
+        <div class="sidebar" role="navigation">
+            <div class="navbar-collapse">
+                <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a ui-sref="dashboard" class="active"><i class="fa fa-dashboard nav_icon"></i>Dashboard</a>
+                           
+                        </li>
+                        <li>
+                            <a ui-sref="eventList" class="chart-nav"><i class="fa fa-bar-chart nav_icon"></i>Appointment<span class="fa arrow"></span> </a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="#">Doctor Schedule<span class="nav-badge-btm">08</span></a>
+                                </li>
+                                <li>
+                                    <a href="#">Book Appointment</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="chart-nav"><i class="fa fa-user nav_icon"></i>Doctors <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="#">All Doctors<span class="nav-badge-btm">08</span></a>
+                                </li>
+                                <li>
+                                    <a href="#">Add Doctor</a>
+                                </li>
+                                <li>
+                                    <a href="#">Edit Doctor</a>
+                                </li>
+                               
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" class="chart-nav"><i class="fa fa-users nav_icon"></i>Patient<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="#">All Patients<span class="nav-badge-btm">08</span></a>
+                                </li>
+                                <li>
+                                    <a href="#">Add Patient</a>
+                                </li>
+                                <li>
+                                    <a href="#">Edit Patient</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                         <li class="">
+                            <a href="#"><i class="fa fa-book nav_icon"></i>Reports <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse">
+                                <li>
+                                    <a href="general.html">General<span class="nav-badge-btm">08</span></a>
+                                </li>
+                                <li>
+                                    <a href="typography.html">Typography</a>
+                                </li>
+                            </ul>
+                            <!-- /nav-second-level -->
+                        </li>
+                        
+                       
+                    </ul>
+                    <!-- //sidebar-collapse -->
+                </nav>
+            </div>
+        </div>
+        <!--left-fixed -navigation-->
+    </div>
+    <div class="col-md-10" style="background-color:#F1F1F1;">
+        <!-- header-starts -->
+        <div class="sticky-header header-section ">
+            <div class="header-left">
+               
+                <!--logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="../../assets/img/logo.png" style="height:53px;margin-top:8px;" />
+
+                        <!--<h1>NOVUS</h1>
+                        <span>AdminPanel</span>-->
+                    </a>
+                   
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+            <div class="header-right">
+                <div class="profile_details_left">
+                    <!--notifications of menu start -->
+
+                    <div class="clearfix"> </div>
+                </div>
+                <!--notification menu end -->
+                <div class="profile_details">
+                    <ul>
+                        <li class="dropdown profile_details_drop">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <div class="profile_img">
+                                    <span class="prfil-img"><img src="assets/images/avatars/user.jpg" alt=""> </span>
+                                    <div class="user-name">
+                                        <p>Dr. Steave</p>
+                                        <span>Administrator</span>
+                                    </div>
+                                    <i class="fa fa-angle-down lnr"></i>
+                                    <i class="fa fa-angle-up lnr"></i>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu drp-mnu">
+                                <li> <a href="#"><i class="fa fa-user"></i> My Profile</a> </li>
+                                <li> <a href="#"><i class="fa fa-cog"></i> Account Settings</a> </li>
+                                <li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="clearfix"> </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <!-- //header-ends -->
+        <!--<div class="dashbord">-->
+        <!-- main content start-->
+        <div class="row">
+            <ul class="breadcrumb" style="margin-top: 60px;background-color: #ffffff;">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="/dashboard" ui-sref="root.dashboard">Home</a>
+                </li>
+
+                <li class="active">Edit Events</li>
+            </ul>
+                
+            
+
+        </div>
+        <!-- //header-ends -->
+        <!--<div class="dashbord">-->
+        <!-- main content start-->
+        <div class="row">
+            <!-- <div class="col-md-10 col-sm-offset-2"> -->
+   <!--          <ul class="breadcrumb" style="margin-top: 40px;background-color: #ffffff;">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="/dashboard" ui-sref="root.dashboard">Home</a>
+                </li>
+
+                <li class="active">Dashboard</li>
+            </ul> -->
+
+        <!-- </div> -->
+        <div class="col-md-10 col-sm-offset-3">
+            <div id="page-wrapper" style="width: 500px;">
+                <div class="main-page">
+                    <div class="forms">
+                      
+                        <div class="form-grids row widget-shadow" data-example-id="basic-forms" style="width: 700;">
+                            <div class="form-title">
+                                <h4>Edit Events</h4>
+                            </div>
+                            <div class="form-body">
+                                <form name="userForm" >
+                                    <div class="form-group">
+                                         <label for="exampleInputEmail1">Patient</label>
+                                        <input type="text" class="form-control"  placeholder="Patient Name" ng-model="patient.patient" readonly="">
+                                    </div>
+                                    <div class="form-group">
+                                         <label for="exampleInputEmail1">Cause</label>
+                                        <input type="text" class="form-control"  placeholder="Cause" ng-model="patient.cause" readonly="">
+                                    </div>
+                                    <div class="form-group">
+                                          <label for="exampleInputEmail1">Appointment</label>
+                                        <input type="text" class="form-control"  placeholder="Appointment Time" ng-model="patient.appointmentTime" readonly="">
+                                    </div>
+                                    <div class="form-group">
+                                          <label for="exampleInputEmail1">Reschedule</label>
+                                    <datepicker date-format="MM-dd-yyyy" selector="form-control">      
+                                          <input type="text" name="time" ng-model="patient.rescheduleTime" placeholder="Choose a date" class="editable-input form-control input-sm" required/>
+                                    </datepicker>
+                                    </div>
+                                    <button type="submit" class="btn btn-default" ng-disabled="submitBtn" ng-click="Update()" style="margin-left: 275px;margin-top: 10px;">Update</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!--<div class="container">
+                <form class="contact" name="userForm" style="margin: 10px 0; !important">
+                    <h3>Patient</h3>
+                   
+                        <label>1. Name</label>
+                        <input placeholder="Name" type="text" name="username" ng-model="patient.patient">
+                        <label> Cause</label>
+                        <input placeholder="Department" type="text" name="department" ng-model="patient.disease">
+                        <label> Appointment Time</label>
+                        <input placeholder="Department" type="text" name="department" ng-model="patient.appointmentTime">
+                        <label> Status</label>
+                        <input placeholder="Department" type="text" name="department" ng-model="patient.status">
+                   
+                    <div class="col-md-offset-3 col-md-6">
+                        <button name="submit" type="submit" ng-disabled="submitBtn">Update</button>
+                    </div>
+                   
+                </form>
+            </div>-->
+        </div>
+        <div class="main-page">
+
+
+        </div>
+    <!-- </div> -->
+
+
+<!-- <div class="footer">
+    <p>© 2016 Novus Admin Panel. All Rights Reserved | Design by <a href="https://w3layouts.com/" target="_blank">w3layouts</a></p>
+</div> -->
+
+<!--</div>-->
+<script type="text/javascript">
+    $('.side li').on('click', function () {
+        $(this).siblings().removeClass('active');
+        $(this).addClass('active');
+    })
+
+</script>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<script>
+    new WOW().init();
+</script>
+<script>
+    var menuLeft = document.getElementById('cbp-spmenu-s1'),
+        showLeftPush = document.getElementById('showLeftPush'),
+        body = document.body;
+
+    showLeftPush.onclick = function () {
+        classie.toggle(this, 'active');
+        classie.toggle(body, 'cbp-spmenu-push-toright');
+        classie.toggle(menuLeft, 'cbp-spmenu-open');
+        disableOther('showLeftPush');
+    };
+
+
+    function disableOther(button) {
+        if (button !== 'showLeftPush') {
+            classie.toggle(showLeftPush, 'disabled');
+        }
+    }
+</script>
+
+
+

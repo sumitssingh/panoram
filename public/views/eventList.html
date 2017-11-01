@@ -1,0 +1,131 @@
+    <div class="col-md-12" style="background-color:#F1F1F1;" ng-controller="eventListCtrl as demo">
+        <!-- header-starts -->
+        <div class="sticky-header header-section ">
+            <div class="header-left">
+               
+                <!--logo -->
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="../../assets/img/logo.png" style="height:53px;margin-top:8px;" />
+
+                        <!--<h1>NOVUS</h1>
+                        <span>AdminPanel</span>-->
+                    </a>
+                   
+                </div>
+                <!--<button id="showLeftPush"><i class="fa fa-bars"></i></button>-->
+                <!--//logo-->
+                <!--toggle button start-->
+                <!--<button id="showLeftPush"><i class="fa fa-bars"></i></button>-->
+                <!--toggle button end-->
+                <!--search-box-->
+                <div class="search-box">
+                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                {{selectedItem.name}}
+                                <span class="caret"></span>
+                            </button>
+                  <!--   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Select option
+                        {{select.name}}
+                   <span class="caret"></span>
+                    </button> -->
+                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li ng-repeat="a in response">
+                                    <a ng-click="getEvent(a)">{{a.name}}</a>
+                                </li>
+                            </ul>
+                    <!--<ul>
+                        <li class="schedule-dropedown">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li >
+                                        
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>-->
+
+                    <!--<form class="input">
+                        <input class="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31" />
+                        <label class="input__label" for="input-31">
+                            <svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
+                                <path d="m0,0l404,0l0,77l-404,0l0,-77z" />
+                            </svg>
+                        </label>
+                    </form>-->
+                </div><!--//end-search-box-->
+                <div class="clearfix"> </div>
+            </div>
+            <div class="header-right">
+                <div class="profile_details_left">
+                    <!--notifications of menu start -->
+
+                    <div class="clearfix"> </div>
+                </div>
+                <!--notification menu end -->
+                <div class="profile_details">
+                    <ul>
+                        <li class="dropdown profile_details_drop">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <div class="profile_img">
+                                    <span class="prfil-img"><img src="assets/images/avatars/user.jpg" alt=""> </span>
+                                    <div class="user-name">
+                                        <p>Admin</p>
+                                        <span>Administrator</span>
+                                    </div>
+                                    <i class="fa fa-angle-down lnr"></i>
+                                    <i class="fa fa-angle-up lnr"></i>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                            <ul class="dropdown-menu drp-mnu">
+                                <li> <a href="#"><i class="fa fa-user"></i> My Profile</a> </li>
+                                <li> <a href="#"><i class="fa fa-cog"></i> Account Settings</a> </li>
+                                <li> <a ui-sref="login"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="clearfix"> </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+  <div class="row" style="background: #f1f1f1; margin-top: 75px;">
+            <div class="col-md-10 col-sm-offset-2">
+<!--       <table ng-table="usersTable" show-filter="true" class="table ">
+                
+                    <tr ng-repeat="user in $data">
+                        <td data-title="'Sr.No'" sortable="'id'">
+                                  {{$index + 1}}
+                        </td>
+                        <td data-title="'Patient'"  sortable="'patient'" filter="{ 'patient': 'text' }">
+                                {{user.patient}}
+                        </td>    
+                        <td data-title="'Appointment'" sortable="'appointmentTime'" filter="{ 'appointmentTime': 'text' }">
+                                {{user.appointmentTime | limitTo : 11}}
+                        </td>    
+                        <td data-title="'Location'" sortable="'location'" filter="{ 'location': 'text' }">
+                                {{user.location}}
+                        </td>  
+                        <td data-title="'Action'">
+                          <a><button class="btn btn-danger btn-sm" ng-click="myApplicationDetail(user)"><span></span>VIEW</button></a>
+                         <!--  <a ng-hide="user.isChatStarted==0"><button class="btn btn-danger btn-sm" ng-click="chat(user)"><span></span>MESSAGE</button></a> -->
+                        <!-- </td> -->
+                    <!-- </tr> -->
+                <!-- </table>    --> 
+
+   <table ng-table="demo.tableParams" class="table table-condensed table-bordered table-striped">
+      <tr ng-repeat="row in $data">
+        <td data-title="'Name'" filter="{name: 'text'}" sortable="'name'">{{row.name}}</td>
+        <td data-title="'Age'" filter="{age: 'number'}" sortable="'age'">{{row.age}}</td>
+        <td data-title="'Money'" filter="{money: 'number'}" sortable="'money'">{{row.money}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+</div>

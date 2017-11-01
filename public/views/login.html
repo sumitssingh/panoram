@@ -1,0 +1,44 @@
+
+
+<div class="login-page login content-section">
+    
+    <div class="main-page login-page" style="text-align: center;">
+        <!--<img src="../assets/img/imageedit_4_9037908546.png" />-->
+        <img src="../assets/img/logo.png" style="margin: 44px 0px 38px 0;" />
+        <div class="widget-shadow">
+            <div class="login-top">
+                <h3 style="color:#3a4080;font-weight:500;font-size: 20px;">Please Enter Your Information</h3>
+            </div>
+            <div class="alert alert-block alert-danger" ng-show="showInvalidCredential">
+                <button type="button" class="close" data-dismiss="alert">
+                    <i class="ace-icon fa fa-times"></i>
+                </button>
+                Invalid email or password.
+            </div>
+            <div class="login-body">
+                <form ng-submit="login()" name="loginForm" novalidate>
+                    <input type="text" class="user" name="email" placeholder="Email" ng-model="loginFormObj.email" required>
+                    <div ng-show="loginForm.$submitted || loginForm.email.$touched" style="text-align:left">
+                        <span class="text-danger" ng-show="loginForm.email.$error.required">Email is required.</span>
+                        <span class="text-danger" ng-show="loginForm.email.$error.email">Invalid email.</span>
+                    </div>
+                    <input type="Password" name="Password" class="lock" placeholder="Password" ng-model="loginFormObj.password" minlength="6" required>
+                    <div ng-show="loginForm.$submitted || loginForm.password.$touched" style="text-align:left">
+                        <span class="text-danger" ng-show="loginForm.password.$error.required">Password is required.</span>
+                        <span class="text-danger" ng-show="loginForm.password.$error.minlength">Min 6 character is required.</span>
+
+                    </div>
+          
+           
+            <div class="forgot-grid">
+                <label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i></i>Remember me</label>
+                <input type="submit" name="Login" value="Login" ng-click="login()" ng-disabled="loginBtn" style="float: right;">
+                <div class="clearfix"> </div>
+            </div>
+            </form>
+        </div>
+        </div>
+
+       
+    </div>
+    </div>
