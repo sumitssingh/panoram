@@ -9,7 +9,7 @@ angular.module('myApp')
             $http({
                 method: 'POST',
                 isArray: false,
-                url: 'http://localhost:3000/admin/doctor/getAppointmentByDoctor/patient/'+event.docId +'/'+event.patientId,
+                url: SERVER_BASE_URL+'admin/doctor/getAppointmentByDoctor/patient/'+event.docId +'/'+event.patientId,
 
                 headers: {
                     "Content-Type":"application/x-www-form-urlencoded",
