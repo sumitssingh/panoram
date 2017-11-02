@@ -1,6 +1,6 @@
 angular.module('myApp')
-    .controller('eventDetailCtrl', ['$rootScope','$scope','$state','$filter','$http','ngDialog','NgTableParams','event',
-        function ($rootScope,$scope, $state, $filter, $http, ngDialog,NgTableParams,event) {
+    .controller('eventDetailCtrl', ['$rootScope','$scope','$state','$filter','$http','ngDialog','SERVER_BASE_URL','NgTableParams','event',
+        function ($rootScope,$scope, $state, $filter, $http, ngDialog,SERVER_BASE_URL,NgTableParams,event) {
 
             $scope.patientEvent=[];
             $scope.query = {
