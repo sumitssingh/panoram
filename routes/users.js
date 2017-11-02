@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var multer = require('multer');
 var upload = multer({dest: 'upload/'})
 var Doctor = mongoose.model('Doctor');
+var OnCall = mongoose.model('OnCall');
 var Hospital = mongoose.model('Hospital');
 var ensureAuthenticated = require('../authMiddleWare');
 
@@ -299,5 +300,42 @@ router.route('/follow/doctor')
 })
 })
     })
+router.route('/onCall/providers')
+    .get(function(req, res){
+        OnCall.find({}, function(err, posts) {
+        OnCall.populate(posts, {path: 'doctor'}, function(err, posts) {
+            if (err) {
+                res.send({status: "error", "error": err})
+            } else{
+                res.send(posts);
+            }
+    })
+    })
+        })
+    .post(function(req, res){
+        for (var i = req.body.length - 1; i >= 0; i--) {
+            var location = req.body[i].location;
+            var time = req.body[i].time;
+        Doctor.findOne({username:req.body[i].doctor}, function(err, user){
+             if (err) {
+                res.send(err)
+             } else {
+                console.log(req.body[i]);
+                var providerId = user._id;
+                var emergencyCall = new OnCall();
+                emergencyCall.doctor=providerId;
+                emergencyCall.location=location;
+                emergencyCall.date=time;
 
+                emergencyCall.save(function(err, provider){
+                    if (err) {
+                        res.send(err)
+                    } 
+                })
+             }
+                
+        })
+    }
+    res.send({status: true, info: "Successfully Added"});
+    })
 module.exports = router;
