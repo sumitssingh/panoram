@@ -4,7 +4,8 @@ angular.module('myApp')
 $scope.selectedItem = {};
 $rootScope.users=[];
                             
-
+$scope.isAuthenticate = UtilityService.checkUserLogin();
+                console.log($scope.isAuthenticate);
                         $scope.allDocUrl= 'admin/doctor/getAllDoctors/name';
                         $scope.appointmentUrl= 'admin/doctor/getAppointmentByDoctor';
                         UtilityService.apiGet($scope.allDocUrl,{}).then(function(response){

@@ -8,6 +8,7 @@ angular.module('myApp')
 $scope.row = {};
 $scope.OnCall  = [];
 var states = [];
+$scope.isAuthenticate = UtilityService.checkUserLogin();
 $scope.locationUrl= 'admin/doctor/fetch/All/location';
                         $http({
                             method: "GET",

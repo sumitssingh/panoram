@@ -1,10 +1,12 @@
 angular.module('myApp')
-    .controller('eventEditCtrl', ['SweetAlert','$rootScope','$scope','$filter','$http','NgTableParams','SERVER_BASE_URL',
-        function (SweetAlert,$rootScope,$scope, $filter, $http, NgTableParams, SERVER_BASE_URL) {
+    .controller('eventEditCtrl', ['SweetAlert','$rootScope','$scope','$filter','$http','NgTableParams','SERVER_BASE_URL','UtilityService',
+        function (SweetAlert,$rootScope,$scope, $filter, $http, NgTableParams, SERVER_BASE_URL, UtilityService) {
 $scope.selectedItem = {};
             $scope.patientEvent=[];
-            var patient=$rootScope.patientDetail;
+             $scope.patient=$rootScope.patientDetail;
 console.log( $scope.patient);
+
+$scope.isAuthenticate = UtilityService.checkUserLogin();
 
             $scope.Update = function() {
 
@@ -29,7 +31,7 @@ console.log( $scope.patient);
                     "Content-Type":"application/x-www-form-urlencoded",
                     "Authorization":"Bearer " +localStorage.getItem("ngStorage-token")
                 },
-                data: patient
+                data: $scope.patient
             }).then(function(response){
                 console.log($scope.patient);
                 if (status) {

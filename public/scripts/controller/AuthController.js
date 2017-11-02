@@ -14,8 +14,7 @@ angular.module('myApp')
 
                     response = response.data;
                     if(response.status){
-
-                        $rootScope.isAuthenticate =true;
+                        UtilityService.setLocalStorage('isAuthenticate', true);
                         UtilityService.setLocalStorage('token', response.token);
                         UtilityService.setLocalStorage('userInfo', {email:$scope.loginFormObj.email,name:'admin'});
                         $state.go('dashboard');
@@ -31,7 +30,7 @@ angular.module('myApp')
                 UtilityService.apiPost('auth/login',$scope.loginFormObj).then(function(response){
                     if(response.status){
                 $rootScope.loginName = $scope.loginFormObj.email;
-                $rootScope.isAuthenticate =false;
+                UtilityService.setLocalStorage('isAuthenticate', false);
                 $state.go('dashboard');
             }
             },function(error){

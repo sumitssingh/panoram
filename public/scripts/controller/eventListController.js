@@ -1,7 +1,7 @@
 angular.module('myApp')
-    .controller('eventListCtrl', ['$rootScope','$scope','$state','$filter','$http','ngDialog','NgTableParams','SERVER_BASE_URL',
-        function ($rootScope,$scope, $state, $filter, $http, ngDialog,NgTableParams, SERVER_BASE_URL) {
-
+    .controller('eventListCtrl', ['$rootScope','$scope','$state','$filter','$http','ngDialog','NgTableParams','SERVER_BASE_URL','UtilityService',
+        function ($rootScope,$scope, $state, $filter, $http, ngDialog,NgTableParams, SERVER_BASE_URL, UtilityService) {
+$scope.isAuthenticate = UtilityService.checkUserLogin();
             $scope.patientEvent=[];
             $scope.selectedItem = {};
             // $scope.query = {

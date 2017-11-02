@@ -31,7 +31,7 @@
         /* Check User Login */
         this.checkUserLogin = function() {
             // Removes all local storage
-            if (this.getLocalStorage('userInfo')) {
+            if (this.getLocalStorage('isAuthenticate')) {
                 return true;
             } else {
                 return false;

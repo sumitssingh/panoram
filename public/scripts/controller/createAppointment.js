@@ -7,6 +7,9 @@ angular.module('myApp')
                 $scope.patient.appointmentTime = $rootScope.date;
                 $scope.patient.status = "active";
 
+                $scope.isAdmin = UtilityService.checkUserLogin();
+                console.log($scope.isAdmin); 
+
 $scope.data = [];
                 
                       $http({
