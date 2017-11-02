@@ -1,6 +1,6 @@
 angular.module('myApp')
-    .controller('DashboardController', ['$rootScope','$scope', '$timeout', '$state','SERVER_BASE_URL', '$http','ngDialog','$controller','UtilityService',
-        function($rootScope, $scope, $timeout, $state,SERVER_BASE_URL, $http, ngDialog, $controller, UtilityService) {
+    .controller('DashboardController', ['$rootScope','$scope','$filter', '$timeout', '$state','SERVER_BASE_URL', '$http','ngDialog','$controller','UtilityService',
+        function($rootScope, $scope, $filter, $timeout, $state,SERVER_BASE_URL, $http, ngDialog, $controller, UtilityService) {
 $scope.selectedItem = {};
 $rootScope.users=[];
                             
@@ -75,9 +75,11 @@ $rootScope.users=[];
         };
 
         $scope.createClicked = function (date) {
-            console.log(date);
-            $rootScope.date= date;
-            $state.go('OnCall');
+             var date= new Date(date).toDateString("DD/mm/yyyy")
+             $scope.time = $filter('date')(new Date(), 'HH:mm');
+             $scope.appointmentTime = date + " " +$scope.time; 
+             $rootScope.date= $scope.appointmentTime;
+             $state.go('createEvent');
         };
 
     }]);

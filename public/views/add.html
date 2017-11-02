@@ -166,24 +166,28 @@
                             <div class="form-body">
                                 <form name="userForm" >
                                     <div class="form-group">
+                                        <label for="exampleInputEmail1">Select Doctor</label>
+                                            <select class="form-control" id="repeatSelect" ng-model="patient.doctorId">
+                                                  <option ng-repeat="option in data" value="{{option.id}}">{{option.name}}</option>
+                                            </select>
+                                    </div>    
+                                    <div class="form-group">
                                          <label for="exampleInputEmail1">Patient</label>
-                                        <input type="text" class="form-control"  placeholder="Patient Name" ng-model="patient.patient" readonly="">
+                                        <input type="text" class="form-control"  placeholder="Patient Name" ng-model="patient.patient" >
                                     </div>
                                     <div class="form-group">
-                                         <label for="exampleInputEmail1">Cause</label>
-                                        <input type="text" class="form-control"  placeholder="Cause" ng-model="patient.cause" readonly="">
+                                         <label for="exampleInputEmail1">Disease</label>
+                                        <input type="text" class="form-control"  placeholder="disease" ng-model="patient.disease" >
                                     </div>
                                     <div class="form-group">
-                                          <label for="exampleInputEmail1">Appointment</label>
-                                        <input type="text" class="form-control"  placeholder="Appointment Time" ng-model="patient.appointmentTime" readonly="">
+                                          <label for="exampleInputEmail1">Appointment Time</label>
+                                        <input type="text" class="form-control"  placeholder="Appointment Time" ng-model="patient.appointmentTime" >
                                     </div>
-                                    <div class="form-group">
-                                          <label for="exampleInputEmail1">Reschedule</label>
-                                    <datepicker date-format="MM-dd-yyyy" selector="form-control">      
-                                          <input type="text" name="time" ng-model="patient.rescheduleTime" placeholder="Choose a date" class="editable-input form-control input-sm" required/>
-                                    </datepicker>
+                                     <div class="form-group">
+                                          <label for="exampleInputEmail1">Location</label>
+                                        <input type="text" class="form-control"  placeholder="Appointment Location" ng-model="patient.location" >
                                     </div>
-                                    <button type="submit" class="btn btn-default" ng-disabled="submitBtn" ng-click="Update()" style="margin-left: 275px;margin-top: 10px;">Update</button>
+                                    <button type="submit" class="btn btn-default" ng-disabled="submitBtn" ng-click="create()" style="margin-left: 275px;margin-top: 10px;">Create</button>
                                 </form>
                             </div>
                         </div>
@@ -223,36 +227,6 @@
 </div> -->
 
 <!--</div>-->
-<script type="text/javascript">
-    $('.side li').on('click', function () {
-        $(this).siblings().removeClass('active');
-        $(this).addClass('active');
-    })
-
-</script>
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<script>
-    new WOW().init();
-</script>
-<script>
-    var menuLeft = document.getElementById('cbp-spmenu-s1'),
-        showLeftPush = document.getElementById('showLeftPush'),
-        body = document.body;
-
-    showLeftPush.onclick = function () {
-        classie.toggle(this, 'active');
-        classie.toggle(body, 'cbp-spmenu-push-toright');
-        classie.toggle(menuLeft, 'cbp-spmenu-open');
-        disableOther('showLeftPush');
-    };
-
-
-    function disableOther(button) {
-        if (button !== 'showLeftPush') {
-            classie.toggle(showLeftPush, 'disabled');
-        }
-    }
-</script>
 
 
 

@@ -33,8 +33,16 @@ angular.module('myApp', [
     })
         .state('editEvent', {
         url:'/editEvent',
-      templateUrl: 'views/add.html',
+      templateUrl: 'views/editEvents.html',
       controller: 'eventEditCtrl',
+        data: {
+                    isAuthenticate: true
+                }
+    })
+                .state('createEvent', {
+        url:'/createEvent',
+      templateUrl: 'views/add.html',
+      controller: 'createEventCtrl',
         data: {
                     isAuthenticate: true
                 }

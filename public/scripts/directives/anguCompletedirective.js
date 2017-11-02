@@ -1,4 +1,4 @@
-angular.module('MyApp')
+angular.module('myApp')
     .directive('angucomplete', function ($parse, $http, $sce, $timeout) {
     return {
         restrict: 'EA',

@@ -49,13 +49,14 @@ angular.module('myApp')
 
             $scope.edit = function(patient) {
                 ngDialog.close();
+                console.log(patient);
                $rootScope.patientDetail ={ 
                 "patient" : patient.patient,
                 "disease" : patient.cause,
-                "appointmentId":patient._id,
+                "appointmentId":patient.appointmentId,
                 "appointmentTime" : patient.appointmentTime,
                 "status" : patient.status,
-                "patientId" : event.patientId,
+                "patientId" : patient.id,
                 "doctorId" : event.docId
             }
                 $state.go('editEvent');

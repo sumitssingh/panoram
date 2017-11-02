@@ -1,33 +1,59 @@
 angular.module('myApp')
-    .controller('eventEditCtrl', ['$rootScope','$scope','$filter','$http','NgTableParams',
-        function ($rootScope,$scope, $filter, $http, NgTableParams) {
+    .controller('eventEditCtrl', ['SweetAlert','$rootScope','$scope','$filter','$http','NgTableParams','SERVER_BASE_URL',
+        function (SweetAlert,$rootScope,$scope, $filter, $http, NgTableParams, SERVER_BASE_URL) {
 $scope.selectedItem = {};
             $scope.patientEvent=[];
-            $scope.patient=$rootScope.patientDetail;
+            var patient=$rootScope.patientDetail;
+console.log( $scope.patient);
 
+            $scope.Update = function() {
 
-            // $scope.Update = function() {
-
-            $http({
-                method: 'POST',
+                SweetAlert.swal({
+                     title: "Are you sure?",
+                     text: "Do you want to save the data?",
+                     type: "warning",
+                     showCancelButton: true,
+                     confirmButtonColor: "#DD6B55",confirmButtonText: "Yes, save it!",
+                     cancelButtonText: "No, cancel it!",
+                     closeOnConfirm: false,
+                     closeOnCancel: false }, 
+              function(isConfirm){ 
+            if (isConfirm) {
+              console.log($scope.OnCall);
+                   $http({
+                method: 'PUT',
                 isArray: false,
-                url: 'http://localhost:3000/admin/doctor/rescheduled/appointment/current/patient/'+$scope.patient.appointmentId,
+                url: SERVER_BASE_URL+'admin/doctor/rescheduled/appointment/current/patient/'+$scope.patient.doctorId,
 
                 headers: {
                     "Content-Type":"application/x-www-form-urlencoded",
                     "Authorization":"Bearer " +localStorage.getItem("ngStorage-token")
                 },
-                data: $scope.patient
+                data: patient
             }).then(function(response){
                 console.log($scope.patient);
+                if (status) {
+                SweetAlert.swal("Saved!", "Your data has been saved.", "success");
+                } else {
+                    SweetAlert.swal("Cancelled!", "Something is not right pls try again");
+                }
             })
-            $scope.query = {
-                patientId:event.patientId
-            }
+                    
+                    // window.location=('#/customer').replace();
+            }   else {
+                    SweetAlert.swal("Cancelled!", "Your data is temporarily in the table");
+                  }
+              })
+
+        }
+            // $scope.query = {
+            //     patientId:event.patientId
+            // }
+
             $http({
                 method: 'POST',
                 isArray: false,
-                url: 'http://localhost:3000/admin/doctor/getAppointmentByDoctor/patient/'+event.docId +'/'+event.patientId,
+                url: SERVER_BASE_URL+'admin/doctor/getAppointmentByDoctor/patient/'+$scope.patient.doctorId +'/'+$scope.patient.patientId,
 
                 headers: {
                     "Content-Type":"application/x-www-form-urlencoded",

@@ -268,7 +268,7 @@ if (user.follow.length>0) {
         });
     })
 router.post('/create/appointment/:id', function (req, res) {
-    console.log(req.params.id);
+    console.log(req.body);
     Doctor.findById(req.params.id, function (err, doc) {
         if (err) {
             res.send({status: false, info:err});
@@ -318,7 +318,9 @@ router.put('/rescheduled/appointment/current/patient/:id', function (req, res) {
     Doctor.findById(req.params.id, function (err, doc) {
         if (err) {
             res.send({status: false, info:err});
-        }
+        } else {
+            console.log(doc);
+            console.log(req.body);
         for (var i=doc.Appointment.length-1; i>=0;  i--) {
             if (doc.Appointment[i]._id == req.body.patientId) {
                 var appointmentFor =doc.Appointment[i].for;
@@ -341,6 +343,7 @@ router.put('/rescheduled/appointment/current/patient/:id', function (req, res) {
                 res.send({status: false, info:"No Patient found for given PatientId"})
             }
         }
+    }
     })
 })
 router.post('/add/appointment/current/patient', function (req, res) {

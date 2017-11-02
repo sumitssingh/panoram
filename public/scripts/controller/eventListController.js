@@ -1,6 +1,6 @@
 angular.module('myApp')
-    .controller('eventListCtrl', ['$rootScope','$scope','$state','$filter','$http','ngDialog','NgTableParams',
-        function ($rootScope,$scope, $state, $filter, $http, ngDialog,NgTableParams) {
+    .controller('eventListCtrl', ['$rootScope','$scope','$state','$filter','$http','ngDialog','NgTableParams','SERVER_BASE_URL',
+        function ($rootScope,$scope, $state, $filter, $http, ngDialog,NgTableParams, SERVER_BASE_URL) {
 
             $scope.patientEvent=[];
             $scope.selectedItem = {};
@@ -12,7 +12,7 @@ angular.module('myApp')
 
                         $http({
                             method: "GET",
-                            url: 'http://localhost:3000/admin/doctor/getAllDoctors/name',
+                            url: SERVER_BASE_URL+'admin/doctor/getAllDoctors/name',
                             headers:{
                                 'content-type':'Application/json',
                                 'Authorization':"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc0FkbWluIjp0cnVlLCJleHAiOjMwMjM1NjIwMywiaWF0IjoxNTA2NTk3MDE5fQ.ijDTib7qCuoQ0_MH33sV-Yu2Tf0VcDianhyyZWS-8R8"
@@ -35,7 +35,7 @@ angular.module('myApp')
        //  	$http({
        //      method: 'GET',
        //      isArray: false,
-       //      url: 'http://localhost:3000/admin/doctor/getAppointmentByDoctor/'+doc.id,
+       //      url: SERVER_BASE_URL+'admin/doctor/getAppointmentByDoctor/'+doc.id,
 
        //      headers: {
 
