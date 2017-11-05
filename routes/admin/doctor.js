@@ -173,6 +173,16 @@ router.route('/onCall/providers')
     }
     res.send({status: true, info: "Successfully Added"});
     })
+        .put(function(req, res){
+            console.log(req.body);
+        OnCall.remove({_id: req.body.id}, function(err, data) {
+            if (err) {
+                res.send({status: "error", "error": err})
+            } else{
+                res.send(data);
+            }
+        })
+    })
 router.get('/profile/:id', function(req, res, next) {
     if (req.isAdmin) {
     Doctor.findById(req.params.id, function (err, doctor) {

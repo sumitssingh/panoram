@@ -2,6 +2,7 @@ angular.module('myApp')
     .controller('AuthController', ['$rootScope','$scope','$state', 'UtilityService',
         function($rootScope, $scope,$state, UtilityService) {
         $scope.loginFormObj = {};
+        $rootScope.loginName=localStorage.getItem('ngStorage-loginName');
         $scope.login = function login() {
 
                 //$scope.loginBtn = true;
@@ -14,6 +15,7 @@ angular.module('myApp')
 
                     response = response.data;
                     if(response.status){
+                        UtilityService.setLocalStorage('loginName', 'Admin');
                         UtilityService.setLocalStorage('isAuthenticate', true);
                         UtilityService.setLocalStorage('token', response.token);
                         UtilityService.setLocalStorage('userInfo', {email:$scope.loginFormObj.email,name:'admin'});
@@ -29,7 +31,7 @@ angular.module('myApp')
             }else {
                 UtilityService.apiPost('auth/login',$scope.loginFormObj).then(function(response){
                     if(response.status){
-                $rootScope.loginName = $scope.loginFormObj.email;
+                        UtilityService.setLocalStorage('loginName', response.username);
                 UtilityService.setLocalStorage('isAuthenticate', false);
                 $state.go('dashboard');
             }

@@ -70,6 +70,7 @@
         </div>
         <!--left-fixed -navigation-->
     </div>
+    <!-- <button class="btn btn-primary" ng-ckick="getData()">getData</button> -->
     <div class="col-md-10" style="background-color:#F1F1F1;">
         <!-- header-starts -->
         <div class="sticky-header header-section ">
@@ -102,7 +103,7 @@
                                 <div class="profile_img">
                                     <span class="prfil-img"><img src="assets/images/avatars/user.jpg" alt=""> </span>
                                     <div class="user-name">
-                                        <p>Admin</p>
+                                        <p>{{loginName}}</p>
                                         <span>Administrator</span>
                                     </div>
                                     <i class="fa fa-angle-down lnr"></i>
@@ -157,9 +158,9 @@
       </div>
       <table ng-table="demo.tableParams" class="table table-bordered table-hover table-condensed editable-table" ng-form="demo.tableForm" disable-filter="demo.isAdding" demo-tracked-table="demo.tableTracker">
         <colgroup>
-          <col width="70%" />
-          <col width="12%" />
-          <col width="13%" />
+          <col width="50%" />
+          <col width="25%" />
+          <col width="15%" />
           <col width="5%" />
         </colgroup>
         <tr ng-repeat="row in $data" ng-form="rowForm" demo-tracked-table-row="row">
@@ -181,7 +182,7 @@
           </td>
           <td title="'Time'" filter="{time: 'text'}" sortable="'time'" ng-switch="demo.isEditing" ng-class="time.$dirty ? 'bg-warning' : ''" ng-form="time" demo-tracked-table-cell>
             
-            <span ng-switch-default class="editable-text">{{row.time}}</span>
+            <span ng-switch-default class="editable-text">{{row.time | date}}</span>
             <div class="controls" ng-class="time.$invalid && time.$dirty ? 'has-error' : ''" ng-switch-when="true">
             <datepicker date-format="MM-dd-yyyy">
               <input type="text" name="time" ng-model="row.time" class="editable-input form-control input-sm" required/>

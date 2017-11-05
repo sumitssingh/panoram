@@ -3,11 +3,12 @@ angular.module('myApp')
         function (SweetAlert,$rootScope,$scope, $filter, $http, SERVER_BASE_URL, UtilityService) {
 
                 $scope.patient = {};
-
+$scope.loginName=localStorage.getItem('ngStorage-loginName');
+$scope.loginName = $scope.loginName.replace(/"/g,"");
                 $scope.patient.appointmentTime = $rootScope.date;
                 $scope.patient.status = "active";
 
-                $scope.isAdmin = UtilityService.checkUserLogin();
+                $scope.isAuthenticate = UtilityService.checkUserLogin();
                 console.log($scope.isAdmin); 
 
 $scope.data = [];

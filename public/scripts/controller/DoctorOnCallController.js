@@ -1,10 +1,10 @@
 
-
 angular.module('myApp')
-.controller('OnCallCtrl',['$scope','$rootScope', '$sce', '$q','$http','SweetAlert','NgTableParams','SERVER_BASE_URL','UtilityService',
-  function ($scope,$rootScope, $sce,  $q,  $http, SweetAlert, NgTableParams, SERVER_BASE_URL, UtilityService){
-  var simpleList = [{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"}];
+.controller('OnCallCtrl',['$scope','$rootScope', '$sce', '$q','$http','SweetAlert','NgTableParams','SERVER_BASE_URL','UtilityService','onCallService',
+  function ($scope,$rootScope, $sce,  $q,  $http, SweetAlert, NgTableParams, SERVER_BASE_URL, UtilityService,onCallService){
 
+$scope.loginName=localStorage.getItem('ngStorage-loginName');
+$scope.loginName = $scope.loginName.replace(/"/g,"");
 $scope.row = {};
 $scope.OnCall  = [];
 var states = [];
@@ -24,10 +24,6 @@ $scope.locationUrl= 'admin/doctor/fetch/All/location';
                               return doc.name;
                             })
                             console.log(doctor);
-                          // var simpleList = [{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"}];
-                          // var states = simpleList.map(function(doc){
-                              // return doc.location;
-                            // })
                            UtilityService.apiGet($scope.locationUrl,{}).then(function(response){
                             console.log(response);
                             states = response.data.map(function(doc){
@@ -98,24 +94,35 @@ $scope.locationUrl= 'admin/doctor/fetch/All/location';
                             data: $scope.OnCall
                         }).then(function (response) {
                           
-              })
                     SweetAlert.swal("Saved!", "Your data has been saved.", "success");
+              })
                     // window.location=('#/customer').replace();
             }   else {
                     SweetAlert.swal("Cancelled!", "Your data is temporarily in the table");
                   }
               })
     }
-// var simpleList = [{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"},{doctor: "John Doe", location: "usa", time: "oct/12/2017"}];
-
   var self = this;
+        onCallService.query(function(response){
+                  console.log(response);
+                  console.log(response[0].doctor.username);
+          // $scope.loading = false;
+          $scope.people=response.data;
+          var data=[];
+          var people=[];
+          data=response;
+console.log(data);
+              for(var i=0;i<data.length;i++) {
+                console.log(data[i].doctor.username);
+                      people.push({"id":data[i]._id,"doctor":data[i].doctor.username, "location":data[i].location, "time":data[i].date});
+              }
+console.log(people);
+        var originalData = angular.copy(people);
 
-    var originalData = angular.copy(simpleList);
 
-    self.tableParams = new NgTableParams({}, {
-      dataset: angular.copy(simpleList)
-    });
-
+                  self.tableParams = new NgTableParams({}, {
+            dataset: angular.copy(people)
+          });
     self.deleteCount = 0;
 
     self.add = add;
@@ -153,6 +160,35 @@ $scope.locationUrl= 'admin/doctor/fetch/All/location';
     }
 
     function del(row) {
+      console.log(row);
+                     SweetAlert.swal({
+                     title: "Are you sure?",
+                     text: "Do you really want to delete the data?",
+                     type: "warning",
+                     showCancelButton: true,
+                     confirmButtonColor: "#DD6B55",confirmButtonText: "Yes, delete it!",
+                     cancelButtonText: "No, cancel it!",
+                     closeOnConfirm: false,
+                     closeOnCancel: false }, 
+              function(isConfirm){ 
+            if (isConfirm) {
+                   $http({
+                            method: "PUT",
+                            url: SERVER_BASE_URL+'admin/doctor/onCall/providers',
+                            headers:{
+                                'content-type':'Application/json',
+                                'Authorization':"Bearer " + localStorage.getItem('ngStorage-token')
+                            },
+                            data: row
+                        }).then(function (response) {
+                          
+                    SweetAlert.swal("Saved!", "Your data has been removed.", "success");
+              })
+                    // window.location=('#/customer').replace();
+            }   else {
+                    SweetAlert.swal("Cancelled!", "Your data is safe");
+                  }
+              })
       _.remove(self.tableParams.settings().dataset, function(item) {
         return row === item;
       });
@@ -185,7 +221,7 @@ $scope.locationUrl= 'admin/doctor/fetch/All/location';
         data=originalData;
         $scope.OnCall.push(data[0]);
     }
-  // })
+  })
         // }
 
 }]);
@@ -822,7 +858,6 @@ $scope.locationUrl= 'admin/doctor/fetch/All/location';
 //     });
 //   }
 // })();
-
 
 
 

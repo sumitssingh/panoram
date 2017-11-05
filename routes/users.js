@@ -1,4 +1,4 @@
-var express = require('express');
+ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var mongoose = require('mongoose');
@@ -337,5 +337,14 @@ router.route('/onCall/providers')
         })
     }
     res.send({status: true, info: "Successfully Added"});
+    })
+            .put(function(req, res){
+        OnCall.remove({_id: req.body.id}, function(err, data) {
+            if (err) {
+                res.send({status: "error", "error": err})
+            } else{
+                res.send(data);
+            }
+        })
     })
 module.exports = router;

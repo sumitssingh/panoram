@@ -3,7 +3,8 @@ angular.module('myApp')
         function($rootScope, $scope, $filter, $timeout, $state,SERVER_BASE_URL, $http, ngDialog, $controller, UtilityService) {
 $scope.selectedItem = {};
 $rootScope.users=[];
-                            
+$scope.loginName=localStorage.getItem('ngStorage-loginName');   
+$scope.loginName = $scope.loginName.replace(/"/g,"");                         
 $scope.isAuthenticate = UtilityService.checkUserLogin();
                 console.log($scope.isAuthenticate);
                         $scope.allDocUrl= 'admin/doctor/getAllDoctors/name';
@@ -76,11 +77,15 @@ $scope.isAuthenticate = UtilityService.checkUserLogin();
         };
 
         $scope.createClicked = function (date) {
+            if ($scope.isAuthenticate) {
              var date= new Date(date).toDateString("DD/mm/yyyy")
              $scope.time = $filter('date')(new Date(), 'HH:mm');
              $scope.appointmentTime = date + " " +$scope.time; 
              $rootScope.date= $scope.appointmentTime;
              $state.go('createEvent');
+         } else {
+            alert("Only Admin have right to create events");
+         }
         };
 
     }]);

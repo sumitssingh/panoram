@@ -2,6 +2,8 @@ angular.module('myApp')
     .controller('eventEditCtrl', ['SweetAlert','$rootScope','$scope','$filter','$http','NgTableParams','SERVER_BASE_URL','UtilityService',
         function (SweetAlert,$rootScope,$scope, $filter, $http, NgTableParams, SERVER_BASE_URL, UtilityService) {
 $scope.selectedItem = {};
+$scope.loginName=localStorage.getItem('ngStorage-loginName');
+$scope.loginName = $scope.loginName.replace(/"/g,"");
             $scope.patientEvent=[];
              $scope.patient=$rootScope.patientDetail;
 console.log( $scope.patient);

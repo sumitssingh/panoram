@@ -3,6 +3,8 @@ angular.module('myApp')
         function ($rootScope,$scope, $state, $filter, $http, ngDialog,SERVER_BASE_URL,NgTableParams,event, UtilityService) {
 
             $scope.patientEvent=[];
+            $scope.loginName=localStorage.getItem('ngStorage-loginName');
+            $scope.loginName = $scope.loginName.replace(/"/g,"");
             $scope.query = {
                 patientId:event.patientId
             }
