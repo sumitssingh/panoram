@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var fs = require('fs');
 
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 3002;
 
 var configDB = require('./config/database.js');
 mongoose.connect(configDB.url,{ useMongoClient: true });
