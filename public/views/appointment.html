@@ -1,9 +1,10 @@
-<div class="row">
+  <div class="row" style="background: #f1f1f1;margin-top: 63px;min-height: 100%;">
+  <!-- <div class="row"> -->
     <div class="col-md-2" style="padding-right: 0px;">
         <!--left-fixed -navigation-->
         <div class="sidebar" role="navigation">
             <div class="navbar-collapse">
-                <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+                <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1" style="z-index: 0;">
                     <ul class="nav" id="side-menu">
                         <li>
                             <a ui-sref="dashboard" class="active"><i class="fa fa-dashboard nav_icon"></i>Dashboard</a>
@@ -20,7 +21,7 @@
                                 </li>
                             </ul>
                         </li>
-                <!--         <li>
+            <!--             <li>
                             <a href="#" class="chart-nav"><i class="fa fa-user nav_icon"></i>Doctors <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
                                 <li>
@@ -34,8 +35,8 @@
                                 </li>
                                
                             </ul>
-                        </li>
-                        <li>
+                        </li> -->
+              <!--           <li>
                             <a href="#" class="chart-nav"><i class="fa fa-users nav_icon"></i>Patient<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
                                 <li>
@@ -49,8 +50,8 @@
                                 </li>
 
                             </ul>
-                        </li>
-                         <li class="">
+                        </li> -->
+             <!--             <li class="">
                             <a href="#"><i class="fa fa-book nav_icon"></i>Reports <span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse">
                                 <li>
@@ -60,8 +61,9 @@
                                     <a href="typography.html">Typography</a>
                                 </li>
                             </ul>
-                        </li>
-                         -->
+                            <!-- /nav-second-level -
+                        </li> -->
+                        
                        
                     </ul>
                     <!-- //sidebar-collapse -->
@@ -70,9 +72,10 @@
         </div>
         <!--left-fixed -navigation-->
     </div>
-    <div class="col-md-10" style="background-color:#F1F1F1;">
+    <div class="col-md-9" style="background-color: rgba(35, 46, 51, 0.12);box-shadow: 2px 16px 3px 14px #e6e1e1;margin-right: 0px;margin-top: 21px;">
         <!-- header-starts -->
         <div class="sticky-header header-section ">
+
             <div class="header-left">
                
                 <!--logo -->
@@ -85,6 +88,51 @@
                     </a>
                    
                 </div>
+                <!--<button id="showLeftPush"><i class="fa fa-bars"></i></button>-->
+                <!--//logo-->
+                <!--toggle button start-->
+                <!--<button id="showLeftPush"><i class="fa fa-bars"></i></button>-->
+                <!--toggle button end-->
+                <!--search-box-->
+                <div class="search-box">
+                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                {{selectedItem.name}}
+                                <span class="caret"></span>
+                            </button>
+                  <!--   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Select option
+                        {{select.name}}
+                   <span class="caret"></span>
+                    </button> -->
+                     <ul class="dropdown-menu" ng-if=isAuthenticate aria-labelledby="dropdownMenu1">
+                                <li ng-repeat="a in response">
+                                    <a ng-click="getEvent(a)">{{a.name}}</a>
+                                </li>
+                            </ul>
+                    <!--<ul>
+                        <li class="schedule-dropedown">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li >
+                                        
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>-->
+
+                    <!--<form class="input">
+                        <input class="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31" />
+                        <label class="input__label" for="input-31">
+                            <svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
+                                <path d="m0,0l404,0l0,77l-404,0l0,-77z" />
+                            </svg>
+                        </label>
+                    </form>-->
+                </div><!--//end-search-box-->
                 <div class="clearfix"> </div>
             </div>
             <div class="header-right">
@@ -112,7 +160,7 @@
                             <ul class="dropdown-menu drp-mnu">
                                 <li> <a href="#"><i class="fa fa-user"></i> My Profile</a> </li>
                                 <li> <a href="#"><i class="fa fa-cog"></i> Account Settings</a> </li>
-                                <li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                                <li> <a ui-sref="login"><i class="fa fa-sign-out"></i> Logout</a> </li>
                             </ul>
                         </li>
                     </ul>
@@ -132,100 +180,63 @@
                     <a href="/dashboard" ui-sref="root.dashboard">Home</a>
                 </li>
 
-                <li class="active">Edit Events</li>
+                <li class="active">Appointment</li>
             </ul>
                 
             
 
         </div>
-        <!-- //header-ends -->
-        <!--<div class="dashbord">-->
-        <!-- main content start-->
-        <div class="row">
-            <!-- <div class="col-md-10 col-sm-offset-2"> -->
-   <!--          <ul class="breadcrumb" style="margin-top: 40px;background-color: #ffffff;">
-                <li>
-                    <i class="ace-icon fa fa-home home-icon"></i>
-                    <a href="/dashboard" ui-sref="root.dashboard">Home</a>
-                </li>
-
-                <li class="active">Dashboard</li>
-            </ul> -->
-
-        <!-- </div> -->
-        <div class="col-md-10 col-sm-offset-3">
-            <div id="page-wrapper" style="width: 500px;">
-                <div class="main-page">
-                    <div class="forms">
-                      
-                        <div class="form-grids row widget-shadow" data-example-id="basic-forms" style="width: 700;">
-                            <div class="form-title">
-                                <h4>Edit Events</h4>
-                            </div>
-                            <div class="form-body">
-                                <form name="userForm" >
-                                    <div class="form-group">
-                                         <label for="exampleInputEmail1">Patient</label>
-                                        <input type="text" class="form-control"  placeholder="Patient Name" ng-model="patient.patient" readonly="">
-                                    </div>
-                                    <div class="form-group">
-                                         <label for="exampleInputEmail1">Cause</label>
-                                        <input type="text" class="form-control"  placeholder="Cause" ng-model="patient.cause" readonly="">
-                                    </div>
-                                    <div class="form-group">
-                                          <label for="exampleInputEmail1">Appointment</label>
-                                        <input type="text" class="form-control"  placeholder="Appointment Time" ng-model="patient.appointmentTime" readonly="">
-                                    </div>
-                                    <div class="form-group">
-                                          <label for="exampleInputEmail1">Reschedule</label>
-                                    <datepicker date-format="MM-dd-yyyy" selector="form-control">      
-                                          <input type="text" name="time" ng-model="patient.rescheduleTime" placeholder="Choose a date" class="editable-input form-control input-sm" required/>
-                                    </datepicker>
-                                    </div>
-                                    <button type="submit" class="btn btn-default" ng-disabled="submitBtn" ng-click="Update()" style="margin-left: 275px;margin-top: 10px;">Update</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-            <!--<div class="container">
-                <form class="contact" name="userForm" style="margin: 10px 0; !important">
-                    <h3>Patient</h3>
-                   
-                        <label>1. Name</label>
-                        <input placeholder="Name" type="text" name="username" ng-model="patient.patient">
-                        <label> Cause</label>
-                        <input placeholder="Department" type="text" name="department" ng-model="patient.disease">
-                        <label> Appointment Time</label>
-                        <input placeholder="Department" type="text" name="department" ng-model="patient.appointmentTime">
-                        <label> Status</label>
-                        <input placeholder="Department" type="text" name="department" ng-model="patient.status">
-                   
-                    <div class="col-md-offset-3 col-md-6">
-                        <button name="submit" type="submit" ng-disabled="submitBtn">Update</button>
-                    </div>
-                   
-                </form>
-            </div>-->
-        </div>
-        <div class="main-page">
+            <div class="col-md-10">
+<!--       <table class='table-striped' ng-table="usersTable" show-filter="true" class="table ">
+                
+                    <tr ng-repeat="user in $data">
+                        <td data-title="'Sr.No'" sortable="'id'">
+                                  {{$index + 1}}
+                        </td>
+                        <td data-title="'Patient'"  sortable="'patient'" filter="{ 'patient': 'text' }">
+                                {{user.patient}}
+                        </td>    
+                        <td data-title="'Appointment'" sortable="'appointmentTime'" filter="{ 'appointmentTime': 'text' }">
+                                {{user.appointmentTime | limitTo : 11}}
+                        </td>    
+                        <td data-title="'Location'" sortable="'location'" filter="{ 'location': 'text' }">
+                                {{user.location}}
+                        </td>  
+                        <td data-title="'Action'">
+                          <a><button class="btn btn-danger btn-sm" ng-click="myApplicationDetail(user)"><span></span>VIEW</button></a>
+                          <a ng-hide="user.isChatStarted==0"><button class="btn btn-danger btn-sm" ng-click="chat(user)"><span></span>MESSAGE</button></a>
+                         </td>
+                     </tr>
+                </table>    
+                <div class="" ng-controller="appointmentCtrl as vm"> -->
+<table ng-table="vm.tableParams" class="table table-striped" show-filter="false">
+    <tr ng-repeat="user in users">
+        <td title="'Patient'" filter="{ patient: 'text'}" sortable="'patient'">
+            {{user.patient}}</td>
+        <td title="'Appointment'" filter="{ appointmentTime: 'number'}" sortable="'appointmentTime'">
+            {{user.appointmentTime | limitTo : 11}}</td>
+        <td title="'Location'" filter="{ location: 'number'}" sortable="'location'">
+            {{user.location}}
+        </td>
+        <td data-title="'Action'">
+            <a><button class="btn btn-primary btn-sm" ng-click="edit(user)"><span></span>EDIT</button></a>
+        </td>
+    </tr>
+</table>
 
 
-        </div>
-    <!-- </div> -->
 
 
-<!-- <div class="footer">
-    <p>© 2016 Novus Admin Panel. All Rights Reserved | Design by <a href="https://w3layouts.com/" target="_blank">w3layouts</a></p>
-</div> -->
 
-<!--</div>-->
-</div>
+
+
+  </div>
+
+
+</div> 
 </div>
 
-<div class="footer" style="    margin-left: -10px;">
+<div class="footer" style="margin-left: -10px;">
     <div class="row">
         <div class="col-md-2" style="text-align: -webkit-left;">
            <p> Barry Bronk PA-C 303-919-1371</p>
@@ -248,6 +259,7 @@
 
 
   
+
 
 
 

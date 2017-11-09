@@ -12,7 +12,7 @@ angular.module('myApp', [
   'MassAutoComplete',
   'material.components.eventCalendar'
 ])
-    .constant('SERVER_BASE_URL','http://107.170.218.205:3001/')
+    .constant('SERVER_BASE_URL','http://107.170.218.205:3000/')
     // .constant('SERVER_BASE_URL','http://localhost:3000/')
 
 .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -51,6 +51,15 @@ angular.module('myApp', [
         url:'/eventList',
       templateUrl: 'views/eventList.html',
       controller: 'eventListCtrl'
+    })
+          .state('appointment', {
+        url:'/appointment/list',
+      templateUrl: 'views/appointment.html',
+      controller: 'appointmentCtrl',
+      controllerAs: 'vm',
+        data: {
+                    isAuthenticate: true
+                }
     })
       .state('OnCall', {
         url:'/OnCall',
