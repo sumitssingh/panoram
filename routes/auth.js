@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var mongoose = require('mongoose');
+var ensureAuthenticated = require('../authMiddleWare');
 // var bcrypt = require('bcrypt-nodejs');
 var crypto = require('crypto');
 var config=require('../config.json');
@@ -93,6 +94,28 @@ router.post('/register', function(req, res, next){
         }
     });
 });
+
+router.use(ensureAuthenticated);
+router.post('/reset/password', function(req, res) {
+      Doctor.findById(req.userId, function (err, doctor) {
+        if (!doctor) {
+          return res.send('invalid user.');
+        }
+
+        // user.password = req.body.password;
+        doctor.setPassword(req.body.password);
+
+         doctor.save(function(err,user) {
+            if (err) {
+                res.send(err)
+            }else {
+                res.send("Password Successfully Changed")
+            }
+        });
+});
+});
+
+
 
 
 module.exports = router;
