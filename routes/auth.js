@@ -67,7 +67,7 @@ router.post('/login', function(req, res, next){
 //
 // });
 router.post('/register', function(req, res, next){
-    if (!req.body.username || !req.body.password) {
+    if (!req.body.username || !req.body.password || !req.body.email) {
         return res.status(400).json({message: "Please fill the form"})
     }
 
@@ -76,7 +76,7 @@ router.post('/register', function(req, res, next){
     var doctor = new Doctor();
 
     doctor.username = req.body.username;
-    // doctor.password = req.body.password;
+    doctor.email = req.body.email;
 
 
     doctor.setPassword(req.body.password);

@@ -1,15 +1,22 @@
 
 angular.module('myApp')
-.controller('OnCallCtrl',['$scope','$rootScope', '$sce', '$q','$http','SweetAlert','NgTableParams','SERVER_BASE_URL','UtilityService','onCallService',
-  function ($scope,$rootScope, $sce,  $q,  $http, SweetAlert, NgTableParams, SERVER_BASE_URL, UtilityService,onCallService){
+.controller('OnCallCtrl',['$scope','$rootScope', '$sce', '$q','$http','SweetAlert','NgTableParams','SERVER_BASE_URL','UtilityService','socket','onCallService',
+  function ($scope,$rootScope, $sce,  $q,  $http, SweetAlert, NgTableParams, SERVER_BASE_URL, UtilityService,socket,onCallService){
 
 $scope.loginName=localStorage.getItem('ngStorage-loginName');
 $scope.loginName = $scope.loginName.replace(/"/g,"");
 $scope.row = {};
 $scope.OnCall  = [];
+var id =[]
 var states = [];
 $scope.isAuthenticate = UtilityService.checkUserLogin();
 $scope.locationUrl= 'admin/doctor/fetch/All/location';
+
+
+socket.on('connect', function () { 
+// alert("connected");
+});
+
                         $http({
                             method: "GET",
                             url: SERVER_BASE_URL+'admin/doctor/getAllDoctors/name',
@@ -71,7 +78,7 @@ $scope.locationUrl= 'admin/doctor/fetch/All/location';
 
 
     $scope.Save=function(){
-        
+     
                      SweetAlert.swal({
                      title: "Are you sure?",
                      text: "Do you want to save the data?",
@@ -84,18 +91,32 @@ $scope.locationUrl= 'admin/doctor/fetch/All/location';
               function(isConfirm){ 
             if (isConfirm) {
               console.log($scope.OnCall);
-                   $http({
-                            method: "POST",
-                            url: SERVER_BASE_URL+'admin/doctor/onCall/providers',
-                            headers:{
-                                'content-type':'Application/json',
-                                'Authorization':"Bearer " + localStorage.getItem('ngStorage-token')
-                            },
-                            data: $scope.OnCall
-                        }).then(function (response) {
+              
+                              var to = "59f735c95a3a99017e0d2189";
+                              var message ="New OnCall events"
+                              var from = "59f733f45a3a99017e0d2188"
+                              socket.emit('sendEvents', id);
+                              console.log(id);
+              //      $http({
+              //               method: "POST",
+              //               url: SERVER_BASE_URL+'admin/doctor/onCall/providers',
+              //               headers:{
+              //                   'content-type':'Application/json',
+              //                   'Authorization':"Bearer " + localStorage.getItem('ngStorage-token')
+              //               },
+              //               data: $scope.OnCall
+              //           }).then(function (response) {
                           
-                    SweetAlert.swal("Saved!", "Your data has been saved.", "success");
-              })
+              //               for (var i = id.length - 1; i >= 0; i--) {
+              //                 console.log(id[i]);
+              //                 var to = "59f735c95a3a99017e0d2189";
+              //                 var message ="New OnCall events"
+              //                 var from = "59f733f45a3a99017e0d2188"
+              //                 socket.emit('add-message', message, to, from);
+              //               }
+
+              //       SweetAlert.swal("Saved!", "Your data has been saved.", "success");
+              // })
                     // window.location=('#/customer').replace();
             }   else {
                     SweetAlert.swal("Cancelled!", "Your data is temporarily in the table");
@@ -219,7 +240,20 @@ console.log(people);
       var currentPage = self.tableParams.page();
       originalData = angular.copy(self.tableParams.settings().dataset);
         data=originalData;
+        console.log(data[0]);
+        // socket.emit('adduser', data[0]);
         $scope.OnCall.push(data[0]);
+
+                  for (var i = $scope.response.length - 1; i >= 0; i--) {
+                    for (var j = $scope.OnCall.length - 1; j >= 0; j--) {
+                      if ($scope.OnCall[j].doctor ===$scope.response[i].name ) {
+                        id.push($scope.response[i].id);
+                        console.log($scope.response[i].id);
+                              socket.emit('adduser', id[j]);
+
+                      }
+                    }
+                  }
     }
   })
         // }

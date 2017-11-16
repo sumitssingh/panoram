@@ -8,6 +8,7 @@ var jwt = require('jsonwebtoken');
 
 var DoctorSchema = new mongoose.Schema({
     username:{type:String, unique:true},
+    email:{type:String, unique:true},
     doctorid : {type:String},
     speciality : { type: String, trim: true },
     doctorDp: { data: Buffer, contentType: String },

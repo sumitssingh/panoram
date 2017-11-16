@@ -29,6 +29,7 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => console.log('Client disconnected'));
     socket.on('add-message', (msg, to, from) => {
+      console.log(to);
     var message = {
         'text': msg,
         'to': to,
@@ -36,6 +37,23 @@ io.on('connection', (socket) => {
     }
         // io.emit('message', {type:'new-message', text: message});    
     sockets[to].emit('message',message);
+  });
+        socket.on('sendEvents', (to) => {
+      // console.log(to);
+      for (var i = to.length - 1; i >= 0; i--) {
+            var message = {
+                'text': "New OnCall events",
+                'to': to[i],
+                'from': "303172098",
+            }
+            var docId = to[i];
+            console.log("to " +docId);
+            // console.log(sockets);
+            console.log("message " + message);
+        // io.emit('message', {type:'new-message', text: message});    
+      sockets[docId].emit('message',message);
+      }
+
   });
 });
 
