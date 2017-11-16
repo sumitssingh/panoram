@@ -97,27 +97,26 @@ socket.on('connect', function () {
                               var from = "59f733f45a3a99017e0d2188"
                               socket.emit('sendEvents', id);
                               console.log(id);
-              //      $http({
-              //               method: "POST",
-              //               url: SERVER_BASE_URL+'admin/doctor/onCall/providers',
-              //               headers:{
-              //                   'content-type':'Application/json',
-              //                   'Authorization':"Bearer " + localStorage.getItem('ngStorage-token')
-              //               },
-              //               data: $scope.OnCall
-              //           }).then(function (response) {
+                   $http({
+                            method: "POST",
+                            url: SERVER_BASE_URL+'admin/doctor/onCall/providers',
+                            headers:{
+                                'content-type':'Application/json',
+                                'Authorization':"Bearer " + localStorage.getItem('ngStorage-token')
+                            },
+                            data: $scope.OnCall
+                        }).then(function (response) {
                           
-              //               for (var i = id.length - 1; i >= 0; i--) {
-              //                 console.log(id[i]);
-              //                 var to = "59f735c95a3a99017e0d2189";
-              //                 var message ="New OnCall events"
-              //                 var from = "59f733f45a3a99017e0d2188"
-              //                 socket.emit('add-message', message, to, from);
-              //               }
+                            for (var i = id.length - 1; i >= 0; i--) {
+                              console.log(id[i]);
+                              var to = "59f735c95a3a99017e0d2189";
+                              var message ="New OnCall events"
+                              var from = "59f733f45a3a99017e0d2188"
+                              socket.emit('add-message', message, to, from);
+                            }
 
-              //       SweetAlert.swal("Saved!", "Your data has been saved.", "success");
-              // })
-                    // window.location=('#/customer').replace();
+                    SweetAlert.swal("Saved!", "Your data has been saved.", "success");
+              })
             }   else {
                     SweetAlert.swal("Cancelled!", "Your data is temporarily in the table");
                   }
