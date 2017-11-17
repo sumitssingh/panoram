@@ -146,7 +146,7 @@ router.post('/getAppointmentByDoctor', function (req, res) {
                 var myAppointment = [];
                 if (doc.Appointment.length!=0) {
                     for (var i = 0;i<=doc.Appointment.length-1; i++){
-                        if (doc.Appointment[i].location === req.body.location) {
+                        // if (doc.Appointment[i].location === req.body.location) {
                         if (doc.Appointment[i].for.length!=0){
                             for (var j=0;j<=doc.Appointment[i].for.length-1;j++) {
                                  myAppointment.push({
@@ -161,7 +161,7 @@ router.post('/getAppointmentByDoctor', function (req, res) {
                                 })
                             }
                         }
-                    }
+                    // }
             }
                if (myAppointment.length== 0) {
                     res.send({status: false, info:"Currently You dont have any appointments for this location"});
