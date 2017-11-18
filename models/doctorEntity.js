@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 // var Hospital = mongoose.model('Hospital');
-var arrayUniquePlugin = require('mongoose-unique-array');
+// var arrayUniquePlugin = require('mongoose-unique-array');
 var bcrypt = require('bcrypt-nodejs');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
@@ -30,8 +30,8 @@ var DoctorSchema = new mongoose.Schema({
         status : { type: String }
     }],
     hospital : { type: Schema.Types.ObjectId, ref: 'Hospital' },
-    follow: { type : Array , default : [], unique: true},
-    following: { type : Array , default : [], unique: true},
+    follow: { type : Array , default : []},
+    following: { type : Array , default : []},
     hash: String,
     salt:String
 });
