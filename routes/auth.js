@@ -83,7 +83,7 @@ router.post('/register', function(req, res, next){
 
     doctor.save(function(err){
         if (err) {
-            res.send({status: false, info:"Doctor with this username already exists"});
+            res.send({status: false, err: err,  info:"Doctor with this username already exists"});
         }else {
             res.send({
                 "status": true,

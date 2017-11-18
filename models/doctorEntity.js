@@ -95,7 +95,7 @@ DoctorSchema.methods.generateJwt = function() {
         exp:parseInt(exp.getTime() /5000),
     },'secret');
 }
- DoctorSchema.plugin(arrayUniquePlugin);
+//  DoctorSchema.plugin(arrayUniquePlugin);
 var Doctor = mongoose.model('Doctor', DoctorSchema);
 var OnCall = mongoose.model('OnCall', OnCallSchema);
 var Hospital = mongoose.model('Hospital', HospitalSchema);
