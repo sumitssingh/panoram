@@ -232,35 +232,42 @@ router.route('/follow/doctor')
     .post(function (req, res) {
         console.log(req.body.id);
         Doctor.findById(req.userId, function (err, doc) {
-            if (err)
-                res.send({status: false, info:err});
-
-            doc.follow.push(req.body.id);
-
-            doc.save(function (err, doctor) {
-                if (err) {
-                    res.send({status:false, info:err})
-		} else {
-                // res.send({status: true, info:"Success"})
-        Doctor.findById(req.body.id, function (err, doctor) {
             if (err) {
-                res.send({status: false, info: err})
-            } else {
-                doctor.following.push(req.userId);
-
-                doctor.save(function (err, doctor) {
-                    if (err) {
-                        res.send({status: false, info: err})
-                    } else {
-                        res.send({status: true, info: "Success"})
+                res.send({status: false, info:err});
+            }
+            else {
+                if(doc.follow.indexOf(req.body.id) < 0) {
+                    doc.follow.push(req.body.id);
+                    doc.save(function (err, doctor) {
+                        if (err) {
+                            res.send({status:false, info:err})
+                		} else {
+                        Doctor.findById(req.body.id, function (err, doctor) {
+                            if (err) {
+                                res.send({status: false, info: err})
+                            } else {
+                                if(doc.follow.indexOf(req.userId) < 0) {
+                                    doctor.following.push(req.userId);
+                                    doctor.save(function (err, doctor) {
+                                        if (err) {
+                                            res.send({status: false, info: err})
+                                        } else {
+                                            res.send({status: true, info: "Success"})
+                                        }
+                                    })
+                                } else{
+                                    res.send({status: false, info:"Already Member"});  
+                                }
+                            }
+                        })
                     }
                 })
+            } else {
+                res.send({status: false, info:"Already Member"});  
             }
-        })
-}
-})
-})
+        }
     })
+})
     router.post('/unFollow/doctor', function (req, res) {
         Doctor.findById(req.userId, function (err, doc) {
             if (err)

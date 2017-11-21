@@ -1,15 +1,18 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 // var Hospital = mongoose.model('Hospital');
+<<<<<<< HEAD
  var arrayUniquePlugin = require('mongoose-unique-array');
+=======
+>>>>>>> 4adc1c6d9a9ab9aefbb7171ee8f8d401f8230d6f
 var bcrypt = require('bcrypt-nodejs');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
 // var arrayUniquePlugin = require('mongoose-unique-array');
 
 var DoctorSchema = new mongoose.Schema({
-    username:{type:String, unique:true},
-    email:{type:String, unique:true},
+    username:{type:String, unique: true},
+    email:{type:String, unique: true},
     doctorid : {type:String},
     speciality : { type: String, trim: true },
     doctorDp: { data: Buffer, contentType: String },
@@ -96,7 +99,7 @@ DoctorSchema.methods.generateJwt = function() {
         exp:parseInt(exp.getTime() /5000),
     },'secret');
 }
-//  DoctorSchema.plugin(arrayUniquePlugin);
+ // DoctorSchema.plugin(arrayUniquePlugin);
 var Doctor = mongoose.model('Doctor', DoctorSchema);
 var OnCall = mongoose.model('OnCall', OnCallSchema);
 var Hospital = mongoose.model('Hospital', HospitalSchema);
