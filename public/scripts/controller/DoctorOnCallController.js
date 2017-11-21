@@ -125,7 +125,7 @@ socket.on('connect', function () {
   var self = this;
         onCallService.query(function(response){
                   console.log(response);
-                  console.log(response[0].doctor.username);
+//                  console.log(response[0].doctor.username);
           // $scope.loading = false;
           $scope.people=response.data;
           var data=[];

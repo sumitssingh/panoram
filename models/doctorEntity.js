@@ -1,10 +1,11 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 // var Hospital = mongoose.model('Hospital');
-// var arrayUniquePlugin = require('mongoose-unique-array');
+ var arrayUniquePlugin = require('mongoose-unique-array');
 var bcrypt = require('bcrypt-nodejs');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
+// var arrayUniquePlugin = require('mongoose-unique-array');
 
 var DoctorSchema = new mongoose.Schema({
     username:{type:String, unique:true},
