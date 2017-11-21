@@ -180,7 +180,10 @@
                                     </div>
                                     <div class="form-group">
                                           <label for="exampleInputEmail1">Appointment Time</label>
-                                        <input type="text" class="form-control"  placeholder="Appointment Time" ng-model="patient.appointmentTime" required="">
+                                        <!-- <input type="text" class="form-control"  placeholder="Appointment Time" > -->
+                                        <datepicker date-format="MM-dd-yyyy">
+                                          <input type="text" name="time" class="editable-input form-control input-sm" ng-model="patient.appointmentTime" required=""/>
+                                          </datepicker>
                                     </div>
                                      <div class="form-group">
                                           <label for="exampleInputEmail1">Location</label>
