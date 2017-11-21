@@ -54,6 +54,7 @@ $scope.data = [];
                             data: $scope.patient
                         }).then(function (response) {
                           if (response.status) {
+                            $scope.patient = {};
                             SweetAlert.swal("Saved!", "Your data has been saved.", "success");
                           } else {
                             SweetAlert.swal("Cancelled", response.info, "Done");

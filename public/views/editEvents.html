@@ -182,7 +182,7 @@
                                           <input type="text" name="time" ng-model="patient.rescheduleTime" placeholder="Choose a date" class="editable-input form-control input-sm" required/>
                                     </datepicker>
                                     </div>
-                                    <button type="submit" class="btn btn-default" ng-disabled="submitBtn" ng-click="Update()" style="margin-left: 275px;margin-top: 10px;">Update</button>
+                                    <button type="submit" class="btn btn-default" ng-disabled="userForm.$invalid" ng-click="Update()" style="margin-left: 275px;margin-top: 10px;">Update</button>
                                 </form>
                             </div>
                         </div>

@@ -23,7 +23,6 @@ $scope.isAuthenticate = UtilityService.checkUserLogin();
                      closeOnCancel: false }, 
               function(isConfirm){ 
             if (isConfirm) {
-              console.log($scope.OnCall);
                    $http({
                 method: 'PUT',
                 isArray: false,
@@ -37,6 +36,7 @@ $scope.isAuthenticate = UtilityService.checkUserLogin();
             }).then(function(response){
                 console.log($scope.patient);
                 if (status) {
+                    $scope.patient = {};
                 SweetAlert.swal("Saved!", "Your data has been saved.", "success");
                 } else {
                     SweetAlert.swal("Cancelled!", "Something is not right pls try again");
