@@ -1,6 +1,6 @@
 angular.module('myApp')
-    .controller('createEventCtrl', ['SweetAlert','$rootScope','$scope','$filter','$http','SERVER_BASE_URL','UtilityService',
-        function (SweetAlert,$rootScope,$scope, $filter, $http, SERVER_BASE_URL, UtilityService) {
+    .controller('createEventCtrl', ['SweetAlert','$rootScope','$state','$scope','$filter','$http','SERVER_BASE_URL','UtilityService',
+        function (SweetAlert,$rootScope,$state,$scope, $filter, $http, SERVER_BASE_URL, UtilityService) {
 
                 $scope.patient = {};
 $scope.loginName=localStorage.getItem('ngStorage-loginName');
@@ -12,6 +12,7 @@ $scope.loginName = $scope.loginName.replace(/"/g,"");
                 console.log($scope.isAdmin); 
 
 $scope.data = [];
+			$scope.patient.doctorId = $state.params.doctor;
                 
                       $http({
                             method: "GET",

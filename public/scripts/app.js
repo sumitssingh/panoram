@@ -40,7 +40,7 @@ angular.module('myApp', [
                 }
     })
                 .state('createEvent', {
-        url:'/createEvent',
+        url:'/createEvent/:doctor',
       templateUrl: 'views/add.html',
       controller: 'createEventCtrl',
         data: {

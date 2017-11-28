@@ -82,7 +82,7 @@ $scope.isAuthenticate = UtilityService.checkUserLogin();
              $scope.time = $filter('date')(new Date(), 'HH:mm');
              $scope.appointmentTime = date + " " +$scope.time; 
              $rootScope.date= $scope.appointmentTime;
-             $state.go('createEvent');
+             $state.go('createEvent', {doctor:$rootScope.docId});
          } else {
             alert("Only Admin have right to create events");
          }
