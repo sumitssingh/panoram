@@ -285,17 +285,21 @@ router.post('/create/appointment/:id', function (req, res) {
         } else {
 
         // console.log(doc.Appointment.length);
-            if (doc != null) {
-        if (doc.Appointment.length>=1 ) {
-            for (var i = doc.Appointment.length; i > 0; i--) {
-                console.log(i);
-                doc.Appointment.push({"patient": req.body.patient, "location": req.body.location})
-                doc.Appointment[i].for.push({
-                    "disease": req.body.dieses, "appointmentTime": req.body.appointmentTime,
+        if (doc != null) {
+            if (doc.Appointment.length>0 ) {
+                var isPatient;
+             doc.Appointment.map(function(items, index){
+                if (items.patient === req.body.patient) {
+                    patientIndex = index;
+                    return patientIndex
+                }
+            })
+                doc.Appointment[patientIndex].for.push({
+                    "disease": req.body.disease,
+                    "location": req.body.location,
+                    "appointmentTime": req.body.appointmentTime,
                     "status": req.body.status
                 })
-                // doc.Appointment[0].location= req.body.location;
-
                 doc.save(function (err, data) {
                     if (err) {
                         res.send(err)
@@ -304,23 +308,25 @@ router.post('/create/appointment/:id', function (req, res) {
                     }
                 })
             }
-        } else {
-            doc.Appointment.push({"patient": req.body.patient, "location": req.body.location})
-            doc.Appointment[0].for.push({
-                "disease": req.body.dieses, "appointmentTime": req.body.appointmentTime,
-                "status": req.body.status
-            })
-            doc.save(function (err, data) {
-                if (err) {
-                    res.send(err)
-                } else {
-                    res.send({status: true, info: "Appointment saved"});
-                }
-            })
+            else {
+                doc.Appointment.push({"patient": req.body.patient})
+                doc.Appointment[0].for.push({
+                    "location": req.body.location,
+                    "disease": req.body.disease,
+                    "appointmentTime": req.body.appointmentTime,
+                    "status": req.body.status
+                })
+                doc.save(function (err, data) {
+                    if (err) {
+                        res.send(err)
+                    } else {
+                        res.send({status: true, info: "Appointment saved"});
+                    }
+                })
+            }
+        } else{
+            res.send({status: false, info: "No Document find with this id"});
         }
-    } else{
-        res.send({status: false, info: "No Document find with this id"});
-    }
     }
     })
 })

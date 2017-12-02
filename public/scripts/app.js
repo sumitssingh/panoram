@@ -12,20 +12,23 @@ angular.module('myApp', [
   'MassAutoComplete',
   'material.components.eventCalendar'
 ])
-    .constant('SERVER_BASE_URL','http://107.170.218.205:3000/')
-    // .constant('SERVER_BASE_URL','http://localhost:3000/')
+    // .constant('SERVER_BASE_URL','http://107.170.218.205:3000/')
+    .constant('SERVER_BASE_URL','http://localhost:3000/')
 
 .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
     $stateProvider
-        .state('login', {
-            url:'/',
-            templateUrl: 'views/login.html',
-            controller: 'AuthController'
-        })
+        // .state('login', {
+        //     url:'/',
+        //     templateUrl: 'views/login.html',
+        //     controller: 'AuthController',
+        //     data: {
+        //             isAuthenticate: true
+        //         }
+        // })
     .state('dashboard', {
-        url:'/dashboard',
-      templateUrl: 'views/templates/left.html',
+        url:'/',
+      templateUrl: 'views/dashboard.html',
       controller: 'DashboardController',
         data: {
                     isAuthenticate: true
@@ -47,11 +50,11 @@ angular.module('myApp', [
                     isAuthenticate: true
                 }
     })
-      .state('eventList', {
-        url:'/eventList',
-      templateUrl: 'views/eventList.html',
-      controller: 'eventListCtrl'
-    })
+    //   .state('eventList', {
+    //     url:'/eventList',
+    //   templateUrl: 'views/eventList.html',
+    //   controller: 'eventListCtrl'
+    // })
           .state('appointment', {
         url:'/appointment/list',
       templateUrl: 'views/appointment.html',

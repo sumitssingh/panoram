@@ -268,45 +268,45 @@ router.route('/follow/doctor')
         }
     })
 })
-    router.post('/unFollow/doctor', function (req, res) {
-        Doctor.findById(req.userId, function (err, doc) {
-            if (err)
-                res.send({status: false, info:err});
-
-              var index = doc.follow.map(function(doctor, index){
-                    if (doctor === req.body.id) {
-                         return index;
-                }
-            })
-            doc.follow.splice(index, 1);
-
-            doc.save(function (err, doctor) {
-                if (err) {
-                    res.send({status:false, info:err})
+router.post('/unFollow/doctor', function (req, res) {
+    Doctor.findById(req.userId, function (err, doc) {
+        if (err) {
+            res.send({status: false, info:err});
         } else {
-        Doctor.findById(req.body.id, function (err, doctor) {
-            if (err) {
-                res.send({status: false, info: err})
-            } else {
-                 var index = doctor.following.map(function(doc, index){
-                    if (doc === req.userId) {
-                         return index;
-                }
-            })
-            doctor.following.splice(index, 1);
-                doctor.save(function (err, doctor) {
-                    if (err) {
-                        res.send({status: false, info: err})
-                    } else {
-                       res.send({status: true, info: "Success"})
+                var index = doc.follow.map(function(doctor, index){
+                    if (doctor === req.body.id) {
+                        return index;
                     }
                 })
-            }
-        })
-}
-})
-})
+                doc.follow.splice(index, 1);
+                doc.save(function (err, doctor) {
+                    if (err) {
+                        res.send({status:false, info:err})
+                    } else {
+                            Doctor.findById(req.body.id, function (err, doctor) {
+                                if (err) {
+                                    res.send({status: false, info: err})
+                                } else {
+                                var index = doctor.following.map(function(doc, index){
+                                    if (doc === req.userId) {
+                                        return index;
+                                }
+                            })
+                            doctor.following.splice(index, 1);
+                            doctor.save(function (err, doctor) {
+                                if (err) {
+                                    res.send({status: false, info: err})
+                                } else {
+                                   res.send({status: true, info: "Success"})
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+        }
     })
+})
 router.route('/onCall/providers')
     .get(function(req, res){
         OnCall.find({}, function(err, posts) {

@@ -23,12 +23,21 @@ io.on('connection', (socket) => {
   console.log('Client connected');
 
  socket.on('adduser', function (name) {
-        console.log(name + " join the conversasion");
+  console.log(sockets);
+  if (sockets.indexOf(name)<0) {
+        console.log(name + " join the conversasion...");
         sockets[name] = socket;
 	console.log(sockets);
+  }
     });
+// socket.on('disconnect', function() {
+   //   console.log('Got disconnect!');
 
-  socket.on('disconnect', () => console.log('Client disconnected'));
+//      var i = sockets[name].indexOf(socket);
+  //    console.log(i);
+    //  sockets.splice(i, 1);
+  // });
+   socket.on('disconnect', () => console.log('Client disconnected'));
     socket.on('add-message', (msg, to, from) => {
       console.log(to);
     var message = {
@@ -49,13 +58,23 @@ io.on('connection', (socket) => {
            // }
           //  var docId = to[i];
            // console.log("to " +docId);
+        socket.on('sendEvents', (to) => {
+      for (var i = to.length - 1; i >= 0; i--) {
+      console.log(to[i]);
+
+            var message = {
+                'text': "New OnCall events",
+                'to': to[i],
+                'from': "303172098",
+            }
+            var docId = to[i];
             // console.log(sockets);
           //  console.log("message " + message);
         // io.emit('message', {type:'new-message', text: message});    
-    //  sockets[docId].emit('message',message);
-     // }
+      sockets[docId].emit('message',message);
+      }
 
-//  });
+  });
 });
 
 setInterval(() => io.emit('time', new Date().toTimeString()), 1000);

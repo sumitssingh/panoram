@@ -1,4 +1,3 @@
-
 angular.module('myApp')
 .controller('OnCallCtrl',['$scope','$rootScope', '$sce', '$q','$http','SweetAlert','NgTableParams','SERVER_BASE_URL','UtilityService','socket','onCallService',
   function ($scope,$rootScope, $sce,  $q,  $http, SweetAlert, NgTableParams, SERVER_BASE_URL, UtilityService,socket,onCallService){
@@ -33,10 +32,17 @@ socket.on('connect', function () {
                             console.log(doctor);
                            UtilityService.apiGet($scope.locationUrl,{}).then(function(response){
                              states = response.data.filter(function(elem, index, self) {
+<<<<<<< HEAD
+                if (elem != null) {
+                    return index == self.indexOf(elem);
+                }
+             })
+=======
           			if (elem != null) {
             				return index == self.indexOf(elem);
           			}
        			 })
+>>>>>>> d534f2c08f092078956263c565c060ab2164d096
                           });
                               function suggest_state(term) {
                                 console.log(term);
@@ -478,6 +484,8 @@ console.log(people);
 
 
 
+
+
 // angular.module('myApp')
 // .controller('OnCallCtrl',['$scope','$rootScope', '$sce', '$q','$http','SweetAlert','NgTableParams',
 //   function ($scope,$rootScope, $sce,  $q,  $http, SweetAlert, NgTableParams){
@@ -500,13 +508,13 @@ console.log(people);
 //                             var location = $scope.response.map(function(doc){
 //                               return doc.location;
 //                             })
-                            
+
 //                            for (var i = $scope.response.length - 1; i >= 0; i--) {
 //                                 data.push({"doctor": $scope.response[i].doctor.username, "location": $scope.response[i].location, "time": $scope.response[i].date});
 //                               }
 //                               console.log(data);
 
-                              
+
 
 //                         $http({
 //                             method: "GET",
@@ -560,12 +568,12 @@ console.log(people);
 //                           $scope.autocomplete_options = {
 //                             suggest: suggest_doctor
 //                           };
-                        
+
 //                     });
 
 
 //     $scope.Save=function(){
-        
+
 //                      SweetAlert.swal({
 //                      title: "Are you sure?",
 //                      text: "Do you want to save the data?",
@@ -587,7 +595,7 @@ console.log(people);
 //                             },
 //                             data: $scope.OnCall
 //                         }).then(function (response) {
-                          
+
 // })
 //                     SweetAlert.swal("Saved!", "Your data has been saved.", "success");
 //                     // window.location=('#/customer').replace();

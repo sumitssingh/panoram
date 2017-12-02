@@ -230,6 +230,11 @@ ul.dropdown-menu{
 }
 /*--//side-menu--*/
 /* ----Logo----*/
+.wrapper {
+    background: #fff;
+    margin: 26px;
+    box-shadow: 0px 1px 3.92px 0.08px rgba(0, 0, 0, 0.15);
+}
 .logo {
     background: #6164C1;
     text-align: center;
@@ -824,7 +829,6 @@ ul.dropdown-menu.drp-mnu li {
 /*---footer---*/
 .footer {
     background: #fff;
-    padding: 1em;
     width: 100%;
         z-index: 9999;
     /*margin-top: -150px;*/

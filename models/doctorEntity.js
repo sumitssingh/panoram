@@ -20,11 +20,11 @@ var DoctorSchema = new mongoose.Schema({
             disease : { type: String},
             appointmentTime : { type: String},
             rescheduledTime : { type: String},
+            location: {type: String},
             createdOn : { type: Date, default: Date.now},
             updatedon : { type: Date, default: Date.now},
             status : { type: String}
         }],
-        location: {type: String},
         createdon : { type: Date, default: Date.now},
         modified : { type: Date, default: Date.now},
         updatedon : { type: String },

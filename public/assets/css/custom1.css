@@ -172,3 +172,16 @@ tr.ng-scope {
     left: 765px !important;
     width: 90px;
     }
+ .md-event-calendar-cell-event-show-more-link {
+    bottom: 0;
+    position: absolute;
+}   
+.md-event-calendar-create-link {
+    text-align: center;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #797bcb !important;
+    border-color: #797bcb !important;
+}
