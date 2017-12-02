@@ -1,36 +1,19 @@
 angular.module('myApp')
-    .controller('createEventCtrl', ['SweetAlert','$rootScope','$scope','$filter','$http','SERVER_BASE_URL','UtilityService',
-        function (SweetAlert,$rootScope,$scope, $filter, $http, SERVER_BASE_URL, UtilityService) {
+    .controller('createEventCtrl', ['SweetAlert','$rootScope','$state','$scope','$filter','$http','SERVER_BASE_URL','UtilityService',
+        function (SweetAlert,$rootScope,$state,$scope, $filter, $http, SERVER_BASE_URL, UtilityService) {
 
                 $scope.patient = {};
-$scope.loginName=localStorage.getItem('ngStorage-loginName');
-$scope.loginName = $scope.loginName.replace(/"/g,"");
                 $scope.patient.appointmentTime = $rootScope.date;
                 $scope.patient.status = "active";
-
                 $scope.isAuthenticate = UtilityService.checkUserLogin();
-                console.log($scope.isAdmin); 
 
-$scope.data = [];
-                
-                      $http({
-                            method: "GET",
-                            url: SERVER_BASE_URL+'admin/doctor/getAllDoctors/name',
-                            headers:{
-                                'content-type':'Application/json',
-                                'Authorization':"Bearer " + localStorage.getItem('ngStorage-token')
-                            },
-                            data: $scope.OnCall
-                        }).then(function (response) {
-                            console.log(response.data.doctor);
-                         $scope.data=response.data.doctor; 
-                         console.log($scope.data);
-})
+                $scope.createAppointmentUrl= 'admin/doctor/create/appointment/';
 
-
-
-
-
+                $scope.$on('docId', function(event, data){
+                    $scope.patient.doctorId = data.id;
+                })
+                $scope.data = [];   
+                $scope.patient.doctorId = UtilityService.getDoctor().id;
 
                 $scope.create = function() {
                     SweetAlert.swal({
@@ -40,31 +23,31 @@ $scope.data = [];
                      showCancelButton: true,
                      confirmButtonColor: "#DD6B55",confirmButtonText: "Yes, save it!",
                      cancelButtonText: "No, cancel it!",
-                     closeOnConfirm: false,
-                     closeOnCancel: false }, 
-              function(isConfirm){ 
-            if (isConfirm) {
-                   $http({
+                     closeOnConfirm: true,
+                     closeOnCancel: true }, 
+                function(isConfirm){ 
+                    if (isConfirm) {
+                        $http({
                             method: "POST",
-                            url: SERVER_BASE_URL+'admin/doctor/create/appointment/'+$scope.patient.doctorId,
+                            url: SERVER_BASE_URL+$scope.createAppointmentUrl+$scope.patient.doctorId,
                             headers:{
                                 'content-type':'Application/json',
                                 'Authorization':"Bearer " + localStorage.getItem('ngStorage-token')
                             },
                             data: $scope.patient
                         }).then(function (response) {
-                          if (response.status) {
-                            $scope.patient = {};
-                            SweetAlert.swal("Saved!", "Your data has been saved.", "success");
-                          } else {
-                            SweetAlert.swal("Cancelled", response.info, "Done");
-                          }
-              })
-                    // window.location=('#/customer').replace();
-            }   else {
-                    SweetAlert.swal("Cancelled!", "Done");
-                  }
-              })
-                }
+                            if (response.status) {
+                                $scope.patient = {};
+                                SweetAlert.swal("Saved!", "Your data has been saved.", "success");
+                            } else {
+                                SweetAlert.swal("Cancelled", response.info, "Done");
+                            }
+                        })
+                    }   
+                    else {
+                        SweetAlert.swal("Cancelled!", "Done");
+                    }
+                })
+            }
 
         }]);

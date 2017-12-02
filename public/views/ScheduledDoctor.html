@@ -1,279 +1,77 @@
-    <div class="col-md-2" style="padding-right: 0px;">
-        <!--left-fixed -navigation-->
-        <div class="sidebar" role="navigation">
-            <div class="navbar-collapse">
-                <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
-                    <ul class="nav" id="side-menu">
-                        <li>
-                            <a ui-sref="dashboard" class="active"><i class="fa fa-dashboard nav_icon"></i>Dashboard</a>
-                           
-                        </li>
-                        <li>
-                            <a ui-sref="appointment" class="chart-nav"><i class="fa fa-bar-chart nav_icon"></i>Appointment<span class="fa arrow"></span> </a>
-                            <ul class="nav nav-second-level collapse">
-                                <li>
-                                    <a href="#">Doctor Schedule<span class="nav-badge-btm">08</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Book Appointment</a>
-                                </li>
-                            </ul>
-                        </li>
-                  <!--       <li>
-                            <a href="#" class="chart-nav"><i class="fa fa-user nav_icon"></i>Doctors <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li>
-                                    <a href="#">All Doctors<span class="nav-badge-btm">08</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Add Doctor</a>
-                                </li>
-                                <li>
-                                    <a href="#">Edit Doctor</a>
-                                </li>
-                               
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#" class="chart-nav"><i class="fa fa-users nav_icon"></i>Patient<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li>
-                                    <a href="#">All Patients<span class="nav-badge-btm">08</span></a>
-                                </li>
-                                <li>
-                                    <a href="#">Add Patient</a>
-                                </li>
-                                <li>
-                                    <a href="#">Edit Patient</a>
-                                </li>
-
-                            </ul>
-                        </li>
-                         <li class="">
-                            <a href="#"><i class="fa fa-book nav_icon"></i>Reports <span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level collapse">
-                                <li>
-                                    <a href="general.html">General<span class="nav-badge-btm">08</span></a>
-                                </li>
-                                <li>
-                                    <a href="typography.html">Typography</a>
-                                </li>
-                            </ul>
-                        </li> -->
-                        
-                       
-                    </ul>
-                    <!-- //sidebar-collapse -->
-                </nav>
-            </div>
-        </div>
-        <!--left-fixed -navigation-->
-    </div>
-    <!-- <button class="btn btn-primary" ng-ckick="getData()">getData</button> -->
-    <div class="col-md-10" style="background-color:#F1F1F1;">
-        <!-- header-starts -->
-        <div class="sticky-header header-section ">
-            <div class="header-left">
-               
-                <!--logo -->
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="../../assets/img/logo.png" style="height:53px;margin-top:8px;" />
-
-                        <!--<h1>NOVUS</h1>
-                        <span>AdminPanel</span>-->
-                    </a>
-                   
-                </div>
-                <div class="clearfix"> </div>
-            </div>
-          
-            <div class="header-right">
-                <div class="profile_details_left">
-                    <!--notifications of menu start -->
-
-                    <div class="clearfix"> </div>
-                </div>
-                <!--notification menu end -->
-                <div class="profile_details">
-                    <ul>
-                        <li class="dropdown profile_details_drop">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <div class="profile_img">
-                                    <span class="prfil-img"><img src="assets/images/avatars/user.jpg" alt=""> </span>
-                                    <div class="user-name">
-                                        <p>{{loginName}}</p>
-                                        <span>Administrator</span>
-                                    </div>
-                                    <i class="fa fa-angle-down lnr"></i>
-                                    <i class="fa fa-angle-up lnr"></i>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </a>
-                            <ul class="dropdown-menu drp-mnu">
-                                <li> <a href="#"><i class="fa fa-user"></i> My Profile</a> </li>
-                                <li> <a href="#"><i class="fa fa-cog"></i> Account Settings</a> </li>
-                                <li> <a ui-sref="login"><i class="fa fa-sign-out"></i> Logout</a> </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="clearfix"> </div>
-            </div>
-          </div>
-           <div class="row">
-            <ul class="breadcrumb" style="margin-top: 60px;background-color: #ffffff;">
-                <li>
-                    <i class="ace-icon fa fa-home home-icon"></i>
-                    <a href="/dashboard" ui-sref="root.dashboard">Home</a>
-                </li>
-
-                <li class="active">On Call</li>
-            </ul>
-                
-            
-
-        </div>
-<div class="row" >
-  <div class="col-md-12">
-  
-
- <div class="row" style="background: #fff; margin-top: 75px;">
-            <div class="col-md-10 col-sm-offset-1">
-      <div class="brn-group pull-right" ng-if=isAuthenticate>
-        <button class="btn btn-default" ng-if="demo.isEditing" ng-click="demo.cancelChanges()">
-          <span class="glyphicon glyphicon-remove"></span>
-        </button>
-        <button class="btn btn-primary" ng-if="!demo.isEditing" ng-click="demo.isEditing = true">
-          <span class="glyphicon glyphicon-pencil"></span>
-        </button>
-        <button class="btn btn-primary" ng-if="demo.isEditing" ng-disabled="!demo.hasChanges() || demo.tableTracker.$invalid" ng-click="demo.saveChanges()">
-          <span class="glyphicon glyphicon-ok"></span>
-        </button>
-        <button class="btn btn-default" ng-click="demo.add()">
-          <span class="glyphicon glyphicon-plus"></span>
-        </button>
-      </div>
-      <table ng-table="demo.tableParams" class="table table-bordered table-hover table-condensed editable-table" ng-form="demo.tableForm" disable-filter="demo.isAdding" demo-tracked-table="demo.tableTracker">
-        <colgroup>
-          <col width="50%" />
-          <col width="25%" />
-          <col width="15%" />
-          <col width="5%" />
-        </colgroup>
-        <tr ng-repeat="row in $data" ng-form="rowForm" demo-tracked-table-row="row">
-          <td title="'Doctor'" filter="{doctor: 'text'}" sortable="'doctor'" ng-switch="demo.isEditing" ng-class="doctor.$dirty ? 'bg-warning' : ''" ng-form="doctor" demo-tracked-table-cell>
-            <span ng-switch-default class="editable-text">{{row.doctor}}</span>
-            <div class="controls" ng-class="doctor.$invalid && doctor.$dirty ? 'has-error' : ''" ng-switch-when="true">
-                <div mass-autocomplete class="auto">
-                    <input type="text" name="doctor" ng-model="row.doctor" mass-autocomplete-item="autocomplete_options" class="editable-input form-control input-sm" required />
-            </div>
-      </div>
-          </td>
-          <td title="'Location'" filter="{location: 'text'}" sortable="'location'" ng-switch="demo.isEditing" ng-class="location.$dirty ? 'bg-warning' : ''" ng-form="location" demo-tracked-table-cell>
-            <span ng-switch-default class="editable-text">{{row.location}}</span>
-            <div class="controls" ng-class="location.$invalid && location.$dirty ? 'has-error' : ''" ng-switch-when="true">
-                <div mass-autocomplete class="location">
-                    <input type="text" name="location" ng-model="row.location" mass-autocomplete-item="autocomplete_location" class="editable-input form-control input-sm" required />
-            </div>
-            </div>
-          </td>
-          <td title="'Time'" filter="{time: 'text'}" sortable="'time'" ng-switch="demo.isEditing" ng-class="time.$dirty ? 'bg-warning' : ''" ng-form="time" demo-tracked-table-cell>
-            
-            <span ng-switch-default class="editable-text">{{row.time | date}}</span>
-            <div class="controls" ng-class="time.$invalid && time.$dirty ? 'has-error' : ''" ng-switch-when="true">
-            <datepicker date-format="MM-dd-yyyy">
-              <input type="text" name="time" ng-model="row.time" class="editable-input form-control input-sm" required/>
-              </datepicker>
-            </div>
-          </td>
-          <td>
-            <button class="btn btn-danger btn-sm" ng-click="demo.del(row)" ng-disabled="!demo.isEditing"><span class="glyphicon glyphicon-trash"></span></button>
-          </td>
-        </tr>
-      </table>
-           <table>
-      <tr>
-           <button class="btn btn-primary btn-sm" ng-Disabled="demo.isEditing" ng-if=isAuthenticate ng-click="Save()" style="float: right;margin-bottom: 20px;"><span class="glyphicon glyphicon-save"> Publish</span></button>
-        </tr>
-        </table>
-    </div>
-
-<!--               <table class="table table-striped">
-    <thead>
-    <tr>
-        <th>SR.No</th>
-        <th>Doctor</th>
-        <th>Patient</th>
-        <th>Location</th>
-        <th>Appointment Time</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody ng-repeat="list in users">
-    <tr>
-        <td>{{$index +1}}</td>
-        <td>{{list.doctor}}</td>
-        <td>{{list.patient}}</td>
-        <td>{{list.location}}</td>
-        <td>{{list.appointmentTime | date}}</td>
-        <td><button type="button" ng-click="edit(list)" >Edit</button></td>
-    </tr>
-    </tbody>
-</table> -->
-<!--      <table ng-table="usersTable" show-filter="true" class="table ">
-                
-                    <tr ng-repeat="user in $data">
-                        <td data-title="'Sr.No'" sortable="'id'">
-                                  {{$index + 1}}
-                        </td>
-                          <td data-title="'Doctor'"  sortable="'doctor'" filter="{ 'doctor': 'text' }">
-                                {{user.doctor}}
-                        </td>  
-                        <td data-title="'Patient'"  sortable="'patient'" filter="{ 'patient': 'text' }">
-                                {{user.patient}}
-                        </td>    
-                        <td data-title="'Appointment'" sortable="'appointmentTime'" filter="{ 'appointmentTime': 'text' }">
-                                {{user.appointmentTime | limitTo : 11}}
-                        </td>    
-                        <td data-title="'Location'" sortable="'location'" filter="{ 'location': 'text' }">
-                                {{user.location}}
-                        </td>  
-                        <td data-title="'Action'">
-                          <a><button class="btn btn-danger btn-sm" ng-click="myApplicationDetail(user)"><span></span>VIEW</button></a>
-                         <!--  <a ng-hide="user.isChatStarted==0"><button class="btn btn-danger btn-sm" ng-click="chat(user)"><span></span>MESSAGE</button></a> -->
-                        </td>
-                    </tr>
-                </table>   
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-</div>
-<div class="footer" style="bottom: 0 !important;margin-left: -10px;">
     <div class="row">
-        <div class="col-md-2" style="text-align: -webkit-left;">
-           <p> Barry Bronk PA-C 303-919-1371</p>
-           <p> Brian Morgan PA-C 720-201-7993</p>
-           <p> Ramu Naidu PA-C 678-464-9624</p>
-        </div>
-           <div class="col-md-6" style="margin-left: 100px;">
-           <p> Spine PA-C Call 720-321-5474 24hrs Day</p>
-           <p> Spine PA's - Lindsey 303-653-2389, Nate 303-513-6408, Katie 720-201-6530, Jason 970-376-1049, Gene 303-710-5770</p>
-           <p> SAH Ortho Trauma Backup Call - Panorama Orthopedics 303-233-1223 24hrs day</p>
-        </div>
-           <div class="col-md-2" style="float: right;text-align: -webkit-right;">
-           <p> Sonya Silleck PA-C 720-201-3550</p>
-           <p> Brian Fox PA-C 303-931-7408</p>
-           <p> Chris Erwin PA-C 303-842-1293</p>
+        <ul class="breadcrumb" style="margin-top: 60px;background-color: #ffffff;">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="/dashboard" ui-sref="root.dashboard">Home</a>
+            </li>
+            <li class="active">On Call</li>
+        </ul>
+    </div>
+    <div class="row" >
+        <div class="col-md-12">
+            <div class="row" style="background: #fff; margin-top: 75px;">
+                <div class="col-md-10 col-sm-offset-1">
+                    <div class="brn-group pull-right" ng-if=isAuthenticate>
+                        <button class="btn btn-default" ng-if="demo.isEditing" ng-click="demo.cancelChanges()">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                        <button class="btn btn-primary" ng-if="!demo.isEditing" ng-click="demo.isEditing = true">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </button>
+                        <button class="btn btn-primary" ng-if="demo.isEditing" ng-disabled="!demo.hasChanges() || demo.tableTracker.$invalid" ng-click="demo.saveChanges()">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                        <button class="btn btn-default" ng-click="demo.add()">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                    </div>
+                    <table ng-table="demo.tableParams" class="table table-bordered table-hover table-condensed editable-table" ng-form="demo.tableForm" disable-filter="demo.isAdding" demo-tracked-table="demo.tableTracker">
+                        <colgroup>
+                          <col width="50%" />
+                          <col width="25%" />
+                          <col width="15%" />
+                          <col width="5%" />
+                        </colgroup>
+                        <tr ng-repeat="row in $data" ng-form="rowForm" demo-tracked-table-row="row">
+                            <td title="'Doctor'" filter="{doctor: 'text'}" sortable="'doctor'" ng-switch="demo.isEditing" ng-class="doctor.$dirty ? 'bg-warning' : ''" ng-form="doctor" demo-tracked-table-cell>
+                                <span ng-switch-default class="editable-text">{{row.doctor}}</span>
+                                <div class="controls" ng-class="doctor.$invalid && doctor.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                                    <div mass-autocomplete class="auto">
+                                        <input type="text" name="doctor" ng-model="row.doctor" mass-autocomplete-item="autocomplete_options" class="editable-input form-control input-sm" required />
+                                    </div>
+                                </div>
+                            </td>
+                            <td title="'Location'" filter="{location: 'text'}" sortable="'location'" ng-switch="demo.isEditing" ng-class="location.$dirty ? 'bg-warning' : ''" ng-form="location" demo-tracked-table-cell>
+                                <span ng-switch-default class="editable-text">{{row.location}}</span>
+                                <div class="controls" ng-class="location.$invalid && location.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                                    <div mass-autocomplete class="location">
+                                        <input type="text" name="location" ng-model="row.location" mass-autocomplete-item="autocomplete_location" class="editable-input form-control input-sm" required />
+                                    </div>
+                                </div>
+                            </td>
+                            <td title="'Time'" filter="{time: 'text'}" sortable="'time'" ng-switch="demo.isEditing" ng-class="time.$dirty ? 'bg-warning' : ''" ng-form="time" demo-tracked-table-cell>
+                            
+                                <span ng-switch-default class="editable-text">{{row.time | date}}</span>
+                                <div class="controls" ng-class="time.$invalid && time.$dirty ? 'has-error' : ''" ng-switch-when="true">
+                                    <datepicker date-format="MM-dd-yyyy" pick-time="true">
+                                        <input type="text" name="time" ng-model="row.time" class="editable-input form-control input-sm" required/>
+                                    </datepicker>
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" ng-click="demo.del(row)" ng-disabled="!demo.isEditing"><span class="glyphicon glyphicon-trash"></span></button>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                           <button class="btn btn-primary btn-sm" ng-Disabled="demo.isEditing" ng-if=isAuthenticate ng-click="Save()" style="float: right;margin-bottom: 20px;"><span class="glyphicon glyphicon-save"> Publish</span></button>
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-
-
 
   
 

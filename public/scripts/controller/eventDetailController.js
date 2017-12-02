@@ -3,8 +3,6 @@ angular.module('myApp')
         function ($rootScope,$scope, $state, $filter, $http, ngDialog,SERVER_BASE_URL,NgTableParams,event, UtilityService) {
 
             $scope.patientEvent=[];
-            $scope.loginName=localStorage.getItem('ngStorage-loginName');
-            $scope.loginName = $scope.loginName.replace(/"/g,"");
             $scope.query = {
                 patientId:event.patientId
             }
@@ -20,15 +18,7 @@ angular.module('myApp')
                 },
                 data: $scope.query
             }).then(function(response){
-                // localStorage.setItem("userData", response);
-                console.log(response);
-                // $scope.table = response;
-
-                // $scope.tables=angular.toJson($scope.table);
-                // $scope.value = JSON.parse($scope.tables);
                 $scope.patientEvent=response.data.Appointment;
-                console.log($scope.patientEvent);
-
             })
 
             $scope.tableParams = new NgTableParams({
@@ -36,7 +26,6 @@ angular.module('myApp')
                 count: 3
             },{
                 total:$scope.patientEvent.length,
-                //Returns the table for rendering
                 getData : function($defer,params){
                     if(params !== undefined){
                         $scope.data = params.sorting() ? $filter('orderBy')($scope.patientEvent, params.orderBy()) : $scope.patientEvent;
@@ -49,10 +38,8 @@ angular.module('myApp')
                 }
 
             });
-
             $scope.edit = function(patient) {
                 ngDialog.close();
-                console.log(patient);
                $rootScope.patientDetail ={ 
                 "patient" : patient.patient,
                 "disease" : patient.cause,

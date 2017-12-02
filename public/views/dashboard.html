@@ -1,30 +1,51 @@
-<div id="sidebar" class="sidebar responsive ace-save-state" ui-view="left@"></div>
-<!--<div class="container">-->
-  <div class="row">
-    <div class="col-md-8 col-xs-offset-2">
-<button ng-click="getEvent()">getEvent</button>
-<md-event-calendar
-  auto-height="40"
-  ng-model="selected"
-  md-events="events"
-  md-event-click="eventClicked($selectedEvent)"
-  md-create-event-click="createClicked($date)"
-  md-label="title"
-  md-show-create-link
-  md-create-disabled="dis"
->
-  <md-event-calendar-header>
-    <div flex></div>
-    <md-event-calendar-prev></md-event-calendar-prev>
-    <md-event-calendar-title></md-event-calendar-title>
-    <md-event-calendar-next></md-event-calendar-next>
-    <div flex layout="row">
-      <span flex></span>
-      <md-event-calendar-today></md-event-calendar-today>
-    </div>
-  </md-event-calendar-header>
-</md-event-calendar>
+<!-- <div class="calender">    
+    <div class="" style="background-color:#F1F1F1;">
+            <ul class="breadcrumb" style="margin-top: 60px;background-color: #ffffff;">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="/dashboard" ui-sref="root.dashboard">Home</a>
+                </li>
 
-    </div>
-  </div>
-<!--</div>-->
+                <li class="active">Dashboard</li>
+                <li style="float: right;" class="active"><button class="btn btn-primary btn-sm" ui-sref="OnCall">On Call</button></li>
+            </ul> -->
+        <div class="row">
+            <ul class="breadcrumb" style="margin-top: 60px;background-color: #ffffff;">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <a href="/dashboard" ui-sref="root.dashboard">Home</a>
+                </li>
+                <li class="active">Dashboard</li>
+                <li style="float: right;" class="active"><button class="btn btn-primary btn-sm" ui-sref="OnCall">On Call</button></li>
+            </ul>
+        </div>
+        <div id="page-wrapper" >
+            <div class="row calender widget-shadow">
+                <md-event-calendar auto-height="80"
+                                   ng-model="selected"
+                                   md-events="events"
+                                   md-event-click="eventClicked($selectedEvent)"
+                                   md-create-event-click="createClicked($date)"
+                                   md-label="title"
+                                   md-show-create-link
+                                   md-create-disabled="dis">
+                    <md-event-calendar-header class="clndr-controls" >
+                        <div flex></div>
+                        <div>
+                        <div class="clndr-control-button" style="float: left;margin-left:10px">
+                            <div class="btn btn-default" ng-click="mdEventCalendar.previousMonth()" style="text-align: center;"><span class="clndr-previous-button">Previous</span></div>
+                            <!--<md-event-calendar-prev class="clndr-previous-button">previous</md-event-calendar-prev>-->
+                            <div class="btn btn-default" ng-click="mdEventCalendar.nextMonth()" style="text-align: center;"><span class="clndr-previous-button">Next</span></div>
+                            <!--<md-event-calendar-next class="clndr-next-button">next</md-event-calendar-next>-->
+                            <div class="btn btn-default" ng-click="mdEventCalendar.setToday()" style="text-align: center;"><span class="clndr-previous-button">Today</span></div>
+
+                        </div>
+                            
+                            <div class="clndr-control-button" style="float: left;width: 652px;text-align: center;">
+                                <md-event-calendar-title class="month" ></md-event-calendar-title>
+                            </div>   
+                        </div><br/>
+                    </md-event-calendar-header>
+                </md-event-calendar>
+            </div>
+        </div>
