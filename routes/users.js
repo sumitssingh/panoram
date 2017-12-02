@@ -109,7 +109,7 @@ router.post('/create/appointment', function (req, res) {
                 console.log(i);
                 doc.Appointment.push({"patient": req.body.patientName, "location": req.body.location})
                 doc.Appointment[i].for.push({
-                    "disease": req.body.dieses, "appointmentTime": req.body.appointmentTime,
+                    "disease": req.body.disease, "appointmentTime": req.body.appointmentTime,
                     "status": req.body.status
                 })
                 // doc.Appointment[0].location= req.body.location;
@@ -125,7 +125,7 @@ router.post('/create/appointment', function (req, res) {
         } else {
             doc.Appointment.push({"patient": req.body.patientName, "location": req.body.location})
             doc.Appointment[0].for.push({
-                "disease": req.body.dieses, "appointmentTime": req.body.appointmentTime,
+                "disease": req.body.disease, "appointmentTime": req.body.appointmentTime,
                 "status": req.body.status
             })
             doc.save(function (err, data) {
@@ -212,7 +212,7 @@ router.post('/add/appointment/current/patient', function (req, res) {
         for (var i=doc.Appointment.length-1; i>=0;  i--) {
             if (doc.Appointment[i]._id == req.body.patientId) {
                 doc.Appointment[i].for.push({
-                    "disease": req.body.dieses, "appointmentTime": req.body.appointmentTime,
+                    "disease": req.body.disease, "appointmentTime": req.body.appointmentTime,
                     "status": req.body.status
                 })
                 // doc.Appointment[0].location= req.body.location;
