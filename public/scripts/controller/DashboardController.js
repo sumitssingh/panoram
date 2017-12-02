@@ -51,5 +51,4 @@ angular.module('myApp')
                     alert("Only Admin have right to create events");
                  }
             };
-
     }]);
