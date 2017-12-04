@@ -6,6 +6,7 @@ $scope.loginName=localStorage.getItem('ngStorage-loginName');
 $scope.loginName = $scope.loginName.replace(/"/g,"");
 $scope.row = {};
 $scope.OnCall  = [];
+$scope.$emit('editEvent',{selectDoctor:false});
 var id =[]
 var states = [];
 $scope.isAuthenticate = UtilityService.checkUserLogin();
