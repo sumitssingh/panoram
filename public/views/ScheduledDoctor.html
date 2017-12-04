@@ -54,7 +54,7 @@
                                 <span ng-switch-default class="editable-text">{{row.time | date}}</span>
                                 <div class="controls" ng-class="time.$invalid && time.$dirty ? 'has-error' : ''" ng-switch-when="true">
                                     <datepicker date-format="MM-dd-yyyy" pick-time="true">
-                                        <input type="text" name="time" ng-model="row.time | date" class="editable-input form-control input-sm" required/>
+                                        <input type="text" name="time" ng-model="row.time" ng-value="row.time | date" class="editable-input form-control input-sm" required/>
                                     </datepicker>
                                 </div>
                             </td>
