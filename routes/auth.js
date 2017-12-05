@@ -133,7 +133,7 @@ router.post('/reset/password', function(req, res) {
       });
     },
     function(user, done) {
-var transporter = nodemailer.createTransport({
+    var transporter = nodemailer.createTransport({
 
       service: 'gmail',
       auth: {
@@ -142,7 +142,7 @@ var transporter = nodemailer.createTransport({
       }
     });
 var mailOptions = {
-    from:'testpanoramaortho@gmail.com',
+    from:'oncall@panoramaortho.com',
     to:user.email,
     subject: 'Passwoord changed successfull',
     text: ('text/plain','Hello,\n\n' +
