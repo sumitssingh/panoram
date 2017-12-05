@@ -12,8 +12,8 @@ angular.module('myApp', [
   'MassAutoComplete',
   'material.components.eventCalendar'
 ])
-    // .constant('SERVER_BASE_URL','http://107.170.218.205:3000/')
-    .constant('SERVER_BASE_URL','http://localhost:3000/')
+    .constant('SERVER_BASE_URL','http://107.170.218.205:3000/')
+    // .constant('SERVER_BASE_URL','http://localhost:3000/')
 
 .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
