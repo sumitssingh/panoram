@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var mongoose = require('mongoose');
-var ensureAuthenticated = require('../authMiddleWare');
 var nodemailer = require('nodemailer');
 var bcrypt = require('bcrypt-nodejs');
 var async = require('async');
