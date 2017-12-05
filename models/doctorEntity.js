@@ -28,6 +28,8 @@ var DoctorSchema = new mongoose.Schema({
     hospital : {type: Schema.Types.ObjectId, ref: 'Hospital' },
     follow: { type : Array , default : []},
     following: { type : Array , default : []},
+    resetPasswordToken: String,
+    resetPasswordExpires: Date,
     hash: String,
     salt:String
 });

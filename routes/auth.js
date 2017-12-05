@@ -64,8 +64,8 @@ router.post('/register', function(req, res, next){
     });
 });
 
-router.use(ensureAuthenticated);
-router.post('/forgot', function(req, res, next) {
+// router.use(ensureAuthenticated);
+router.post('/forgot/password', function(req, res, next) {
   async.waterfall([
     function(done) {
       crypto.randomBytes(20, function(err, buf) {
@@ -90,19 +90,20 @@ router.post('/forgot', function(req, res, next) {
     },
     function(token, doc, done) {
     var transporter = nodemailer.createTransport({
+
       service: 'gmail',
       auth: {
-        user: 'sumitsingh94310@gmail.com',
-        pass: 'mom7488389320'
+        user: 'testpanoramaortho@gmail.com',
+        pass: 'panoramaortho'
       }
     });
     var mailOptions = {
-        from:'sumitssingh943@gmail.com',
+        from:'oncall@panoramaortho.com',
         to:req.body.email,
         subject: 'Reset Passwoord',
         text: ('text/plain','You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
-              'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-              'http://' + req.headers.host + '/#/reset/' + token + '\n\n' +
+              'Please use the following token, to complete the process:\n\n' +
+               token + '\n\n' +
               'If you did not request this, please ignore this email and your password will remain unchanged.\n')
     } 
     transporter.sendMail(mailOptions, function(error, response) {
@@ -116,10 +117,10 @@ router.post('/forgot', function(req, res, next) {
   });
 });
 
-router.post('/reset/:token', function(req, res) {
+router.post('/reset/password', function(req, res) {
   async.waterfall([
     function(done) {
-      Doctor.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+      Doctor.findOne({ resetPasswordToken: req.body.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
         if (!user) {
           return res.send('Password reset token is invalid or has expired.');
         }
@@ -133,9 +134,16 @@ router.post('/reset/:token', function(req, res) {
       });
     },
     function(user, done) {
+var transporter = nodemailer.createTransport({
 
+      service: 'gmail',
+      auth: {
+        user: 'testpanoramaortho@gmail.com',
+        pass: 'panoramaortho'
+      }
+    });
 var mailOptions = {
-    from:'sumitssingh943@gmail.com',
+    from:'testpanoramaortho@gmail.com',
     to:user.email,
     subject: 'Passwoord changed successfull',
     text: ('text/plain','Hello,\n\n' +
