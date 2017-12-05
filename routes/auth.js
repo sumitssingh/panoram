@@ -123,7 +123,8 @@ router.post('/reset/password', function(req, res) {
         if (!user) {
           return res.send('Password reset token is invalid or has expired.');
         }
-        user.setPassword(req.body.password);
+        var password = new Buffer(req.body.password, 'binary')
+        user.setPassword(password);
         user.resetPasswordToken = undefined;
         user.resetPasswordExpires = undefined;
 
