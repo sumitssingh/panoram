@@ -51,10 +51,10 @@
                             </td>
                             <td title="'Time'" filter="{time: 'text'}" sortable="'time'" ng-switch="demo.isEditing" ng-class="time.$dirty ? 'bg-warning' : ''" ng-form="time" demo-tracked-table-cell>
                             
-                                <span ng-switch-default class="editable-text">{{row.time | date}}</span>
+                                <span ng-switch-default class="editable-text">{{row.time | panoDate :'MMMM d, y'}}</span>
                                 <div class="controls" ng-class="time.$invalid && time.$dirty ? 'has-error' : ''" ng-switch-when="true">
-                                    <datepicker date-format="MM-dd-yyyy" pick-time="true">
-                                        <input type="text" name="time" ng-model="row.time" ng-value="row.time | date" class="editable-input form-control input-sm" required/>
+                                    <datepicker date-format="MMMM d,y" pick-time="true">
+                                        <input type="text" name="time" ng-model="row.time" ng-value="row.time" class="editable-input form-control input-sm" required/>
                                     </datepicker>
                                 </div>
                             </td>

@@ -11,7 +11,7 @@ var id =[]
 var states = [];
 $scope.isAuthenticate = UtilityService.checkUserLogin();
 $scope.locationUrl= 'admin/doctor/fetch/All/location';
-
+$scope.minDate = new Date().toDateString();
 
 socket.on('connect', function () { 
 // alert("connected");

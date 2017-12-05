@@ -3,6 +3,7 @@ var router = express.Router();
 var fs = require('fs');
 var mongoose = require('mongoose');
 var multer = require('multer');
+var _ = require('underscore');
 var upload = multer({dest: 'upload/'})
 var Doctor = mongoose.model('Doctor');
 var OnCall = mongoose.model('OnCall');
@@ -10,12 +11,13 @@ var Hospital = mongoose.model('Hospital');
 var ensureAuthenticated = require('../authMiddleWare');
 
 
-/* GET users listing. */
 router.get('/fetchAllDoctor', function (req, res) {
     Doctor.find({}, function (err, doc) {
-    if (err)
-        res.send({status: false, info: "Something is not right"})
-    res.send({status: true, doctor:doc});
+        if (err) {
+            res.send({status: false, info: "Something is not right"})
+        } else {
+            res.send({status: true, doctor:doc});
+        }
     })
 })
 router.get('/fetch/All/location', function (req, res) {
@@ -23,7 +25,7 @@ router.get('/fetch/All/location', function (req, res) {
     if (err) {
         res.send({status: false, info: "Something is not right"})
     } else{
-var docLocation =[];
+    var docLocation =[];
        for (var i = doc.length - 1; i >= 0; i--) {
            var location = doc[i].Appointment.map(function(loc){
             docLocation.push(loc.location);
@@ -41,44 +43,45 @@ router.get('/myProfile', function(req, res, next) {
       if (err) {
           res.send(err)
       } else {
-          // res.contentType(doctor.doctorDp.contentType);
           res.send(doctor);
-          // res.send(doctor.doctorDp.data);
       }
   })
 });
 
 router.post('/upload/dp', upload.any(), function (req, res) {
     Doctor.findById(req.userId, function (err, doctor) {
-        if (err)
+        if (err) {
             res.send(err)
-        console.log(req.files);
-        doctor.doctorDp.data = fs.readFileSync(req.files[0].path);
-        doctor.doctorDp.contentType = req.files[0].mimetype;
-        doctor.save(function (err, a) {
-            if (err)
-                res.send(err);
-            res.send(req.files);
-            // res.send(doctor)
-        })
+        } else {
+            doctor.doctorDp.data = fs.readFileSync(req.files[0].path);
+            doctor.doctorDp.contentType = req.files[0].mimetype;
+            doctor.save(function (err, a) {
+                if (err) {
+                    res.send(err);
+                } else {
+                res.send(req.files);
+                }
+            })
+        }
     })
 });
 router.route('/follow/me')
     .get(function(req, res){
         Doctor.findById(req.userId, function(err, user){
-            if(err)
+            if(err) {
                 res.send(err);
-
-            var myMatch = user.following.map(function(ele) {
-                return ele;
-            });
-            Doctor.find({
-                _id: {
-                    $in: myMatch
-                }
-            },function(err, docs) {
-                res.send(docs)
-            });
+            }else {
+                var myMatch = user.following.map(function(ele) {
+                    return ele;
+                });
+                Doctor.find({_id: {$in: myMatch}},function(err, docs) {
+                    if (err) {
+                        res.send(err);
+                    }else {
+                        res.send(docs);
+                    }
+                });
+            }
         });
     })
 router.route('/following')
@@ -90,54 +93,53 @@ router.route('/following')
             var myMatch = user.follow.map(function(ele) {
                 return ele;
             });
-            Doctor.find({
-                _id: {
-                    $in: myMatch
+            Doctor.find({_id: {$in: myMatch}},function(err, docs) {
+                if (err) {
+                    res.send(err);
+                }else {
+                    res.send(docs);
                 }
-            },function(err, docs) {
-                res.send(docs)
             });
         });
     })
-router.post('/create/appointment', function (req, res) {
-    Doctor.findById(req.userId, function (err, doc) {
-        if (err)
-            res.send({status: false, info:err});
-        console.log(doc.Appointment.length);
-        if (doc.Appointment.length>=1) {
-            for (var i = doc.Appointment.length; i > 0; i--) {
-                console.log(i);
-                doc.Appointment.push({"patient": req.body.patientName, "location": req.body.location})
-                doc.Appointment[i].for.push({
-                    "disease": req.body.disease, "appointmentTime": req.body.appointmentTime,
-                    "status": req.body.status
-                })
-                // doc.Appointment[0].location= req.body.location;
-
-                doc.save(function (err, data) {
-                    if (err) {
-                        res.send(err)
-                    } else {
-                        res.send({status: true, info: "Appointment saved"});
-                    }
-                })
-            }
-        } else {
-            doc.Appointment.push({"patient": req.body.patientName, "location": req.body.location})
-            doc.Appointment[0].for.push({
-                "disease": req.body.disease, "appointmentTime": req.body.appointmentTime,
-                "status": req.body.status
-            })
-            doc.save(function (err, data) {
-                if (err) {
-                    res.send(err)
-                } else {
-                    res.send({status: true, info: "Appointment saved"});
-                }
-            })
-        }
-})
-})
+// router.post('/create/appointment', function (req, res) {
+//     Doctor.findById(req.userId, function (err, doc) {
+//         if (err) {
+//             res.send({status: false, info:err});
+//         } else {
+//             if (doc.Appointment.length>=1) {
+//                 for (var i = doc.Appointment.length; i > 0; i--) {
+//                     console.log(i);
+//                     doc.Appointment.push({"patient": req.body.patientName, "location": req.body.location})
+//                     doc.Appointment[i].for.push({
+//                         "disease": req.body.disease, "appointmentTime": req.body.appointmentTime,
+//                         "status": req.body.status
+//                     })
+//                     doc.save(function (err, data) {
+//                         if (err) {
+//                             res.send(err)
+//                         } else {
+//                             res.send({status: true, info: "Appointment saved"});
+//                         }
+//                     })
+//                 }
+//             } else {
+//                 doc.Appointment.push({"patient": req.body.patientName, "location": req.body.location})
+//                 doc.Appointment[0].for.push({
+//                     "disease": req.body.disease, "appointmentTime": req.body.appointmentTime,
+//                     "status": req.body.status
+//                 })
+//                 doc.save(function (err, data) {
+//                     if (err) {
+//                         res.send(err)
+//                     } else {
+//                         res.send({status: true, info: "Appointment saved"});
+//                     }
+//                 })
+//             }
+//         }    
+//     })
+// })
 router.post('/getAppointmentByDoctor', function (req, res) {
         Doctor.findById(req.body.id, function (err, doc) {
             if (err) {
@@ -145,14 +147,12 @@ router.post('/getAppointmentByDoctor', function (req, res) {
             }else {
                 var myAppointment = [];
                 if (doc.Appointment.length!=0) {
-                    for (var i = 0;i<=doc.Appointment.length-1; i++){
-                        // if (doc.Appointment[i].location === req.body.location) {
+                    for (var i = 0;i<=doc.Appointment.length-1; i++) {
                         if (doc.Appointment[i].for.length!=0){
                             for (var j=0;j<=doc.Appointment[i].for.length-1;j++) {
                                  myAppointment.push({
                                     "id":doc.Appointment[i]._id,
-                                    "patient":doc.Appointment[i].patient,
-                                    "location":doc.Appointment[i].location,
+                                    "location":doc.Appointment[i].for[j].location,
                                     "disease":doc.Appointment[i].for[j].disease,
                                     "appointmentId":doc.Appointment[i].for[j]._id,
                                     "appointmentTime":doc.Appointment[i].for[j].appointmentTime,
@@ -161,73 +161,73 @@ router.post('/getAppointmentByDoctor', function (req, res) {
                                 })
                             }
                         }
-                    // }
-            }
-               if (myAppointment.length== 0) {
-                    res.send({status: false, info:"Currently You dont have any appointments for this location"});
-                } else {
-            res.send({status: true, Appointment: myAppointment});
-        }
-                    // res.send({status: true, Appointment: doc.Appointment});
+                    }
+                    if (myAppointment.length== 0) {
+                        res.send({status: false, info:"Currently You dont have any appointments for this location"});
+                    } else {
+                        res.send({status: true, Appointment: myAppointment});
+                    }
                 } else {
                     res.send({status: false, info:"Currently You dont have any appointments"});
                 }
             }
         })
 })
-router.put('/rescheduled/appointment/current/patient', function (req, res) {
-    console.log(req.body);
-    Doctor.findById(req.userId, function (err, doc) {
-        if (err)
-            res.send({status: false, info:err});
-        for (var i=doc.Appointment.length-1; i>=0;  i--) {
-            if (doc.Appointment[i]._id == req.body.patientId) {
-                var appointmentFor =doc.Appointment[i].for;
-                console.log(appointmentFor.length);
-                for (var j=appointmentFor.length-1; j>=0; j--) {
-                    if (appointmentFor[j]._id== req.body.appointmentId) {
-                        appointmentFor[j].rescheduledTime = req.body.rescheduledTime;
-                        doc.save(function (err, doctor) {
-                            if (err) {
-                                res.send(err)
-                            }else {
-                                res.send({Status: true, info:"Success"});
-                            }
-                        })
-                    } else {
-                        res.send({status: false, info:"No Appointment found for given AppointmentId"})
-                    }
-                }
-            } else {
-                res.send({status: false, info:"No Patient found for given PatientId"})
-            }
-        }
-    })
-})
-router.post('/add/appointment/current/patient', function (req, res) {
-    console.log(req.body);
-    Doctor.findById(req.userId, function (err, doc) {
-        if (err)
-            res.send({status: false, info:err})
-        for (var i=doc.Appointment.length-1; i>=0;  i--) {
-            if (doc.Appointment[i]._id == req.body.patientId) {
-                doc.Appointment[i].for.push({
-                    "disease": req.body.disease, "appointmentTime": req.body.appointmentTime,
-                    "status": req.body.status
-                })
-                // doc.Appointment[0].location= req.body.location;
+// router.put('/rescheduled/appointment/current/patient', function (req, res) {
+//     console.log(req.body);
+//     Doctor.findById(req.userId, function (err, doc) {
+//         if (err) {
+//             res.send({status: false, info:err});
+//         } else {
+//             for (var i=doc.Appointment.length-1; i>=0;  i--) {
+//                 if (doc.Appointment[i]._id == req.body.patientId) {
+//                     var appointmentFor =doc.Appointment[i].for;
+//                     console.log(appointmentFor.length);
+//                     for (var j=appointmentFor.length-1; j>=0; j--) {
+//                         if (appointmentFor[j]._id== req.body.appointmentId) {
+//                             appointmentFor[j].rescheduledTime = req.body.rescheduledTime;
+//                             doc.save(function (err, doctor) {
+//                                 if (err) {
+//                                     res.send(err)
+//                                 }else {
+//                                     res.send({Status: true, info:"Success"});
+//                                 }
+//                             })
+//                         } else {
+//                             res.send({status: false, info:"No Appointment found for given AppointmentId"})
+//                         }
+//                     }
+//                 } else {
+//                     res.send({status: false, info:"No Patient found for given PatientId"})
+//                 }
+//             }
+//         }    
+//     })
+// })
+// router.post('/add/appointment/current/patient', function (req, res) {
+//     console.log(req.body);
+//     Doctor.findById(req.userId, function (err, doc) {
+//         if (err)
+//             res.send({status: false, info:err})
+//         for (var i=doc.Appointment.length-1; i>=0;  i--) {
+//             if (doc.Appointment[i]._id == req.body.patientId) {
+//                 doc.Appointment[i].for.push({
+//                     "disease": req.body.disease, "appointmentTime": req.body.appointmentTime,
+//                     "status": req.body.status
+//                 })
+//                 // doc.Appointment[0].location= req.body.location;
 
-                doc.save(function (err, data) {
-                    if (err) {
-                        res.send(err)
-                    } else {
-                        res.send({status: true, info: "Appointment saved"});
-                    }
-                })
-            }
-        }
-    })
-})
+//                 doc.save(function (err, data) {
+//                     if (err) {
+//                         res.send(err)
+//                     } else {
+//                         res.send({status: true, info: "Appointment saved"});
+//                     }
+//                 })
+//             }
+//         }
+//     })
+// })
 router.route('/follow/doctor')
     .post(function (req, res) {
         console.log(req.body.id);
@@ -314,44 +314,50 @@ router.route('/onCall/providers')
             if (err) {
                 res.send({status: "error", "error": err})
             } else{
-                res.send(posts);
-            }
-    })
-    })
+                var onCallEvents =[];
+                _.forEach(posts, function(provider) {
+                    console.log(provider.doctor.username);
+                    onCallEvents.push({'id':provider._id,'location':provider.location,'doctor':provider.doctor.username,'date':provider.date})
+                return onCallEvents;
+            })
+            res.send(onCallEvents);
+        }
         })
-    .post(function(req, res){
-        for (var i = req.body.length - 1; i >= 0; i--) {
-            var location = req.body[i].location;
-            var time = req.body[i].time;
-        Doctor.findOne({username:req.body[i].doctor}, function(err, user){
-             if (err) {
-                res.send(err)
-             } else {
-                console.log(req.body[i]);
-                var providerId = user._id;
-                var emergencyCall = new OnCall();
-                emergencyCall.doctor=providerId;
-                emergencyCall.location=location;
-                emergencyCall.date=time;
+    })
+})
+    // .post(function(req, res){
+    //     for (var i = req.body.length - 1; i >= 0; i--) {
+    //         var location = req.body[i].location;
+    //         var time = req.body[i].time;
+    //     Doctor.findOne({username:req.body[i].doctor}, function(err, user){
+    //          if (err) {
+    //             res.send(err)
+    //          } else {
+    //             console.log(req.body[i]);
+    //             var providerId = user._id;
+    //             var emergencyCall = new OnCall();
+    //             emergencyCall.doctor=providerId;
+    //             emergencyCall.location=location;
+    //             emergencyCall.date=time;
 
-                emergencyCall.save(function(err, provider){
-                    if (err) {
-                        res.send(err)
-                    } 
-                })
-             }
+    //             emergencyCall.save(function(err, provider){
+    //                 if (err) {
+    //                     res.send(err)
+    //                 } 
+    //             })
+    //          }
                 
-        })
-    }
-    res.send({status: true, info: "Successfully Added"});
-    })
-            .put(function(req, res){
-        OnCall.remove({_id: req.body.id}, function(err, data) {
-            if (err) {
-                res.send({status: "error", "error": err})
-            } else{
-                res.send(data);
-            }
-        })
-    })
+    //     })
+    // }
+    // res.send({status: true, info: "Successfully Added"});
+    // })
+    // .put(function(req, res){
+    //     OnCall.remove({_id: req.body.id}, function(err, data) {
+    //         if (err) {
+    //             res.send({status: "error", "error": err})
+    //         } else{
+    //             res.send(data);
+    //         }
+    //     })
+    // })
 module.exports = router;

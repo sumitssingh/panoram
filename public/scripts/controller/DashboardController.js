@@ -29,18 +29,22 @@ angular.module('myApp')
                 });
             }
             $scope.eventClicked = function (item) {
-                console.log(item);
-                console.log($scope.selectedItem.id);
+                // var date = item.start
+                $rootScope.date = item.start;
+                console.log($rootScope.date);
+                // $scope.time = $filter('date')(new Date(), 'MM y');
+                // console.log($scope.time);
                 ngDialog.open({
                     template: '../../views/eventDetail.html',
                     scope: $scope,
                     controller: $controller('eventDetailCtrl', {
                         $scope: $scope,
-                        event: {docId:$scope.selectedItem.id,patientId:item.id}
+                        event: {docId:$scope.selectedItem.id}
                     })
                 });
             };
             $scope.createClicked = function (date) {
+                console.log(date);
                 if (UtilityService.checkUserLogin()) {
                  var date= new Date(date).toDateString("DD/mm/yyyy")
                  $scope.time = $filter('date')(new Date(), 'HH:mm');

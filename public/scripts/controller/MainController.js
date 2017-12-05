@@ -5,7 +5,7 @@ angular.module('myApp')
             $rootScope.users=[];
             $scope.selectDoctor = true;
             $scope.loginName=localStorage.getItem('ngStorage-loginName');   
-            // $scope.loginName = $scope.loginName.replace(/"/g,"");                         
+            $scope.loginName = $scope.loginName.replace(/"/g,"");                         
             $scope.isAuthenticate = UtilityService.checkUserLogin();
 
             $scope.allDocUrl= 'admin/doctor/getAllDoctors/name';

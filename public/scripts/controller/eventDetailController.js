@@ -4,13 +4,15 @@ angular.module('myApp')
 
             $scope.patientEvent=[];
             $scope.query = {
-                patientId:event.patientId
+             date:$rootScope.date
             }
+
+            console.log($scope.query);
             $scope.isAuthenticate = UtilityService.checkUserLogin();
             $http({
                 method: 'POST',
-                isArray: false,
-                url: SERVER_BASE_URL+'admin/doctor/getAppointmentByDoctor/patient/'+event.docId +'/'+event.patientId,
+                isArray: true,
+                url: SERVER_BASE_URL+'admin/doctor/getAppointmentByDoctor/date/'+event.docId+'/'+$rootScope.date,
 
                 headers: {
                     "Content-Type":"application/x-www-form-urlencoded",

@@ -15,22 +15,17 @@ var DoctorSchema = new mongoose.Schema({
     doctorDp: { data: Buffer, contentType: String },
     status : { type: String },
     Appointment : [{
-        patient : { type: String, trim: true},
-        for : [{
-            disease : { type: String},
-            appointmentTime : { type: String},
-            rescheduledTime : { type: String},
-            location: {type: String},
-            createdOn : { type: Date, default: Date.now},
-            updatedon : { type: Date, default: Date.now},
-            status : { type: String}
-        }],
-        createdon : { type: Date, default: Date.now},
-        modified : { type: Date, default: Date.now},
-        updatedon : { type: String },
-        status : { type: String }
+        _id: {type: Schema.Types.ObjectId},
+        disease : { type: String},
+        appointmentTime : { type: String},
+        rescheduledTime : { type: String},
+        location: {type: String},
+        createdOn : { type: Date, default: Date.now},
+        updatedon : { type: Date, default: Date.now},
+        status : { type: String},
+        modified : { type: Boolean},
     }],
-    hospital : { type: Schema.Types.ObjectId, ref: 'Hospital' },
+    hospital : {type: Schema.Types.ObjectId, ref: 'Hospital' },
     follow: { type : Array , default : []},
     following: { type : Array , default : []},
     hash: String,
@@ -39,7 +34,7 @@ var DoctorSchema = new mongoose.Schema({
 var OnCallSchema = new mongoose.Schema({
     doctor :{ type: Schema.Types.ObjectId, ref: 'Doctor' },
     location: {type: String},
-    date: { type: Date, default: Date.now}
+    date: { type: String}
 })
 var HospitalSchema = new mongoose.Schema({
     name:{type:String, required:true, unique:true},

@@ -1251,6 +1251,15 @@ section#tables  p {
  margin-top: 1em;
 }
 @media (max-width:768px){
+  .page-wrapper {
+        height: 800px;
+    overflow: scroll;
+    min-width: 83.5%;
+    position: absolute;
+    min-height: 100%;
+    right: 0 !important;
+    padding: 0;
+  }
 .grid_3 {
 	margin-bottom: 0em;
 }
@@ -2677,7 +2686,23 @@ i.fa.fa-facebook.profile-icon {
     height: 265px !important;
 }
 }
+@media(max-width:1920px){
+  #page-wrapper {
+       min-width: 89.5%;
+        height: 100% !important;
+  }
+}
+@media(max-width:1337px){
+  #page-wrapper {
+       min-width: 83.5%;
+        height: 100% !important;
+  }
+}
 @media(max-width:1080px){
+  #page-wrapper {
+    min-width: 84.5%;
+    height: 100% !important; 
+  }
 .logo a {
     padding: 0.9em 2.35em .7em;
 }
@@ -2685,7 +2710,12 @@ i.fa.fa-facebook.profile-icon {
     width: 52%;
 }
 .cbp-spmenu-vertical {
-    width: 278px;
+    min-width: 10.7%;
+    height: 100%;
+    top: 88px;
+    z-index: 1000;
+    background-color: #222d32;
+    padding: 0.5em 0;
 }
 .cbp-spmenu-push div#page-wrapper {
     margin:0 0 0 17.4em;

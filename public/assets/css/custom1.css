@@ -185,3 +185,12 @@ tr.ng-scope {
     background-color: #797bcb !important;
     border-color: #797bcb !important;
 }
+ .page-wrapper {
+        height: 100%;
+    overflow: scroll;
+    min-width: 83.5%;
+    position: absolute;
+    min-height: 100%;
+    right: 0 !important;
+    padding: 0;
+  }

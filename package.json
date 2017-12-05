@@ -28,6 +28,7 @@
     "passport-local": "^1.0.0",
     "pm2": "^2.7.1",
     "serve-favicon": "^2.4.5",
-    "socket.io": "^2.0.4"
+    "socket.io": "^2.0.4",
+    "underscore": "^1.8.3"
   }
 }
