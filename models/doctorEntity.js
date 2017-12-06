@@ -28,6 +28,12 @@ var DoctorSchema = new mongoose.Schema({
     hospital : {type: Schema.Types.ObjectId, ref: 'Hospital' },
     follow: { type : Array , default : []},
     following: { type : Array , default : []},
+    notification:[{
+        _created_at:{type: Date, default: Date.now()},
+        event:{type: Schema.Types.ObjectId, ref: 'OnCallSchema' },
+        text: {type: String},
+        isRead: {type: Boolean, default: false},
+    }],
     resetPasswordToken: String,
     resetPasswordExpires: Date,
     hash: String,

@@ -4,6 +4,7 @@ var fs = require('fs');
 var mongoose = require('mongoose');
 var multer = require('multer');
 var _ = require('underscore');
+var async = require('async');
 var upload = multer({dest: 'upload/'})
 var Doctor = mongoose.model('Doctor');
 var OnCall = mongoose.model('OnCall');
@@ -147,30 +148,20 @@ router.post('/getAppointmentByDoctor', function (req, res) {
             }else {
                 var myAppointment = [];
                 if (doc.Appointment.length!=0) {
-                    for (var i = 0;i<=doc.Appointment.length-1; i++) {
-                        if (doc.Appointment[i].for.length!=0){
-                            for (var j=0;j<=doc.Appointment[i].for.length-1;j++) {
-                                 myAppointment.push({
-                                    "id":doc.Appointment[i]._id,
-                                    "location":doc.Appointment[i].for[j].location,
-                                    "disease":doc.Appointment[i].for[j].disease,
-                                    "appointmentId":doc.Appointment[i].for[j]._id,
-                                    "appointmentTime":doc.Appointment[i].for[j].appointmentTime,
-                                    "rescheduledTime":doc.Appointment[i].for[j].rescheduledTime,
-
-                                })
-                            }
-                        }
+                    for (var i = 0;i<=doc.Appointment.length-1; i++){
+                        myAppointment.push({
+                            "location":doc.Appointment[i].location,
+                            "status":doc.Appointment[i].status,
+                            "appointmentId":doc.Appointment[i]._id,
+                            "appointmentTime":doc.Appointment[i].appointmentTime,
+                            "rescheduledTime":doc.Appointment[i].rescheduledTime,
+                        })
                     }
-                    if (myAppointment.length== 0) {
-                        res.send({status: false, info:"Currently You dont have any appointments for this location"});
-                    } else {
-                        res.send({status: true, Appointment: myAppointment});
-                    }
+                    res.send({status: true, Appointment: myAppointment});
                 } else {
                     res.send({status: false, info:"Currently You dont have any appointments"});
                 }
-            }
+            } 
         })
 })
 // router.put('/rescheduled/appointment/current/patient', function (req, res) {
@@ -325,6 +316,66 @@ router.route('/onCall/providers')
         })
     })
 })
+router.get('/my/notification', function(req, res) {
+    Doctor.findById('5a222a4b2364fa07c43041af', function (err, doc) {  
+     if (err) {
+            res.send(err);
+        }else {
+             var myNotification =[];
+                _.forEach(doc.notification, function(event) {
+                    myNotification.push({'id':event._id,'text':event.text});
+                return myNotification;
+            })
+                res.send(myNotification);
+        }  
+    })
+})        
+// router.get('/my/notification', function(req, res) {
+//     Doctor.findById('5a222a4b2364fa07c43041af', function (err, doc) {
+//         if (err) {
+//             res.send(err);
+//         }else {
+//             async.waterfall([
+//                 function(done) {
+//                     var myNotification =[];
+//                      _.forEach(doc.notification, function(connection) {
+//                     if (connection.isRead === false) {    
+//                         OnCall.populate(connection, {path: 'event'}, function(err, events) {
+//                             if (err) {
+//                                 res.send({status: "error", "error": err})
+//                             } else{
+//                                 myNotification.push({'id':events._id,'text':events.text,'location':events.event.location,'date':events.event.date});
+//                             }
+//                         })
+//                         return myNotification;
+//                         }
+//                         done(err, myNotification);
+//                     })
+//                 },function(myNotification, done) {
+    
+//                         res.send(myNotification);
+//                     }
+//             ], function(err) {
+//                 if (err)
+//                     res.send({status: false, error: err});
+//             });
+//             }     
+//         })
+//     })
+router.get('/notification/read', function(req, res){
+   Doctor.findById('5a222a4b2364fa07c43041af', function(err, doc){
+     _.forEach(doc.notification, function(event) {
+            event.isRead = true;
+            })
+        doc.save(function (err, data) {
+            if (err) {
+                res.send(err)
+            } else{
+                res.send({status:true, info:"Success"});
+            }
+        })
+    })    
+})     
     // .post(function(req, res){
     //     for (var i = req.body.length - 1; i >= 0; i--) {
     //         var location = req.body[i].location;

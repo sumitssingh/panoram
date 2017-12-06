@@ -87,8 +87,8 @@ socket.on('connect', function () {
                      showCancelButton: true,
                      confirmButtonColor: "#DD6B55",confirmButtonText: "Yes, save it!",
                      cancelButtonText: "No, cancel it!",
-                     closeOnConfirm: false,
-                     closeOnCancel: false }, 
+                     closeOnConfirm: true,
+                     closeOnCancel: true }, 
               function(isConfirm){ 
             if (isConfirm) {
               console.log($scope.OnCall);

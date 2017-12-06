@@ -195,12 +195,23 @@ router.route('/onCall/providers')
                     emergencyCall.save(function(err, provider){
                         if (err) {
                             res.send(err)
+                        }else {
+                            user.notification.push({
+                                "event":provider._id,
+                                "text":"You have assigned an emergencyCall"
+                            })
+                            user.save(function (err, data) {
+                                if (err) {
+                                    res.send(err)
+                                }
+                            })
                         } 
                     })
                  }
                     
             })
         }
+
         res.send({status: true, info: "Successfully Added"});
     })
     .put(function(req, res){
@@ -212,7 +223,6 @@ router.route('/onCall/providers')
             }
         })
     })
-
 router.get('/profile/:id', function(req, res, next) {
     if (req.isAdmin) {
     Doctor.findById(req.params.id, function (err, doctor) {
