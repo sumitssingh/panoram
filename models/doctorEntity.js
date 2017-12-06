@@ -31,6 +31,7 @@ var DoctorSchema = new mongoose.Schema({
     notification:[{
         _created_at:{type: Date, default: Date.now()},
         event:{type: Schema.Types.ObjectId, ref: 'OnCallSchema' },
+        type: {type: String},
         text: {type: String},
         isRead: {type: Boolean, default: false},
     }],

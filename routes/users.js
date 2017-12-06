@@ -239,10 +239,15 @@ router.route('/follow/doctor')
                             } else {
                                 if(doc.follow.indexOf(req.userId) < 0) {
                                     doctor.following.push(req.userId);
+                                    doctor.notification.push({
+                                          'type':'following',
+                                            "text":"Doctor " + doctor.username + "now following you"
+                                    })
                                     doctor.save(function (err, doctor) {
                                         if (err) {
                                             res.send({status: false, info: err})
                                         } else {
+
                                             res.send({status: true, info: "Success"})
                                         }
                                     })
@@ -284,6 +289,10 @@ router.post('/unFollow/doctor', function (req, res) {
                                 }
                             })
                             doctor.following.splice(index, 1);
+                            doctor.notification.push({
+                                'type':'unfollow',
+                                "text": doctor.username + ' UnFollowed you'
+                            })
                             doctor.save(function (err, doctor) {
                                 if (err) {
                                     res.send({status: false, info: err})

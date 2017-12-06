@@ -197,6 +197,7 @@ router.route('/onCall/providers')
                             res.send(err)
                         }else {
                             user.notification.push({
+                                "type":"OnCall",
                                 "event":provider._id,
                                 "text":"You have assigned an emergencyCall"
                             })
