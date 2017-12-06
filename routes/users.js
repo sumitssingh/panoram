@@ -317,7 +317,7 @@ router.route('/onCall/providers')
     })
 })
 router.get('/my/notification', function(req, res) {
-    Doctor.findById('5a222a4b2364fa07c43041af', function (err, doc) {  
+    Doctor.findById(req.userId, function (err, doc) {  
      if (err) {
             res.send(err);
         }else {
@@ -363,7 +363,7 @@ router.get('/my/notification', function(req, res) {
 //         })
 //     })
 router.get('/notification/read', function(req, res){
-   Doctor.findById('5a222a4b2364fa07c43041af', function(err, doc){
+   Doctor.findById(req.userId, function(err, doc){
      _.forEach(doc.notification, function(event) {
             event.isRead = true;
             })
