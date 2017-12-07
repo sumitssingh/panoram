@@ -31,6 +31,9 @@ angular.module('myApp')
                     $scope.getEvent(response.data.doctor[0]);
                 }
             });
+            $scope.logout = function() {
+                $rootScope.isAuthenticate =false;
+            }
             $scope.getEvent = function(doc){
                 $rootScope.$broadcast('docId',doc);
                 UtilityService.putDoctor(doc.id);

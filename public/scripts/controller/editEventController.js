@@ -4,11 +4,13 @@ angular.module('myApp')
 
             $scope.patientEvent=[];
             $scope.patient=$rootScope.patientDetail;
+            console.log($scope.patient);
 
             $scope.isAuthenticate = UtilityService.checkUserLogin();
 
             $scope.$emit('editEvent',{selectDoctor:false});
             $scope.Update = function() {
+                console.log($scope.patient);
                 SweetAlert.swal({
                      title: "Are you sure?",
                      text: "Do you want to save the data?",
@@ -23,9 +25,9 @@ angular.module('myApp')
                        $http({
                             method: 'PUT',
                             isArray: false,
-                            url: SERVER_BASE_URL+'admin/doctor/rescheduled/appointment/current/patient/'+$scope.patient.doctorId,
+                            url: SERVER_BASE_URL+'admin/doctor/rescheduled/appointment/'+$scope.patient.doctorId+'/'+$scope.patient.appointmentId,
                             headers: {
-                                "Content-Type":"application/x-www-form-urlencoded",
+                                "Content-Type":"application/json",
                                 "Authorization":"Bearer " +localStorage.getItem("ngStorage-token")
                             },
                             data: $scope.patient

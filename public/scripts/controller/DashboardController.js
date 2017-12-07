@@ -45,14 +45,46 @@ angular.module('myApp')
             };
             $scope.createClicked = function (date) {
                 console.log(date);
-                if (UtilityService.checkUserLogin()) {
-                 var date= new Date(date).toDateString("DD/mm/yyyy")
-                 $scope.time = $filter('date')(new Date(), 'HH:mm');
-                 $scope.appointmentTime = date + " " +$scope.time; 
-                 $rootScope.date= $scope.appointmentTime;
-                 $state.go('createEvent', {doctor:$rootScope.docId});
-                 } else {
-                    alert("Only Admin have right to create events");
-                 }
+                $scope.currentDate = new Date();
+                console.log($scope.currentDate);
+                var currentYear = $scope.currentDate.getFullYear();
+                var currentDay = $scope.currentDate.getDate();
+                var currentMonth = $scope.currentDate.getMonth() +1;
+                var eventYear = date.getFullYear();
+                var eventDay = date.getDate();
+                var eventMonth = date.getMonth() +1;
+                console.log(eventMonth);
+                console.log(eventYear);
+                console.log(eventDay);
+                console.log(currentMonth);
+                console.log(currentYear);
+                console.log(currentDay);
+                if (eventYear<currentYear) {
+                    alert("err")
+                    }
+                else if (eventYear == $scope.currentYear) {
+                    if (eventMonth<currentMonth) {
+                            alert("err")
+                        }
+                    else {
+                        if (eventMonth == currentMonth) {
+                            if (eventDay<currentDay) {
+                                    alert("err")
+                                }
+                            }
+                        }
+
+                    }
+                    else {
+                        if (UtilityService.checkUserLogin()) {
+                             var date= new Date(date).toDateString("DD/mm/yyyy")
+                             $scope.time = $filter('date')(new Date(), 'HH:mm');
+                             $scope.appointmentTime = date + " " +$scope.time; 
+                             $rootScope.date= $scope.appointmentTime;
+                             $state.go('createEvent', {doctor:$rootScope.docId});
+                        } else {
+                            alert("Only Admin have right to create events");
+                        }
+                }  
             };
     }]);

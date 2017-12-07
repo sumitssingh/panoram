@@ -20,6 +20,7 @@ angular.module('myApp')
                 },
                 data: $scope.query
             }).then(function(response){
+                console.log(response);
                 $scope.patientEvent=response.data.Appointment;
             })
 
@@ -41,14 +42,11 @@ angular.module('myApp')
 
             });
             $scope.edit = function(patient) {
-                ngDialog.close();
-               $rootScope.patientDetail ={ 
-                "patient" : patient.patient,
-                "disease" : patient.cause,
-                "appointmentId":patient.appointmentId,
+            ngDialog.close();
+            console.log(patient);
+            $rootScope.patientDetail ={ 
+                "appointmentId":patient.id,
                 "appointmentTime" : patient.appointmentTime,
-                "status" : patient.status,
-                "patientId" : patient.id,
                 "doctorId" : event.docId
             }
                 $state.go('editEvent');
