@@ -316,8 +316,7 @@ router.route('/onCall/providers')
             } else{
                 var onCallEvents =[];
                 _.forEach(posts, function(provider) {
-                    console.log(provider.doctor.username);
-                    onCallEvents.push({'id':provider._id,'location':provider.location,'doctor':provider.doctor.username,'date':provider.date})
+                    onCallEvents.push({'id':provider._id,'location':provider.location,'doctor':provider.doctor.username,'doctorId':provider.doctor._id,'date':provider.date})
                 return onCallEvents;
             })
             res.send(onCallEvents);
@@ -332,7 +331,9 @@ router.get('/my/notification', function(req, res) {
         }else {
              var myNotification =[];
                 _.forEach(doc.notification, function(event) {
-                    myNotification.push({'id':event._id,'text':event.text});
+                    if (event.isRead === false) {
+                        myNotification.push({'id':event._id,'text':event.text});
+                    }
                 return myNotification;
             })
                 res.send(myNotification);

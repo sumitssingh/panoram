@@ -36,7 +36,7 @@
                                           <label for="exampleInputEmail1">Appointment Time</label>
                                         <!-- <input type="text" class="form-control"  placeholder="Appointment Time" > -->
                                         <datepicker date-format="MM-dd-yyyy">
-                                          <input type="text" name="time" class="editable-input form-control input-sm" ng-model="patient.appointmentTime| panoDate :'MMMM d, y h:mm'" ng-value="patient.appointmentTime | panoDate :'MMMM d, y h:mm'" required=""/>
+                                          <input type="text" name="time" class="editable-input form-control input-sm" ng-model="patient.appointmentTime" required=""/>
                                           </datepicker>
                                     </div>
                                     </br>    
@@ -44,7 +44,7 @@
                                           <label for="exampleInputEmail1">Location</label>
                                         <input type="text" class="form-control"  placeholder="Appointment Location" ng-model="patient.location" required="">
                                     </div>
-                                    <button type="submit" class="btn btn-default" ng-disabled="userForm.$invalid || !patient.doctorId" ng-click="create()" style="margin-left: 175px;margin-top: 10px;">Create</button>
+                                    <button type="submit" class="btn btn-default" ng-disabled="userForm.$invalid" ng-click="create()" style="margin-left: 175px;margin-top: 10px;">Create</button>
                                 </form>
                             </div>
                         </div>
