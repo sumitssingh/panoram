@@ -194,3 +194,7 @@ tr.ng-scope {
     right: 0 !important;
     padding: 0;
   }
+  .search-box ul.dropdown-menu {
+    overflow-y: scroll;
+    height: 300px;
+}
