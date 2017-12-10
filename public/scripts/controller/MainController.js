@@ -6,7 +6,7 @@ angular.module('myApp')
             $scope.selectDoctor = true;
             $scope.loginName=localStorage.getItem('ngStorage-loginName');   
             $scope.loginName = $scope.loginName.replace(/"/g,"");                         
-            $scope.isAuthenticate = UtilityService.checkUserLogin();
+            $scope.isAuthenticate = localStorage.getItem('ngStorage-isAuthenticate');
 
             $scope.allDocUrl= 'admin/doctor/getAllDoctors/name';
             $scope.$on('editEvent', function(events, data){
