@@ -241,7 +241,8 @@ router.route('/follow/doctor')
                                     doctor.following.push(req.userId);
                                     doctor.notification.push({
                                           'type':'following',
-                                            "text":"Doctor " + doctor.username + "now following you"
+                                            "text":"Doctor " + doc.username + "now following you",
+                                            "doctorId": doc._id
                                     })
                                     doctor.save(function (err, doctor) {
                                         if (err) {
@@ -291,7 +292,8 @@ router.post('/unFollow/doctor', function (req, res) {
                             doctor.following.splice(index, 1);
                             doctor.notification.push({
                                 'type':'unfollow',
-                                "text": doctor.username + ' UnFollowed you'
+                                "text": doc.username + ' UnFollowed you',
+                                "doctorId": doc._id
                             })
                             doctor.save(function (err, doctor) {
                                 if (err) {
