@@ -10,7 +10,7 @@ var Doctor = mongoose.model('Doctor');
 var OnCall = mongoose.model('OnCall');
 var Location = mongoose.model('Location');
 // var Hospital = mongoose.model('Hospital');
-var ensureAuthenticated = require('../authMiddleWare');
+
 
 
 router.get('/fetchAllDoctor', function (req, res) {
@@ -35,6 +35,7 @@ router.get('/AllDoctors', function (req, res) {
         }
     })
 })
+var ensureAuthenticated = require('../authMiddleWare');
 router.get('/fetch/All/location', function (req, res) {
     Location.find({}, function (err, doc) {
     if (err) {
