@@ -16,16 +16,14 @@ var DoctorSchema = new mongoose.Schema({
     status : { type: String },
     Appointment : [{
         _id: {type: Schema.Types.ObjectId},
-        disease : { type: String},
+        description : { type: String},
+        appointmentType : { type: String},
         appointmentTime : { type: String},
         rescheduledTime : { type: String},
         location: {type: String},
         createdOn : { type: Date, default: Date.now},
         updatedon : { type: Date, default: Date.now},
-        status : { type: String},
-        modified : { type: Boolean},
     }],
-    hospital : {type: Schema.Types.ObjectId, ref: 'Hospital' },
     follow: { type : Array , default : []},
     following: { type : Array , default : []},
     notification:[{
@@ -45,20 +43,23 @@ var OnCallSchema = new mongoose.Schema({
     location: {type: String},
     date: { type: String}
 })
-var HospitalSchema = new mongoose.Schema({
-    name:{type:String, required:true, unique:true},
-    doctorid : {type:String, required:true},
-    speciality : { type: String, required: true, trim: true },
-    status : { type: String },
-    Address : [{
-        state : { type: String},
-        city : { type: String},
-        zipCode : { type: String},
-        area : { type: String},
-        street : { type: String},
-    }],
-    doctorId: { type: Schema.Types.ObjectId, ref: 'Doctor' }
-});
+var locationSchema = new mongoose.Schema({
+    location:{type:String, required:true, unique:true},
+})
+// var HospitalSchema = new mongoose.Schema({
+//     name:{type:String, required:true, unique:true},
+//     doctorid : {type:String, required:true},
+//     speciality : { type: String, required: true, trim: true },
+//     status : { type: String },
+//     Address : [{
+//         state : { type: String},
+//         city : { type: String},
+//         zipCode : { type: String},
+//         area : { type: String},
+//         street : { type: String},
+//     }],
+//     doctorId: { type: Schema.Types.ObjectId, ref: 'Doctor' }
+// });
 
 
 DoctorSchema.pre('save', function(next) {
@@ -103,11 +104,11 @@ DoctorSchema.methods.generateJwt = function() {
  // DoctorSchema.plugin(arrayUniquePlugin);
 var Doctor = mongoose.model('Doctor', DoctorSchema);
 var OnCall = mongoose.model('OnCall', OnCallSchema);
-var Hospital = mongoose.model('Hospital', HospitalSchema);
+var Location = mongoose.model('Location', locationSchema);
 
 module.exports = {
     Doctor: Doctor,
-    Hospital: Hospital,
+    Location: Location,
 };
 //
 // module.exports = {

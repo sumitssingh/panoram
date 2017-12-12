@@ -8,7 +8,8 @@ var async = require('async');
 var upload = multer({dest: 'upload/'})
 var Doctor = mongoose.model('Doctor');
 var OnCall = mongoose.model('OnCall');
-var Hospital = mongoose.model('Hospital');
+var Location = mongoose.model('Location');
+// var Hospital = mongoose.model('Hospital');
 var ensureAuthenticated = require('../authMiddleWare');
 
 
@@ -17,27 +18,40 @@ router.get('/fetchAllDoctor', function (req, res) {
         if (err) {
             res.send({status: false, info: "Something is not right"})
         } else {
-            res.send({status: true, doctor:doc});
+            var doctor = [];
+            _.forEach(doc, function(data){
+                doctor.push({"username":data.username,"id":data._id})
+            })
+            res.send({status: true, doctor:doctor});
         }
     })
 })
 router.get('/fetch/All/location', function (req, res) {
-    Doctor.find({}, function (err, doc) {
+    Location.find({}, function (err, doc) {
     if (err) {
         res.send({status: false, info: "Something is not right"})
     } else{
-    var docLocation =[];
-       for (var i = doc.length - 1; i >= 0; i--) {
-           var location = doc[i].Appointment.map(function(loc){
-            docLocation.push(loc.location);
-            return docLocation;
-           })
-           
-       }
-        res.send(docLocation);
+        res.send(doc);
     }
     })
 })
+// router.get('/fetch/All/location', function (req, res) {
+//     Doctor.find({}, function (err, doc) {
+//     if (err) {
+//         res.send({status: false, info: "Something is not right"})
+//     } else{
+//     var docLocation =[];
+//        for (var i = doc.length - 1; i >= 0; i--) {
+//            var location = doc[i].Appointment.map(function(loc){
+//             docLocation.push(loc.location);
+//             return docLocation;
+//            })
+           
+//        }
+//         res.send(docLocation);
+//     }
+//     })
+// })
 router.use(ensureAuthenticated);
 router.get('/myProfile', function(req, res, next) {
   Doctor.findById(req.userId, function (err, doctor) {
@@ -334,7 +348,7 @@ router.get('/my/notification', function(req, res) {
              var myNotification =[];
                 _.forEach(doc.notification, function(event) {
                     if (event.isRead === false) {
-                        myNotification.push({'id':event._id,'text':event.text});
+                        myNotification.push({'id':event._id,'text':event.text,doctorId:event.doctorId});
                     }
                 return myNotification;
             })

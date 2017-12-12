@@ -8,7 +8,7 @@ var crypto = require('crypto');
 var config=require('../../config.json');
 var jwt=require('jwt-simple');
 var Doctor = mongoose.model('Doctor');
-var Hospital = mongoose.model('Hospital');
+// var Hospital = mongoose.model('Hospital');
 var jwt = require('jsonwebtoken');
 
 /* GET home page. */
