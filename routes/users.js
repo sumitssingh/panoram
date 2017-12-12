@@ -18,6 +18,15 @@ router.get('/fetchAllDoctor', function (req, res) {
         if (err) {
             res.send({status: false, info: "Something is not right"})
         } else {
+            res.send({status: true, doctor:doc});
+        }
+    })
+})
+router.get('/AllDoctors', function (req, res) {
+    Doctor.find({}, function (err, doc) {
+        if (err) {
+            res.send({status: false, info: "Something is not right"})
+        } else {
             var doctor = [];
             _.forEach(doc, function(data){
                 doctor.push({"username":data.username,"id":data._id})
