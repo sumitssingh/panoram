@@ -42,25 +42,30 @@ router.post('/register', function(req, res, next){
     if (!req.body.username || !req.body.password || !req.body.email) {
         return res.status(400).json({message: "Please fill the form"})
     }
-    var doctor = new Doctor();
-
-    doctor.username = req.body.username;
-    doctor.email = req.body.email;
-
-    doctor.setPassword(req.body.password);
-
-    doctor.save(function(err){
+    // var doctor = new Doctor();
+    Doctor.find({username: req.body.username}, function(err, doctor){
+        // var password = new Buffer(req.body.password, 'binary')
         if (err) {
-            res.send({status: false, err: err,  info:"Doctor with this username already exists"});
+            res.send(err)
         }else {
-            res.send({
-                "status": true,
-                'userId': doctor._id,
-                'token': doctor.generateJwt(0),
-                info: "Successfull SignedUp"
-            });
-        }
-    });
+        doctor[0].email = req.body.email;
+          var password = new Buffer(req.body.password, 'binary')
+        doctor[0].setPassword(password);
+
+        doctor[0].save(function(err){
+            if (err) {
+                res.send({status: false, err: err,  info:"Doctor with this username already exists"});
+            }else {
+                res.send({
+                    "status": true,
+                    'userId': doctor._id,
+                    'token': doctor[0].generateJwt(0),
+                    info: "Successfull SignedUp"
+                });
+            }
+        });
+    }
+    })
 });
 
 // router.use(ensureAuthenticated);
