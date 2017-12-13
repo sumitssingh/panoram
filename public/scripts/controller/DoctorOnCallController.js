@@ -32,12 +32,17 @@ socket.on('connect', function () {
                             })
                             console.log(doctor);
                            UtilityService.apiGet($scope.locationUrl,{}).then(function(response){
-                             states = response.data.filter(function(elem, index, self) {
-                                if (elem != null) {
-                                    return index == self.indexOf(elem);
-                                }
-                             })
+
+                            states = response.data.map(function(loc){
+                              return loc.location;
+                            })
+                             // states = response.data.filter(function(elem, index, self) {
+                             //    if (elem != null) {
+                             //        return index == self.indexOf(elem);
+                             //    }
+                             // })
                           });
+                           console.log(states);
                               function suggest_state(term) {
                                 console.log(term);
                             var q = term.toLowerCase().trim();

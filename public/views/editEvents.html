@@ -18,7 +18,7 @@
                             <div class="form-body">
                                 <form name="userForm" >
                                     <div class="form-group">
-                                          <label for="exampleInputEmail1">Appointment</label>
+                                          <label for="exampleInputEmail1">Appointment Time</label>
                                         <input type="text" class="form-control"  placeholder="Appointment Time" ng-model="patient.appointmentTime" readonly="">
                                     </div>
                                     <div class="form-group">
@@ -26,6 +26,15 @@
                                     <datepicker date-format="MM-dd-yyyy" selector="form-control">      
                                           <input type="text" name="time" ng-model="patient.rescheduleTime" placeholder="Choose a date" class="editable-input form-control input-sm" required/>
                                     </datepicker>
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                          <label for="exampleInputEmail1">Appointment Type</label>
+                                        <input type="text" class="form-control"  placeholder="Appointment Type" ng-model="patient.appointmentType" readonly="">
+                                    </div>
+                                    <div class="form-group">
+                                          <label for="exampleInputEmail1">Description</label>
+                                        <input type="text" class="form-control"  placeholder="Description" ng-model="patient.description" readonly="">
                                     </div>
                                     <button type="submit" class="btn btn-default" ng-disabled="userForm.$invalid" ng-click="Update()" style="margin-left: 175px;margin-top: 10px;">Update</button>
                                 </form>

@@ -272,7 +272,8 @@ router.post('/create/appointment/:docId', function (req, res) {
             doc.Appointment.push({
                 "location": req.body.location,
                 "appointmentTime": req.body.appointmentTime,
-                "status": req.body.status
+                "appointmentType": req.body.appointmentType,
+                "description": req.body.description
             })
              doc.save(function (err, data) {
                 if (err) {

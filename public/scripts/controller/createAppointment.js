@@ -8,13 +8,41 @@ angular.module('myApp')
                 $scope.isAuthenticate = UtilityService.checkUserLogin();
 
                 $scope.createAppointmentUrl= 'admin/doctor/create/appointment/';
+                $scope.locationUrl= 'admin/doctor/fetch/All/location';
 
                 $scope.$on('docId', function(event, data){
                     $scope.patient.doctorId = data.id;
                 })
                 $scope.data = [];   
                 $scope.patient.doctorId = UtilityService.getDoctor().id;
+                UtilityService.apiGet($scope.locationUrl,{}).then(function(response){
+                     states = response.data.map(function(loc){
+                              return loc.location;
+                            })
+                             // states = response.data.filter(function(elem, index, self) {
+                             //    if (elem != null) {
+                             //        return index == self.indexOf(elem);
+                             //    }
+                             // })
+                          });
+               function suggest_state(term) {
+                        console.log(term);
+                    var q = term.toLowerCase().trim();
+                    var results = [];
 
+                    // Find first 10 states that start with `term`.
+                    for (var i = 0; i < states.length && results.length < 10; i++) {
+                      var state = states[i];
+                      if (state.toLowerCase().indexOf(q) === 0)
+                        results.push({ label: state, value: state });
+                    }
+
+                    return results;
+                  }
+
+                  $scope.autocomplete_location = {
+                    suggest: suggest_state
+                  };
                 $scope.create = function() {
                     SweetAlert.swal({
                      title: "Are you sure?",

@@ -24,14 +24,11 @@
                                                   <option ng-repeat="option in data" value="{{option.id}}">{{option.name}}</option>
                                             </select>
                                     </div>   -->  
-                                    <!-- <div class="form-group">
-                                         <label for="exampleInputEmail1">Patient</label>
-                                        <input type="text" class="form-control"  placeholder="Patient Name" ng-model="patient.patient" required="">
+                                     <div class="form-group">
+                                          <label for="exampleInputEmail1">Location</label>
+                                          <div mass-autocomplete class="location">
+                                        <input type="text" name="location" class="form-control" ng-model="row.location" mass-autocomplete-item="autocomplete_location"  required />
                                     </div>
-                                    <div class="form-group">
-                                         <label for="exampleInputEmail1">Disease</label>
-                                        <input type="text" class="form-control"  placeholder="disease" ng-model="patient.disease" required="">
-                                    </div> -->
                                     <div class="form-group">
                                           <label for="exampleInputEmail1">Appointment Time</label>
                                         <!-- <input type="text" class="form-control"  placeholder="Appointment Time" > -->
@@ -39,11 +36,18 @@
                                           <input type="text" name="time" class="editable-input form-control input-sm" ng-model="patient.appointmentTime" required=""/>
                                           </datepicker>
                                     </div>
-                                    </br>    
-                                     <div class="form-group">
-                                          <label for="exampleInputEmail1">Location</label>
-                                        <input type="text" class="form-control"  placeholder="Appointment Location" ng-model="patient.location" required="">
+                                    <div class="form-group">
+                                         <label for="exampleInputEmail1">Appointment Type</label>
+                                        <input type="text" class="form-control"  placeholder="Appointment Type" ng-model="patient.appointmentType" required="">
                                     </div>
+                                        <!-- <input type="text" class="form-control"  placeholder="Appointment Location" ng-model="patient.location" required=""> -->
+                                    </div>
+
+                                    <div class="form-group">
+                                         <label for="exampleInputEmail1">Description</label>
+                                        <input type="text" class="form-control"  placeholder="Description" ng-model="patient.description" required="">
+                                    </div>
+                                    </br>    
                                     <button type="submit" class="btn btn-default" ng-disabled="userForm.$invalid" ng-click="create()" style="margin-left: 175px;margin-top: 10px;">Create</button>
                                 </form>
                             </div>
