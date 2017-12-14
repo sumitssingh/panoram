@@ -81,7 +81,7 @@ angular.module('myApp', [
                     isAuthenticate: true
                 }
     })
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/login');
 })
 .run(['$rootScope', '$state', '$location', 'UtilityService', function($rootScope, $state, $location, UtilityService) {
     $rootScope.$state = $state;
