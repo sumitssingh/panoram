@@ -177,7 +177,7 @@ router.post('/getAppointmentByDoctor', function (req, res) {
                             "location":doc.Appointment[i].location,
                             "status":doc.Appointment[i].status,
                             "appointmentId":doc.Appointment[i]._id,
-                            "appointmentTime":doc.Appointment[i].appointmentTime,
+                            "appointmentTime":doc.Appointment[i].appointmenTime,
                             "rescheduledTime":doc.Appointment[i].rescheduledTime,
                         })
                     }
@@ -358,7 +358,7 @@ router.get('/my/notification', function(req, res) {
              var myNotification =[];
                 _.forEach(doc.notification, function(event) {
                     if (event.isRead === false) {
-                        myNotification.push({'id':event._id,'text':event.text,doctorId:event.doctorId});
+                        myNotification.push({'id':event._id,'text':event.text,doctorId:doc._id});
                     }
                 return myNotification;
             })

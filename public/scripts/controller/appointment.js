@@ -43,7 +43,7 @@ angular.module('myApp')
                 "patientId" : patient.id,
                 "doctorId" : event.docId
             }
-                $state.go('editEvent');
+                $state.go('root.editEvent');
             };
             // $scope.getEvent = function(doc){
                 $rootScope.$on('docId', function(event, doc){
@@ -60,6 +60,7 @@ angular.module('myApp')
                  UtilityService.apiGet($scope.appointmentUrl+doc.id,{}).then(function(response){
                     $scope.docAppointment = response.data.Appointment;
                     $scope.users=response.data.Appointment
+                    console.log($scope.users);
                 $scope.tableParams = new NgTableParams({
                     page: 1,
                     count: 3

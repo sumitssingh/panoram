@@ -16,7 +16,7 @@ angular.module('myApp')
                         UtilityService.setLocalStorage('isAuthenticate', true);
                         UtilityService.setLocalStorage('token', response.token);
                         UtilityService.setLocalStorage('userInfo', {email:$scope.loginFormObj.email,name:'admin'});
-                        $state.go('dashboard');
+                        $state.go('root.dashboard');
                     }else{
                         console.log(response.data);
                         $scope.showInvalidCredential = true;
@@ -30,7 +30,7 @@ angular.module('myApp')
                     if(response.status){
                         UtilityService.setLocalStorage('loginName', response.username);
                 UtilityService.setLocalStorage('isAuthenticate', false);
-                $state.go('dashboard');
+                $state.go('root.dashboard');
             }
             },function(error){
                     $scope.loginBtn = false;
@@ -40,5 +40,5 @@ angular.module('myApp')
     }
     }]);
 // angular.module('myApp')
-//     .controller('DashboardController', ['$rootScope','$scope','$filter', '$timeout', '$state','SERVER_BASE_URL', '$http','ngDialog','$controller','UtilityService',
+//     .controller('root.DashboardController', ['$rootScope','$scope','$filter', '$timeout', '$state','SERVER_BASE_URL', '$http','ngDialog','$controller','UtilityService',
 //         function($rootScope, $scope, $filter, $timeout, $state,SERVER_BASE_URL, $http, ngDialog, $controller, UtilityService) {

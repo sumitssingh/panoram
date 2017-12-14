@@ -18,32 +18,40 @@ angular.module('myApp', [
 .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
 
     $stateProvider
-        // .state('login', {
-        //     url:'/',
-        //     templateUrl: 'views/login.html',
-        //     controller: 'AuthController',
-        //     data: {
-        //             isAuthenticate: true
-        //         }
-        // })
-    .state('dashboard', {
+        .state('login', {
+            url:'/login',
+            templateUrl: 'views/login.html',
+            controller: 'AuthController',
+            data: {
+                    isAuthenticate: true
+                }
+        })
+    .state('root', {
         url:'/',
+        templateUrl: 'views/templates/header.html',
+        controller: 'MainCtrl',
+        data: {
+                  isAuthenticate: true
+              }
+    })    
+    .state('root.dashboard', {
+        url:'dashboard',
       templateUrl: 'views/dashboard.html',
       controller: 'DashboardController',
         data: {
                     isAuthenticate: true
                 }
     })
-        .state('editEvent', {
-        url:'/editEvent',
+        .state('root.editEvent', {
+        url:'editEvent',
       templateUrl: 'views/editEvents.html',
       controller: 'eventEditCtrl',
         data: {
                     isAuthenticate: true
                 }
     })
-                .state('createEvent', {
-        url:'/createEvent/:doctor',
+                .state('root.createEvent', {
+        url:'createEvent/:doctor',
       templateUrl: 'views/add.html',
       controller: 'createEventCtrl',
         data: {
@@ -55,8 +63,8 @@ angular.module('myApp', [
     //   templateUrl: 'views/eventList.html',
     //   controller: 'eventListCtrl'
     // })
-          .state('appointment', {
-        url:'/appointment/list',
+          .state('root.appointment', {
+        url:'appointment/list',
       templateUrl: 'views/appointment.html',
       controller: 'appointmentCtrl',
       controllerAs: 'vm',
@@ -64,8 +72,8 @@ angular.module('myApp', [
                     isAuthenticate: true
                 }
     })
-      .state('OnCall', {
-        url:'/OnCall',
+      .state('root.OnCall', {
+        url:'OnCall',
       templateUrl: 'views/ScheduledDoctor.html',
       controller: 'OnCallCtrl',
       controllerAs: 'demo',

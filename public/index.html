@@ -181,8 +181,8 @@
 </head>
 <body ng-app="myApp" layout="row" style="background-color:#959393;">
 
-    <div ng-include="'views/login.html'" ng-if="!isAuthenticate" ng-controller='AuthController'></div>
-    <div ng-include="'views/templates/header.html'" ng-if="isAuthenticate" ng-controller='MainCtrl'></div>
-    <!-- <div ui-view class="view-container"></div> -->
+    <!-- <div ng-include="'views/login.html'" ng-if="!isAuthenticate" ng-controller='AuthController'></div> -->
+    <!-- <div ng-include="'views/templates/header.html'" ng-if="isAuthenticate" ng-controller='MainCtrl'></div> -->
+    <div ui-view class="view-container"></div>
 </body>
 </html>

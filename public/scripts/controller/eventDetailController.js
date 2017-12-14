@@ -49,7 +49,7 @@ angular.module('myApp')
                 "appointmentTime" : patient.appointmentTime,
                 "doctorId" : event.docId
             }
-                $state.go('editEvent');
+                $state.go('root.editEvent');
             };
 
 

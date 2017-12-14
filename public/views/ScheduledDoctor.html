@@ -49,12 +49,12 @@
                                     </div>
                                 </div>
                             </td>
-                            <td title="'Time'" filter="{time: 'text'}" sortable="'time'" ng-switch="demo.isEditing" ng-class="time.$dirty ? 'bg-warning' : ''" ng-form="time" demo-tracked-table-cell>
+                            <td title="'Date'" filter="{time: 'text'}" sortable="'time'" ng-switch="demo.isEditing" ng-class="time.$dirty ? 'bg-warning' : ''" ng-form="time" demo-tracked-table-cell>
                             
                                 <span ng-switch-default class="editable-text">{{row.time | panoDate :'MMMM d, y'}}</span>
                                 <div class="controls" ng-class="time.$invalid && time.$dirty ? 'has-error' : ''" ng-switch-when="true">
-                                    <datepicker date-format="MMMM d,y" pick-time="true">
-                                        <input type="text" name="time" ng-model="row.time" ng-value="row.time" class="editable-input form-control input-sm" required/>
+                                    <datepicker date-format="MMMM d,y" pick-time="true" date-min-limit="{{minDate}}">
+                                        <input type="text" name="time" ng-model="row.time" ng-value="row.time" class="editable-input form-control input-sm" readonly="" />
                                     </datepicker>
                                 </div>
                             </td>
@@ -65,7 +65,7 @@
                     </table>
                     <table>
                         <tr>
-                           <button class="btn btn-primary btn-sm" ng-Disabled="demo.isEditing" ng-if=isAuthenticate ng-click="Save()" style="float: right;margin-bottom: 20px;"><span class="glyphicon glyphicon-save"> Publish</span></button>
+                           <button class="btn btn-primary btn-sm" ng-disabled="!isData" ng-if=isAuthenticate ng-click="Save()" style="float: right;margin-bottom: 20px;"><span class="glyphicon glyphicon-save"> Publish</span></button>
                         </tr>
                     </table>
                 </div>

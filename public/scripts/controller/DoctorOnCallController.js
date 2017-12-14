@@ -4,6 +4,7 @@ angular.module('myApp')
 
 $scope.loginName=localStorage.getItem('ngStorage-loginName');
 $scope.loginName = $scope.loginName.replace(/"/g,"");
+$scope.isData = false;
 $scope.row = {};
 $scope.OnCall  = [];
 $scope.$emit('editEvent',{selectDoctor:false});
@@ -112,7 +113,7 @@ socket.on('connect', function () {
                             },
                             data: $scope.OnCall
                         }).then(function (response) {
-                          
+                          $scope.isData = false;
                             for (var i = id.length - 1; i >= 0; i--) {
                               console.log(id[i]);
                               var to = "59f735c95a3a99017e0d2189";
@@ -242,6 +243,7 @@ console.log(people);
 
     function saveChanges() {
       resetTableStatus();
+      $scope.isData = true;
       var currentPage = self.tableParams.page();
       originalData = angular.copy(self.tableParams.settings().dataset);
         data=originalData;

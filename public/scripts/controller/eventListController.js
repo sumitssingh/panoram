@@ -35,7 +35,7 @@ angular.module('myApp')
                 ngDialog.close();
                 $rootScope.patientId = patientId;
                 $rootScope.doctorId = event.docId;
-                $state.go('editEvent');
+                $state.go('root.editEvent');
             };
 
         }]);

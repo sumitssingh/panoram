@@ -16,6 +16,7 @@ angular.module('myApp')
                 $scope.events = [];
                 UtilityService.apiGet($scope.appointmentUrl+doc.id,{}).then(function(response){
                     $scope.docAppointment = response.data.Appointment;
+                    if ($scope.docAppointment) {
                     for (var i = 0; i<=$scope.docAppointment.length-1; i++) {
                         $scope.events.push(
                             {
@@ -25,6 +26,7 @@ angular.module('myApp')
                             }
                         );
                     }
+                }
                     $scope.selected = $scope.events[0];
                 });
             }
@@ -50,7 +52,7 @@ angular.module('myApp')
                         $scope.time = $filter('date')(new Date(), 'HH:mm');
                         $scope.appointmentTime = date + " " +$scope.time; 
                         $rootScope.date= $scope.appointmentTime;
-                        $state.go('createEvent', {doctor:$rootScope.docId});
+                        $state.go('root.createEvent', {doctor:$rootScope.docId});
                     } else {
                         alert("Only Admin have right to create events");
                     }

@@ -34,11 +34,12 @@ router.get('/fetch/All/location', function (req, res) {
     })
 })
 router.get('/getAllDoctors/name', function (req, res) {
-    console.log(req.isAdmin);
     if (req.isAdmin) {
         Doctor.find({}, function (err, doc) {
-            if (err)
+            if (err) {
                 res.send({status: false, info: "Something is not right"})
+            }
+            console.log(doc);
                 var docName = doc.map(function (name) {
                     return data = {
                         "name" : name.username,
@@ -64,7 +65,7 @@ router.get('/getAppointmentByDoctor/:docId', function (req, res) {
                             "location":doc.Appointment[i].location,
                             "status":doc.Appointment[i].status,
                             "appointmentId":doc.Appointment[i]._id,
-                            "appointmentTime":doc.Appointment[i].appointmentTime,
+                            "appointmentTime":doc.Appointment[i].appointmenTime,
                             "rescheduledTime":doc.Appointment[i].rescheduledTime,
                         })
                     }
@@ -104,7 +105,7 @@ router.post('/getAppointmentByDoctor/date/:docId/:date', function (req, res) {
                                 "id":doc.Appointment[i]._id,
                                 'status':doc.Appointment[i].status,
                                 "location":doc.Appointment[i].location,
-                                "appointmentTime":doc.Appointment[i].appointmentTime,
+                                "appointmentTime":doc.Appointment[i].appointmenTime,
                                 "rescheduledTime":doc.Appointment[i].rescheduledTime,
 
                             })
