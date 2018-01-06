@@ -1,11 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-// var Hospital = mongoose.model('Hospital');
-//  var arrayUniquePlugin = require('mongoose-unique-array');
+var ObjectId = Schema.Types.ObjectId;
 var bcrypt = require('bcrypt-nodejs');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
-// var arrayUniquePlugin = require('mongoose-unique-array');
 
 var DoctorSchema = new mongoose.Schema({
     username:{type:String, unique: true},
@@ -15,7 +13,7 @@ var DoctorSchema = new mongoose.Schema({
     doctorDp: { data: Buffer, contentType: String },
     status : { type: String },
     Appointment : [{
-        _id: {type: Schema.Types.ObjectId},
+        _id: { type: Schema.ObjectId, auto: true },
         description : { type: String},
         appointmentType : { type: String},
         appointmentTime : { type: String},
@@ -31,6 +29,7 @@ var DoctorSchema = new mongoose.Schema({
         event:{type: Schema.Types.ObjectId, ref: 'OnCallSchema' },
         type: {type: String},
         text: {type: String},
+        doctorId: {type: String},
         isRead: {type: Boolean, default: false},
     }],
     resetPasswordToken: String,
@@ -42,10 +41,13 @@ var OnCallSchema = new mongoose.Schema({
     doctor :{ type: Schema.Types.ObjectId, ref: 'Doctor' },
     location: {type: String},
     date: { type: String}
-})
+});
 var locationSchema = new mongoose.Schema({
     location:{type:String, required:true, unique:true},
-})
+});
+var typeSchema = new mongoose.Schema({
+    location:{type:String, required:true, unique:true},
+});
 // var HospitalSchema = new mongoose.Schema({
 //     name:{type:String, required:true, unique:true},
 //     doctorid : {type:String, required:true},
@@ -105,10 +107,12 @@ DoctorSchema.methods.generateJwt = function() {
 var Doctor = mongoose.model('Doctor', DoctorSchema);
 var OnCall = mongoose.model('OnCall', OnCallSchema);
 var Location = mongoose.model('Location', locationSchema);
+var Type = mongoose.model('Type', typeSchema);
 
 module.exports = {
     Doctor: Doctor,
     Location: Location,
+    Type: Type,
 };
 //
 // module.exports = {

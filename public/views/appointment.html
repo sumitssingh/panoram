@@ -1,39 +1,37 @@
-        <div class="row--container">
-            <ul class="breadcrumb" style="margin-top: 60px;background-color: #ffffff;">
-                <li>
-                    <i class="ace-icon fa fa-home home-icon"></i>
-                    <a href="/dashboard" ui-sref="root.dashboard">Home</a>
-                </li>
+<div class="row--container">
+    <ul class="breadcrumb" style="margin-top: 60px;background-color: #ffffff;">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/dashboard" ui-sref="root.dashboard">Home</a>
+        </li>
 
-                <li class="active">Appointment</li>
-            </ul>
-        </div>
-        <div class="wrapper">
-            <div class="table--container">
-                <table ng-table="vm.tableParams" class="table table-striped" show-filter="false">
-                    <tr ng-repeat="user in users">
-                        <!-- <td title="'Patient'" filter="{ patient: 'text'}" sortable="'patient'"> -->
-                            <!-- {{user.patient}}</td> -->
-                        <!-- <td title="'Disease'" filter="{ disease: 'text'}" sortable="'disease'"> -->
-                            <!-- {{user.disease}}</td> -->
-                        <td title="'Date'" filter="{ appointmentTime: 'number'}" sortable="'appointmentTime'">
-                            {{user.appointmentTime | panoDate :'MMMM d, y'}}</td>
-                        <td title="'Location'" filter="{ location: 'number'}" sortable="'location'">
-                            {{user.location}}
-                        </td>
-                        <td title="'Type'" filter="{ appointmentType: 'number'}" sortable="'appointmentType'">
-                            {{user.appointmentType}}
-                        </td>
-                        <!-- <td title="'Status'" filter="{ status: 'text'}" sortable="'status'">
-                            {{user.status}}
-                        </td> -->
-                        <td data-title="'Action'">
-                            <a><button class="btn btn-primary btn-sm" ng-click="edit(user)"><span></span>EDIT</button></a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>    
+        <li class="active">Appointment</li>
+    </ul>
+</div>
+<div class="wrapper">
+    <div class="table--container">
+        <table ng-table="vm.tableParams" class="table table-striped" show-filter="false">
+            <tr ng-repeat="user in users">
+                <td title="'Appointment Date'" filter="{ appointmentTime: 'number'}" sortable="'appointmentTime'">
+                    {{user.appointmentTime}}</td>
+                <td title="'Rescheduled Date'" filter="{ rescheduledTime: 'number'}" sortable="'rescheduledTime'">
+                    {{user.rescheduledTime || 'NA'}}</td>
+                <td title="'Location'" filter="{ location: 'number'}" sortable="'location'">
+                    {{user.location}}
+                </td>
+                <td title="'Type'" filter="{ appointmentType: 'number'}" sortable="'appointmentType'">
+                    {{user.appointmentType}}
+                </td>
+                <!-- <td title="'Status'" filter="{ status: 'text'}" sortable="'status'">
+                    {{user.status}}
+                </td> -->
+                <td data-title="'Action'">
+                    <a><button class="btn btn-primary btn-sm" ng-click="edit(user)"><span></span>EDIT</button></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
 
 
 

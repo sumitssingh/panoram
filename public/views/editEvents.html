@@ -1,48 +1,55 @@
-        <div class="row">
-            <ul class="breadcrumb" style="margin-top: 60px;background-color: #ffffff;">
-                <li>
-                    <i class="ace-icon fa fa-home home-icon"></i>
-                    <a href="/dashboard" ui-sref="root.dashboard">Home</a>
-                </li>
+<div class="row">
+    <ul class="breadcrumb" style="margin-top: 60px;background-color: #ffffff;">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/dashboard" ui-sref="root.dashboard">Home</a>
+        </li>
 
-                <li class="active">Edit Events</li>
-            </ul>
-        </div>
-           <div class="row" >
-                <div class="col-md-12">       
-                    <div class="forms" style="width: 500px;margin: 0 auto;">
-                        <div class="form-grids row widget-shadow" data-example-id="basic-forms">
-                            <div class="form-title">
-                                <h4>Edit Events</h4>
-                            </div>
-                            <div class="form-body">
-                                <form name="userForm" >
-                                    <div class="form-group">
-                                          <label for="exampleInputEmail1">Appointment Time</label>
-                                        <input type="text" class="form-control"  placeholder="Appointment Time" ng-model="patient.appointmentTime" readonly="">
-                                    </div>
-                                    <div class="form-group">
-                                          <label for="exampleInputEmail1">Reschedule</label>
-                                    <datepicker date-format="MM-dd-yyyy" selector="form-control">      
-                                          <input type="text" name="time" ng-model="patient.rescheduleTime" placeholder="Choose a date" class="editable-input form-control input-sm" required/>
-                                    </datepicker>
-                                    </div>
-                                    <br>
-                                    <div class="form-group">
-                                          <label for="exampleInputEmail1">Appointment Type</label>
-                                        <input type="text" class="form-control"  placeholder="Appointment Type" ng-model="patient.appointmentType" readonly="">
-                                    </div>
-                                    <div class="form-group">
-                                          <label for="exampleInputEmail1">Description</label>
-                                        <input type="text" class="form-control"  placeholder="Description" ng-model="patient.description" readonly="">
-                                    </div>
-                                    <button type="submit" class="btn btn-default" ng-disabled="userForm.$invalid" ng-click="Update()" style="margin-left: 175px;margin-top: 10px;">Update</button>
-                                </form>
+        <li class="active">Edit Events</li>
+    </ul>
+</div>
+<div class="row" >
+    <div class="col-md-12">
+        <div class="forms" style="width: 500px;margin: 0 auto;">
+            <div class="form-grids row widget-shadow" data-example-id="basic-forms">
+                <div class="form-title">
+                    <h4>Edit Events</h4>
+                </div>
+                <div class="form-body">
+                    <form name="userForm" >
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" style="width: 100%">Location</label>
+                            <span ng-if="locationError" style="color: red;font-size: 12px;width: 100%">{{errMsg}}</span>
+                            <div mass-autocomplete class="location">
+                                <input type="text" name="location" class="form-control" placeholder="Select Location" ng-change="checkLocAvability()" ng-model="patient.location" mass-autocomplete-item="autocomplete_location"/>
                             </div>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Appointment Time</label>
+                            <input type="text" class="form-control"  placeholder="Appointment Time"  ng-model="patient.appointmentTime" readonly="">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Reschedule</label>
+                            <input moment-picker="ctrl.dateFormatted" start-view="month" min-date="minDateString" placeholder="Select Time" class="form-control" ng-model="ctrl.momentDate" format="MMM D YYYY LT">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" style="width: 100%;">Appointment Type</label>
+                            <span ng-if="typeError" style="color: red;font-size: 12px;width: 100%">{{errMsg}}</span>
+                            <div mass-autocomplete class="type">
+                                <input type="text" class="form-control" ng-change="checkTypeAvability()" placeholder="Appointment Type" ng-model="patient.appointmentType" required="" mass-autocomplete-item="autocomplete_type">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Description</label>
+                            <input type="text" class="form-control"  placeholder="Description" ng-model="patient.description" >
+                        </div>
+                        <button type="submit" class="btn btn-default" ng-disabled="userForm.$invalid" ng-click="Update()" style="margin-left: 175px;margin-top: 10px;">Update</button>
+                    </form>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
   
 

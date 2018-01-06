@@ -2,22 +2,18 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <!-- <th>SR.No</th> -->
-        <!-- <th>Patient</th> -->
-        <!-- <th>Disease</th> -->
         <th>Appointment Time</th>
         <th>Rescheduled Time</th>
+        <th>Location</th>
         <th>Type</th>
         <th>Action</th>
     </tr>
     </thead>
     <tbody ng-repeat="list in patientEvent">
     <tr>
-        <!-- <td>{{$index +1}}</td> -->
-        <!-- <td>{{list.patient}}</td> -->
-        <!-- <td>{{list.cause}}</td> -->
         <td>{{list.appointmentTime}}</td>
-        <td>{{list.rescheduledTime}}</td>
+        <td>{{list.rescheduledTime || 'NA'}}</td>
+        <td>{{list.location}}</td>
         <td>{{list.appointmentType}}</td>
         <td><button class="btn btn-primary btn-sm" type="button" ng-if=isAuthenticate ng-click="edit(list)" >Edit</button></td>
     </tr>

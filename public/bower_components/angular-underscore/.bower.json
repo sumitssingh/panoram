@@ -18,6 +18,5 @@
   },
   "_source": "https://github.com/floydsoft/angular-underscore.git",
   "_target": "^0.5.0",
-  "_originalSource": "angular-underscore",
-  "_direct": true
+  "_originalSource": "angular-underscore"
 }

@@ -35,21 +35,13 @@ angular.module('MassAutoComplete', [])
   // Position ac container given a target element
   config.position_autocomplete = function(container, target) {
     var rect = target[0].getBoundingClientRect(),
-        scrollTop = '',
-        scrollLeft = '';
+        scrollTop = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset,
+        scrollLeft = document.body.scrollLeft || document.documentElement.scrollLeft || window.pageXOffset;
 
     container[0].style.top = rect.top + rect.height + scrollTop + 'px';
     container[0].style.left = rect.left + scrollLeft + 'px';
     container[0].style.width = rect.width + 'px';
   };
-
-  config.CLASSES = {
-    container: 'ac-container',
-    menu: 'ac-menu',
-    menu_item: 'ac-menu-item',
-    menu_item_focus: 'ac-state-focus'
-  };
-
 
   this.$get = function() {
     return config;
@@ -66,17 +58,17 @@ angular.module('MassAutoComplete', [])
     template:
       '<span ng-transclude></span>' +
 
-      '<div class="' + config.CLASSES.container + '"' +
+      '<div class="ac-container" ' +
            'aria-autocomplete="list" ' +
            'role="listbox" ' +
            'ng-show="show_autocomplete">' +
 
-        '<ul class="' + config.CLASSES.menu+ '"> ' +
+        '<ul class="ac-menu"> ' +
           '<li ng-repeat="result in results" ng-if="$index > 0" ' +
-            'class="' + config.CLASSES.menu_item + '" ' +
+            'class="ac-menu-item" ' +
             'role="option" ' +
             'id="{{result.id}}" ' +
-            'ng-class="$index == selected_index ? \'' + config.CLASSES.menu_item_focus + '\': \'\'">' +
+            'ng-class="$index == selected_index ? \'ac-state-focus\': \'\'">' +
             '<a href ng-click="apply_selection($index)" ng-bind-html="result.label"></a>' +
           '</li>' +
         '</ul>' +

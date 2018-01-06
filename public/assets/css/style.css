@@ -62,7 +62,7 @@ body a:hover{
 }
 .header-left {
     float: left;
-    width: 45%;
+    width: 84%;
 }
 .header-right {
     float: right;
@@ -259,10 +259,14 @@ ul.dropdown-menu{
 }
 /* ----//Logo----*/
 /*start search*/
+.text-muted {
+    color: #fff;
+}
 .search-box {
     float: left;
-    width: 24%;
-    margin: 1.2em 0 0 3em;
+    width: 20%;
+    margin: 19px 20px 8px 40px;
+    /*margin: 1.2em 0 0 3em;*/
 	position: relative;
     z-index: 1;
     display: inline-block;
@@ -830,10 +834,12 @@ ul.dropdown-menu.drp-mnu li {
 .footer {
     background: #fff;
     width: 100%;
-        z-index: 9999;
+    z-index: 9999;
     /*margin-top: -150px;*/
-        bottom: 0px !important;
+    bottom: 0px !important;
     position: fixed;
+    left: 0;
+    padding: 0px 10px 0px 10px;
     text-align:center;
 	box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.21);
 	-webkit-box-shadow: 0px -1px 4px rgba(0, 0, 0, 0.21);
@@ -2686,22 +2692,30 @@ i.fa.fa-facebook.profile-icon {
     height: 265px !important;
 }
 }
-@media(max-width:1920px){
+@media screen and (max-width: 1920px) and (min-width: 1080px) {
   #page-wrapper {
-       min-width: 89.5%;
-        height: 100% !important;
+       min-width: 88.5%;
+        height: 1000px !important;
   }
 }
+@media screen and (max-width: 1366px) and (min-width: 768px) {
+
+    #page-wrapper {
+        min-width: 83.5%;
+        height: 1000px !important;
+    }
+}
+
 @media(max-width:1337px){
   #page-wrapper {
        min-width: 83.5%;
-        height: 100% !important;
+        height: 1000px !important;
   }
 }
 @media(max-width:1080px){
   #page-wrapper {
     min-width: 84.5%;
-    height: 100% !important; 
+    height: 1000px !important; 
   }
 .logo a {
     padding: 0.9em 2.35em .7em;

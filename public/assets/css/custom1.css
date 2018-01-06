@@ -166,18 +166,12 @@ tr.ng-scope {
     left: 20px !important;
     width: 576px;
     }
-    .ac-container {
-            position: absolute;
-    top: 150px !important;
-    left: 530px !important;
+.ac-container {
+    position: absolute;
+    top: unset !important;
+    left: unset !important;
     width: 90px;
     }
-.userForm .ac-container {
-            position: absolute;
-    top: 134px !important;
-    left: 330px !important;
-    width: 90px;
-    }    
  .md-event-calendar-cell-event-show-more-link {
     bottom: 0;
     position: absolute;
@@ -203,4 +197,10 @@ tr.ng-scope {
   .search-box ul.dropdown-menu {
     overflow-y: scroll;
     height: 300px;
+}
+md-event-calendar-month.fitted {
+    height: 1000px;
+}
+._720kb-datepicker-calendar-header:nth-child(odd) {
+    background: #797bcb !important;
 }

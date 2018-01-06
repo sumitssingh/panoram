@@ -1,77 +1,96 @@
-    <div class="row">
-        <ul class="breadcrumb" style="margin-top: 60px;background-color: #ffffff;">
-            <li>
-                <i class="ace-icon fa fa-home home-icon"></i>
-                <a href="/dashboard" ui-sref="root.dashboard">Home</a>
-            </li>
-            <li class="active">On Call</li>
-        </ul>
-    </div>
-    <div class="row wrapper">
-        <div class="col-md-12" style="padding: 20px">
-            <div class="row" style="background: #fff;">
-                <div class="col-md-12">
-                    <div class="brn-group pull-right" ng-if=isAuthenticate>
-                        <button class="btn btn-default" ng-if="demo.isEditing" ng-click="demo.cancelChanges()">
-                            <span class="glyphicon glyphicon-remove"></span>
-                        </button>
-                        <button class="btn btn-primary" ng-if="!demo.isEditing" ng-click="demo.isEditing = true">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                        </button>
-                        <button class="btn btn-primary" ng-if="demo.isEditing" ng-disabled="!demo.hasChanges() || demo.tableTracker.$invalid" ng-click="demo.saveChanges()">
-                            <span class="glyphicon glyphicon-ok"></span>
-                        </button>
-                        <button class="btn btn-default" ng-click="demo.add()">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                    </div>
-                    <table ng-table="demo.tableParams" class="table table-bordered table-hover table-condensed editable-table" ng-form="demo.tableForm" disable-filter="demo.isAdding" demo-tracked-table="demo.tableTracker">
-                        <colgroup>
-                          <col width="50%" />
-                          <col width="25%" />
-                          <col width="15%" />
-                          <col width="5%" />
-                        </colgroup>
-                        <tr ng-repeat="row in $data" ng-form="rowForm" demo-tracked-table-row="row">
-                            <td title="'Doctor'" filter="{doctor: 'text'}" sortable="'doctor'" ng-switch="demo.isEditing" ng-class="doctor.$dirty ? 'bg-warning' : ''" ng-form="doctor" demo-tracked-table-cell>
-                                <span ng-switch-default class="editable-text">{{row.doctor}}</span>
-                                <div class="controls" ng-class="doctor.$invalid && doctor.$dirty ? 'has-error' : ''" ng-switch-when="true">
-                                    <div mass-autocomplete class="auto">
-                                        <input type="text" name="doctor" ng-model="row.doctor" mass-autocomplete-item="autocomplete_options" class="editable-input form-control input-sm" required />
-                                    </div>
-                                </div>
-                            </td>
-                            <td title="'Location'" filter="{location: 'text'}" sortable="'location'" ng-switch="demo.isEditing" ng-class="location.$dirty ? 'bg-warning' : ''" ng-form="location" demo-tracked-table-cell>
-                                <span ng-switch-default class="editable-text">{{row.location}}</span>
-                                <div class="controls" ng-class="location.$invalid && location.$dirty ? 'has-error' : ''" ng-switch-when="true">
-                                    <div mass-autocomplete class="location">
-                                        <input type="text" name="location" ng-model="row.location" mass-autocomplete-item="autocomplete_location" class="editable-input form-control input-sm" required />
-                                    </div>
-                                </div>
-                            </td>
-                            <td title="'Date'" filter="{time: 'text'}" sortable="'time'" ng-switch="demo.isEditing" ng-class="time.$dirty ? 'bg-warning' : ''" ng-form="time" demo-tracked-table-cell>
-                            
-                                <span ng-switch-default class="editable-text">{{row.time | panoDate :'MMMM d, y'}}</span>
-                                <div class="controls" ng-class="time.$invalid && time.$dirty ? 'has-error' : ''" ng-switch-when="true">
-                                    <datepicker date-format="MMMM d,y" pick-time="true" date-min-limit="{{minDate}}">
-                                        <input type="text" name="time" ng-model="row.time" ng-value="row.time" class="editable-input form-control input-sm" readonly="" />
-                                    </datepicker>
-                                </div>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger btn-sm" ng-click="demo.del(row)" ng-disabled="!demo.isEditing"><span class="glyphicon glyphicon-trash"></span></button>
-                            </td>
-                        </tr>
-                    </table>
-                    <table>
-                        <tr>
-                           <button class="btn btn-primary btn-sm" ng-disabled="!isData" ng-if=isAuthenticate ng-click="Save()" style="float: right;margin-bottom: 20px;"><span class="glyphicon glyphicon-save"> Publish</span></button>
-                        </tr>
-                    </table>
+<div class="row">
+    <ul class="breadcrumb" style="margin-top: 60px;background-color: #ffffff;">
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="/dashboard" ui-sref="root.dashboard">Home</a>
+        </li>
+        <li class="active">On Call</li>
+    </ul>
+</div>
+<div class="row wrapper">
+    <div class="col-md-12" style="padding: 20px">
+        <div class="row" style="background: #fff;">
+            <div class="col-md-12">
+                <div class="brn-group pull-right" ng-if=isAuthenticate>
+                    <button class="btn btn-default" ng-if="demo.isEditing" ng-click="demo.cancelChanges()">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                    <!--<button class="btn btn-primary" ng-if="!demo.isEditing" ng-click="demo.isEditing = true">-->
+                        <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                    <!--</button>-->
+                    <button class="btn btn-primary" ng-if="demo.isEditing"
+                            ng-disabled="!demo.hasChanges() || demo.tableTracker.$invalid"
+                            ng-click="demo.saveChanges()">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                    <button class="btn btn-default" ng-click="demo.add()" ng-if="!demo.isEditing">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
                 </div>
+                <table ng-table="demo.tableParams"
+                       class="table table-bordered table-hover table-condensed editable-table" ng-form="demo.tableForm"
+                       disable-filter="demo.isAdding" demo-tracked-table="demo.tableTracker">
+                    <colgroup>
+                        <col width="50%"/>
+                        <col width="25%"/>
+                        <col width="15%"/>
+                        <col width="5%"/>
+                    </colgroup>
+                    <tr ng-repeat="row in $data" ng-form="rowForm" demo-tracked-table-row="row">
+                        <td title="'Doctor'" filter="{doctor: 'text'}" sortable="'doctor'" ng-switch="demo.isEditing"
+                            ng-class="doctor.$dirty ? 'bg-warning' : ''" ng-form="doctor" demo-tracked-table-cell>
+                            <span ng-switch-default class="editable-text">{{row.doctor}}</span>
+                            <div class="controls" ng-class="doctor.$invalid && doctor.$dirty ? 'has-error' : ''"
+                                 ng-switch-when="true">
+                                <div mass-autocomplete class="auto">
+                                    <input type="text" name="doctor" ng-model="row.doctor"
+                                           mass-autocomplete-item="autocomplete_options"
+                                           class="editable-input form-control input-sm" required/>
+                                </div>
+                            </div>
+                        </td>
+                        <td title="'Location'" filter="{location: 'text'}" sortable="'location'"
+                            ng-switch="demo.isEditing" ng-class="location.$dirty ? 'bg-warning' : ''" ng-form="location"
+                            demo-tracked-table-cell>
+                            <span ng-switch-default class="editable-text">{{row.location}}</span>
+                            <div class="controls" ng-class="location.$invalid && location.$dirty ? 'has-error' : ''"
+                                 ng-switch-when="true">
+                                <div mass-autocomplete class="location">
+                                    <input type="text" name="location" ng-model="row.location"
+                                           mass-autocomplete-item="autocomplete_location"
+                                           class="editable-input form-control input-sm" required/>
+                                </div>
+                            </div>
+                        </td>
+                        <td title="'Date'" filter="{time: 'text'}" sortable="'time'" ng-switch="demo.isEditing"
+                            ng-class="time.$dirty ? 'bg-warning' : ''" ng-form="time" demo-tracked-table-cell>
+
+                            <span ng-switch-default class="editable-text">{{row.time | panoDate :'MMMM d, y'}}</span>
+                            <div class="controls" ng-class="time.$invalid && time.$dirty ? 'has-error' : ''"
+                                 ng-switch-when="true">
+                                <datepicker date-format="MMMM d,y" pick-time="true" date-min-limit="{{minDate}}">
+                                    <input type="text" name="time" ng-model="row.time" ng-value="row.time"
+                                           class="editable-input form-control input-sm" readonly=""/>
+                                </datepicker>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" ng-click="demo.del(row)"><span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <button class="btn btn-primary btn-sm" ng-disabled="!isData" ng-if=isAuthenticate
+                                ng-click="Save()" style="float: right;margin-bottom: 20px;"><span
+                                class="glyphicon glyphicon-save"> Publish</span></button>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
+</div>
 
   
 
